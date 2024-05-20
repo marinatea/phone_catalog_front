@@ -1,0 +1,71 @@
+.container {
+  font-family: 'Mont SemiBold';
+  font-weight: 600;
+  src: url(./../../../public/fonts/Mont-SemiBold.otf);
+  font-style: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: unset;
+  border: unset;
+  transition: border-color 0.3s ease;
+}
+
+.isDisabled {
+  cursor: auto;
+}
+
+.isSpaceBetween {
+  justify-content: space-between;
+}
+
+.primary {
+  padding: 8px 4px;
+  // border: 1px solid var(--c-primary);
+  // background-color: var(--c-primary);
+  border: 1px solid #313237;
+  background-color: #313237;
+  line-height: 22px;
+  font-size: 14px;
+  color: var(--c-white);
+  transition: box-shadow 0.3s ease;
+
+  &.selected {
+    // background-color: var(--c-white);
+    // color: var(--c-green);
+    // border-color: var(--c-elements);
+    background-color: #fff;;
+    color: #27ae60;
+    border-color: #eb5757;
+  }
+
+  &:hover {
+    box-shadow: 0 3px 13px 0 rgba(23, 32, 49, 0.26);
+  }
+}
+
+.secondary {
+  padding: 7px;
+  border: 1px solid var(--c-icons-secondary);
+  line-height: 20px;
+  font-size: 14px;
+
+  &:hover {
+    border-color: var(--c-primary);
+  }
+
+  &.isDisabled {
+    border-color: var(--c-elements);
+  }
+}
+
+.transparent {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
