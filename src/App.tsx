@@ -1,7 +1,9 @@
 import './App.scss';
 
+import CompA from './components/CompA/CompA';
+
 export const App = () => (
   <div className="App">
-    <h1>Product Catalog</h1>
+    <CompA />
   </div>
 );
