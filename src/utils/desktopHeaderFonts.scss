@@ -2,36 +2,41 @@
   src: url('../../public/fonts/Mont-Bold.otf');
   font-family: MontBold;
 }
+
 @font-face {
   src: url('../../public/fonts/Mont-Regular.otf');
   font-family: MontRegular;
 }
+
 @font-face {
   src: url('../../public/fonts/Mont-SemiBold.otf');
   font-family: MontSemiBold;
 }
 
-@mixin h1Font {
+@mixin h1-font {
   font-size: 48px;
   line-height: 56px;
-  font-family: 'MontBold';
+  font-family: MontBold, sans-serif;
   letter-spacing: -0.01em;
 }
-@mixin h2Font {
+
+@mixin h2-font {
   font-size: 32px;
   line-height: 41px;
-  font-family: 'MontBold';
+  font-family: MontBold, sans-serif;
   letter-spacing: -0.01em;
 }
-@mixin h3Font {
+
+@mixin h3-font {
   font-size: 22px;
   line-height: 31px;
-  font-family: 'MontBold';
+  font-family: MontBold, sans-serif;
   letter-spacing: 0;
 }
-@mixin h4Font {
+
+@mixin h4-font {
   font-size: 20px;
   line-height: 26px;
-  font-family: 'MontSemiBold';
+  font-family: MontSemiBold, sans-serif;
   letter-spacing: 0;
 }

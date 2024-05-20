@@ -16,7 +16,7 @@
   }
 }
 
-@mixin desktopL {
+@mixin desktop-large {
   @media screen and (min-width: 1440px) {
     @content;
   }
