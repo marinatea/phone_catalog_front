@@ -1,9 +1,11 @@
+@use './../../utils/miscFonts.scss' as fonts;
+@use './../../constants/colors.module.scss' as color;
+
 .container {
   width: 272px;
   padding: 37px 24px 24px;
-  // border: 1px solid var(--c-elements);
-  border: 1px solid #e2e6e9;
-  color: var(--c-primary);
+  border: 1px solid color.$elements;
+  color: color.$primary;
 }
 
 .link {
@@ -23,9 +25,7 @@
 }
 
 .name {
-  font-family: 'Mont';
-  src: url(./../../../public/fonts/Mont-Regular.otf);
-  font-style: normal;
+  @include fonts.body-font;
   display: flex;
   font-size: 14px;
   line-height: 20px;
@@ -35,16 +35,12 @@
   transition: color 0.3s ease;
 
   &:hover {
-    // color: var(--c-secondary);
-    color: #89939a;
+    color: color.$secondary;
   }
 }
 
 .price {
-  font-family: 'Mont Bold';
-  font-weight: 700;
-  src: url(./../../../public/fonts/Mont-Bold.otf);
-  font-style: normal;
+  @include fonts.uppercase-font;
   margin-bottom: 8px;
   font-size: 22px;
 }
@@ -57,23 +53,18 @@
 .fullPrice {
   line-height: 50px;
   text-decoration: line-through;
-  // color: var(--c-secondary)
   color: #89939a;
 }
 
 .detailsList {
   padding-top: 16px;
-  // border-top: 1px solid var(--c-elements);
-  border-top: 1px solid #e2e6e9;
+  border-top: 1px solid  color.$elements;
   margin-bottom: 16px;
   padding-inline-start: 0;
 }
 
 .detailsItem {
-  font-family: 'Mont SemiBold';
-  font-weight: 600;
-  src: url(./../../../public/fonts/Mont-SemiBold.otf);
-  font-style: normal;  
+  @include fonts.button-font; 
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -83,8 +74,7 @@
 
 .detailsTitle {
   line-height: 15px;
-  // color: var(--c-secondary);
-  color: #89939a;
+  color:  color.$secondary;
 }
 
 .buttons {

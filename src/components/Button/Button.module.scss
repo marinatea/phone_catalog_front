@@ -1,8 +1,8 @@
+@use './../../utils/miscFonts.scss' as fonts;
+@use './../../constants/colors.module.scss' as color;
+
 .container {
-  font-family: 'Mont SemiBold';
-  font-weight: 600;
-  src: url(./../../../public/fonts/Mont-SemiBold.otf);
-  font-style: normal;
+  @include fonts.button-font;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,22 +21,18 @@
 
 .primary {
   padding: 8px 4px;
-  // border: 1px solid var(--c-primary);
-  // background-color: var(--c-primary);
-  border: 1px solid #313237;
-  background-color: #313237;
+  padding-inline-start: 0;
+  border: 1px solid color.$primary;
+  background-color: color.$primary;
   line-height: 22px;
   font-size: 14px;
-  color: var(--c-white);
+  color: color.$white;
   transition: box-shadow 0.3s ease;
 
   &.selected {
-    // background-color: var(--c-white);
-    // color: var(--c-green);
-    // border-color: var(--c-elements);
-    background-color: #fff;;
-    color: #27ae60;
-    border-color: #eb5757;
+    background-color: color.$white;;
+    color: color.$positive;
+    border-color: color.$negative;
   }
 
   &:hover {
@@ -51,11 +47,11 @@
   font-size: 14px;
 
   &:hover {
-    border-color: var(--c-primary);
+    border-color: color.$icons;
   }
 
   &.isDisabled {
-    border-color: var(--c-elements);
+    border-color: color.$elements;
   }
 }
 
