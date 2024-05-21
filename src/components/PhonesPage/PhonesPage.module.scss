@@ -1,0 +1,125 @@
+@use '/src/utils/mediaQueries.module.scss' as mQ;
+@use '/src/utils/mobileHeaderFonts.scss' as mHF;
+@use '/src/utils/miscFonts.scss' as mF;
+@use '/src/utils/desktopHeaderFonts.scss' as dHF;
+@import '/src/constants/colors.module.scss';
+
+.phonesPage {
+  display: grid;
+  justify-content: center;
+
+  @include mQ.phone {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 16px;
+    margin: 0 16px;
+  }
+
+  @include mQ.tablet {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 16px;
+    padding: 0 24px;
+  }
+
+  @include mQ.desktop {
+    grid-template-columns: repeat(24, 32px);
+    column-gap: 16px;
+  }
+}
+
+@include mQ.phone {
+  .title {
+    margin-top: 24px;
+    @include mHF.h1-font;
+    grid-column: span 4;
+    color: $primary;
+  }
+
+  .subText {
+    margin-top: 8px;
+    @include mF.body-font;
+    grid-column: span 4;
+    color: $secondary;
+  }
+
+  .filter {
+    grid-column: span 2;
+    margin-top: 32px;
+  }
+
+  .cardsContainer {
+    display: flex;
+    grid-column: span 4;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .cardContainer {
+    &:not(:first-child) {
+      margin-top: 40px;
+    }
+  }
+
+  .pageSelector {
+    grid-column: span 4;
+    margin-top: 24px;
+  }
+}
+
+@include mQ.tablet {
+  .title {
+    margin-top: 40px;
+    @include dHF.h1-font;
+    grid-column: span 12;
+  }
+
+  .subText {
+    grid-column: span 12;
+  }
+
+  .filter {
+    grid-column: span 4;
+    margin-top: 40px;
+  }
+
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 320px);
+    grid-column: span 12;
+    justify-content: center;
+  }
+
+  .pageSelector {
+    grid-column: span 12;
+    margin-top: 40px;
+  }
+}
+
+@include mQ.desktop {
+  .title {
+    grid-column: span 24;
+  }
+
+  .subText {
+    margin-top: 8px;
+    @include mF.body-font;
+    grid-column: span 24;
+  }
+
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-column: span 24;
+    align-items: center;
+  }
+
+  .cardContainer {
+    &:not(:first-child) {
+      margin-top: 40px;
+    }
+  }
+
+  .pageSelector {
+    grid-column: span 24;
+  }
+}
