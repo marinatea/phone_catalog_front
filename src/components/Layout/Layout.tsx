@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import styles from './Layout.module.scss';
+import { ProductsProvider } from '../../context/ProductsContext';
 
 type Props = {};
 export default function Layout({ }: Props) {
@@ -8,7 +9,9 @@ export default function Layout({ }: Props) {
     <>
       {/* <Header /> */}
       <main className={`${styles['page-grid']}`}>
-        <Outlet />
+        <ProductsProvider>
+          <Outlet />
+        </ProductsProvider>
       </main>
 
       {/* <Footer /> */}
