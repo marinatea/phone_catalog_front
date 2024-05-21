@@ -25,6 +25,13 @@ export interface IProductDetails {
   cell: string[];
 }
 
+export interface ICartProduct {
+  id: string;
+  name: string;
+  image: string;
+  price: number;
+}
+
 export enum Icons {
   LOGO = 'logo-icon',
   HEART = 'Heart-icon',
