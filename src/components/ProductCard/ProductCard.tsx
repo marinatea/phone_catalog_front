@@ -10,7 +10,6 @@ interface Props {
   phone: IProductDetails;
 }
 const ProductCard: FC<Props> = ({ phone: product }) => {
-
   return (
     <div
       className={cn(s.container, '__app-PhoneCard-container')}
@@ -42,7 +41,7 @@ const ProductCard: FC<Props> = ({ phone: product }) => {
       </ul>
       <div className={s.buttons}>
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           isSelected={false}
           className={s.addToCard}
           title="Add to cart"
