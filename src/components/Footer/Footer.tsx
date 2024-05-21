@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import './Footer.scss';
+import './Footer.module.scss';
 
 export const Footer: React.FC = () => {
   return (

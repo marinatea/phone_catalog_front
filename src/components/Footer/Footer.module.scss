@@ -1,17 +1,23 @@
+@import '../../utils/miscFonts.scss';
+@import '../../utils/mediaQueries.module.scss';
+@import '../../constants/colors.module.scss';
+
 .footer {
   row-gap: 32px;
   display: grid;
   margin-top: 64px;
   padding: 32px 0;
-  border-top: 1px solid #E2E6E9;
+  border-top: 1px solid $elements;
 
   &__logo {
     grid-column: 1 / 5;
     height: 33px;
   }
+
   &__nav {
     grid-column: 1 / 5;
   }
+
   &__top-link {
     grid-column: 1 / 5;
   }
@@ -24,14 +30,8 @@
   gap: 16px;
 
   &__item {
-    font-family: Mont;
-    font-size: 12px;
-    font-weight: 800;
-    line-height: 11px;
-    letter-spacing: 0.04em;
-    text-align: left;
-    text-transform: uppercase;
-    color: #89939A;
+    @include uppercase-font;
+    color: $secondary;
     text-decoration: none;
   }
 }
@@ -44,16 +44,11 @@
   gap: 16px;
 
   &__text {
-    font-family: Mont;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 15.34px;
+    @include small-font;
     text-align: right;
-
     background-color: transparent;
     border: none;
-
-    color: #89939A;
+    color: $secondary;
     text-decoration: none;
   }
 }

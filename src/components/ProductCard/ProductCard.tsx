@@ -1,17 +1,15 @@
 import { FC } from 'react';
-// import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
 import Button from '../Button';
-import { Icons } from '../Button/Button';
-import { IProductDetails } from '../../types';
+import { IProductDetails, Icons } from '../../types';
+
 
 interface Props {
   phone: IProductDetails;
 }
 const ProductCard: FC<Props> = ({ phone: product }) => {
-
   return (
     <div
       className={cn(s.container, '__app-PhoneCard-container')}
@@ -20,7 +18,7 @@ const ProductCard: FC<Props> = ({ phone: product }) => {
       <a href={`/*`} className={s.link}>
         <img className={s.image} src={product.images[0]} alt={product.name} />
       </a>
-      <a href ={`/*`} className={s.name}>
+      <a href={`/*`} className={s.name}>
         {product.name}
       </a>
       <div className={s.price}>
@@ -43,13 +41,13 @@ const ProductCard: FC<Props> = ({ phone: product }) => {
       </ul>
       <div className={s.buttons}>
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           isSelected={false}
           className={s.addToCard}
           title="Add to cart"
         />
         <Button
-          onClick={() => {}}
+          onClick={() => { }}
           type="secondary"
           className={s.addToFavorite}
           icon={Icons.HEART}
