@@ -1,19 +1,3 @@
-export interface IProduct {
-  id: string;
-  category: string;
-  phoneId: string;
-  itemId: string;
-  name: string;
-  fullPrice: number;
-  price: number;
-  screen: string;
-  capacity: string;
-  color: string;
-  ram: string;
-  year: number;
-  image: string;
-}
-
 export interface IProductDescription {
   title: string;
   text: string[];
@@ -39,4 +23,20 @@ export interface IProductDetails {
   camera: string;
   zoom: string;
   cell: string[];
+}
+
+export enum Icons {
+  LOGO = 'logo-icon',
+  HEART = 'Heart-icon',
+  HEART_FILL = 'Heart-icon-fill',
+  CART = 'Cart',
+  ARROW_LEFT = 'Arrow-left',
+  ARROW_RIGHT = 'Arrow-right',
+  ARROW_BOTTOM = 'Arrow-down',
+  ARROW_TOP = 'Arrow-up',
+  HOME = 'Home',
+  SEARCH = 'Search',
+  MINUS = 'Minus',
+  PLUS = 'Plus',
+  CLOSE = 'Close',
 }
