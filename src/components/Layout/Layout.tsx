@@ -5,6 +5,8 @@ import { ProductsProvider } from '../../context/ProductsContext';
 type Props = {};
 export default function Layout({ }: Props) {
   
+export default function Layout({ }: Props) {
+  
   return (
     <>
       {/* <Header /> */}
