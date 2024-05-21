@@ -1,17 +1,17 @@
 import { Outlet } from 'react-router-dom';
-import { ProductsProvider } from '../../context/ProductsContext';
+import styles from './Layout.module.scss';
 
 type Props = {};
 export default function Layout({ }: Props) {
   
   return (
-    <div>
+    <>
       {/* <Header /> */}
-      <ProductsProvider>
+      <main className={`${styles['page-grid']}`}>
         <Outlet />
+      </main>
 
-      </ProductsProvider>
       {/* <Footer /> */}
-    </div>
+    </>
   );
 }
