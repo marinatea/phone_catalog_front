@@ -24,3 +24,19 @@ export interface IProductDetails {
   zoom: string;
   cell: string[];
 }
+
+export enum Icons {
+  LOGO = 'logo-icon',
+  HEART = 'Heart-icon',
+  HEART_FILL = 'Heart-icon-fill',
+  CART = 'Cart',
+  ARROW_LEFT = 'Arrow-left',
+  ARROW_RIGHT = 'Arrow-right',
+  ARROW_BOTTOM = 'Arrow-down',
+  ARROW_TOP = 'Arrow-up',
+  HOME = 'Home',
+  SEARCH = 'Search',
+  MINUS = 'Minus',
+  PLUS = 'Plus',
+  CLOSE = 'Close',
+}

@@ -1,23 +1,11 @@
 import { FC } from 'react';
 import cn from 'classnames';
-import Icon from '../Icon';
 
 import s from './Button.module.scss';
-export enum Icons {
-  LOGO = 'logo-icon',
-  HEART = 'heart-icon',
-  HEART_FILL = 'heart-fill-icon',
-  CART = 'cart-icon',
-  ARROW_LEFT = 'arrow-left-icon',
-  ARROW_RIGHT = 'arrow-right-icon',
-  ARROW_BOTTOM = 'arrow-bottom-icon',
-  ARROW_TOP = 'arrow-top-icon',
-  HOME = 'home-icon',
-  SEARCH = 'search-icon',
-  MINUS = 'minus-icon',
-  PLUS = 'plus-icon',
-  CLOSE = 'close-icon',
-}
+import Icon from '../Icon';
+import { Icons } from '../../types';
+
+
 interface Props {
   onClick?: VoidFunction;
   icon?: Icons;
@@ -29,7 +17,7 @@ interface Props {
 }
 const Button: FC<Props> = ({
   type = 'primary',
-  onClick = ()=> {},
+  onClick = () => { },
   isDisabled = false,
   isSelected = false,
   className,
