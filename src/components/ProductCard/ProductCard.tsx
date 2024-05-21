@@ -1,11 +1,10 @@
 import { FC } from 'react';
-// import { Link } from 'react-router-dom';
 import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
 import Button from '../Button';
-import { Icons } from '../Button/Button';
-import { IProductDetails } from '../../types';
+import { IProductDetails, Icons } from '../../types';
+
 
 interface Props {
   phone: IProductDetails;
@@ -48,7 +47,7 @@ const ProductCard: FC<Props> = ({ phone: product }) => {
           title="Add to cart"
         />
         <Button
-          onClick={() => {}}
+          onClick={() => { }}
           type="secondary"
           className={s.addToFavorite}
           icon={Icons.HEART}

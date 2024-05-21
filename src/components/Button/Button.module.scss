@@ -6,8 +6,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: unset;
-  border: unset;
+  background-color: color.$primary;
+  border: color.$primary;
   transition: border-color 0.3s ease;
 }
 
@@ -41,13 +41,14 @@
 }
 
 .secondary {
-  padding: 7px;
-  border: 1px solid var(--c-icons-secondary);
+  background-color: color.$white;
+  // padding: 7px;
+  border: 1px solid color.$icons;
   line-height: 20px;
   font-size: 14px;
 
   &:hover {
-    border-color: color.$icons;
+    border-color: color.$primary;
   }
 
   &.isDisabled {
