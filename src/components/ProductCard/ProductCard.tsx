@@ -11,7 +11,6 @@ interface Props {
   phone: IProductDetails;
 }
 const ProductCard: FC<Props> = ({ phone: product }) => {
-
   return (
     <div
       className={cn(s.container, '__app-PhoneCard-container')}
@@ -20,7 +19,7 @@ const ProductCard: FC<Props> = ({ phone: product }) => {
       <a href={`/*`} className={s.link}>
         <img className={s.image} src={product.images[0]} alt={product.name} />
       </a>
-      <a href ={`/*`} className={s.name}>
+      <a href={`/*`} className={s.name}>
         {product.name}
       </a>
       <div className={s.price}>
@@ -43,7 +42,7 @@ const ProductCard: FC<Props> = ({ phone: product }) => {
       </ul>
       <div className={s.buttons}>
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           isSelected={false}
           className={s.addToCard}
           title="Add to cart"
