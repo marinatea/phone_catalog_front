@@ -2,23 +2,30 @@ type Props = {};
 
 import { useParams } from 'react-router-dom';
 import styles from './ProductPage.module.scss';
-import { useProductsContext } from '../../../context/ProductsContext';
 import { useState, useEffect } from 'react';
 import { IProductDetails } from '../../../types';
 
 export default function ProductPage({}: Props) {
   const { productId } = useParams<{ productId: string }>();
-  const { phones } = useProductsContext();
   const [_phone, setPhone] = useState<IProductDetails | null>(null);
   
   useEffect(() => {
     if (!productId) return;
-
-    const product = phones.find((item) => item.id === productId) || null;
-    setPhone(product);
-
-  }, [productId]);
-
+    fetch('/api/phones.json')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const product = data.find((item: IProductDetails) => item.id === productId) || null;
+        setPhone(product);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
 
   return (
