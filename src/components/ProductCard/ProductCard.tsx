@@ -7,9 +7,9 @@ import { IProductDetails, Icons } from '../../types';
 
 
 interface Props {
-  phone: IProductDetails;
+  product: IProductDetails;
 }
-const ProductCard: FC<Props> = ({ phone: product }) => {
+const ProductCard: FC<Props> = ({ product }) => {
   return (
     <div
       className={cn(s.container, '__app-PhoneCard-container')}
