@@ -14,7 +14,7 @@ export default function PhonesPage({}: Props) {
       <div className={styles.filter}>Items placeholder</div>
       <div className={styles.cardsContainer}>
         {phones.map(phone => (
-          <ProductCard key={phone.id} phone={phone} />
+          <ProductCard key={phone.id} product={phone} />
         ))}
       </div>
       <div className={styles.pageSelector}>Selector placeholder</div>
