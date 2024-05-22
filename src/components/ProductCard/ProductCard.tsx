@@ -2,27 +2,35 @@ import { FC } from 'react';
 import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
-import Button from '../Button';
+import Button from '../../Components/Button';
 import { IProductDetails, Icons } from '../../types';
 import { useProductsContext } from '../../context/ProductsContext';
-
 
 interface Props {
   product: IProductDetails;
 }
 const ProductCard: FC<Props> = ({ product }) => {
   const { isItemInCart, addItem } = useProductsContext();
-  const { id, name, capacity, ram, priceDiscount, priceRegular, screen, images } = product;
-  
+  const {
+    id,
+    name,
+    capacity,
+    ram,
+    priceDiscount,
+    priceRegular,
+    screen,
+    images,
+  } = product;
+
   const isProductInCard = isItemInCart(id);
 
   const cartProduct = {
     id,
     name,
     image: images[0],
-    price:priceDiscount
+    price: priceDiscount,
   };
-  
+
   return (
     <div
       className={cn(s.container, '__app-PhoneCard-container')}
@@ -60,7 +68,7 @@ const ProductCard: FC<Props> = ({ product }) => {
           title={isProductInCard ? 'Added to cart' : 'Add to cart'}
         />
         <Button
-          onClick={() => { }}
+          onClick={() => {}}
           type="secondary"
           className={s.addToFavorite}
           icon={Icons.HEART}

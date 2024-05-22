@@ -2,9 +2,8 @@ import { FC } from 'react';
 import cn from 'classnames';
 
 import s from './Button.module.scss';
-import Icon from '../Icon';
+import Icon from '../../Components/Icon';
 import { Icons } from '../../types';
-
 
 interface Props {
   onClick?: VoidFunction;
@@ -17,7 +16,7 @@ interface Props {
 }
 const Button: FC<Props> = ({
   type = 'primary',
-  onClick = () => { },
+  onClick = () => {},
   isDisabled = false,
   isSelected = false,
   className,
