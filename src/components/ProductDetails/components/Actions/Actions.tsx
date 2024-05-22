@@ -23,10 +23,13 @@ import Button from '../../../Button';
 import getProductLink from '../../../../utils/getProductLink';
 
 interface Props {
-  product: IProductDetails;
+  product: IProductDetails | null;
 }
 
 export default function Description({ product }: Props) {
+  if (!product) {
+    return;
+  }
   const {
     name,
     capacityAvailable,
