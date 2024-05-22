@@ -2,7 +2,7 @@ import { FC } from 'react';
 import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
-import Button from '../../Components/Button';
+import Button from '../../components/Button';
 import { IProductDetails, Icons } from '../../types';
 import { useProductsContext } from '../../context/ProductsContext';
 
