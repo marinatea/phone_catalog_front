@@ -1,8 +1,11 @@
 type Props = {};
 
+import { useParams } from 'react-router-dom';
 import styles from './ProductPage.module.scss';
 
 export default function ProductPage({}: Props) {
+  const { productId } = useParams();
+
   return (
     <main className={styles.productPage}>
       <h1 className={styles.title}>Name Placeholder</h1>
