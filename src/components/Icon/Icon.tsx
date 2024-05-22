@@ -2,8 +2,6 @@ import { FC } from 'react';
 import s from './Icon.module.scss';
 import cn from 'classnames';
 
-
-
 interface Props {
   iconId: string;
   className?: string;
