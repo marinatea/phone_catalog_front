@@ -4,7 +4,7 @@
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
 @import '/src/constants/colors.module.scss';
 
-.cartPage {
+.phonesPage {
   display: grid;
   justify-content: center;
 
@@ -34,73 +34,92 @@
     color: $primary;
   }
 
-  .cardsContainer {
+  .subText {
+    margin-top: 8px;
+    @include mF.body-font;
     grid-column: span 4;
+    color: $secondary;
+  }
+
+  .filter {
+    grid-column: span 2;
     margin-top: 32px;
+  }
+
+  .cardsContainer {
+    display: flex;
+    grid-column: span 4;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 24px;
   }
 
   .cardContainer {
     &:not(:first-child) {
-      margin-top: 16px;
+      margin-top: 40px;
     }
   }
 
-  .checkoutContainer {
+  .pageSelector {
     grid-column: span 4;
-    margin-top: 32px;
-    padding: 24px;
-    text-align: center;
-
-    .infoContainer {
-      .cashInfo {
-        color: $primary;
-        @include dHF.h2-font;
-      }
-
-      .itemInfo {
-        color: $secondary;
-        @include mF.body-font;
-      }
-    }
-
-    .checkoutButton {
-      margin-top: 32px;
-      width: 100%;
-      height: 48px;
-    }
+    margin-top: 24px;
   }
 }
 
 @include mQ.tablet {
   .title {
-    margin-top: 16px;
+    margin-top: 40px;
     @include dHF.h1-font;
     grid-column: span 12;
   }
 
-  .cardsContainer {
+  .subText {
     grid-column: span 12;
-    margin-top: 32px;
   }
 
-  .checkoutContainer {
+  .filter {
+    grid-column: span 4;
+    margin-top: 40px;
+  }
+
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 320px);
     grid-column: span 12;
+    justify-content: center;
+  }
+
+  .pageSelector {
+    grid-column: span 12;
+    margin-top: 40px;
   }
 }
 
 @include mQ.desktop {
   .title {
-    margin-top: 16px;
-    @include dHF.h1-font;
+    grid-column: span 24;
+  }
+
+  .subText {
+    margin-top: 8px;
+    @include mF.body-font;
     grid-column: span 24;
   }
 
   .cardsContainer {
-    grid-column: span 16;
-    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-column: span 24;
+    align-items: center;
   }
 
-  .checkoutContainer {
-    grid-column: span 8;
+  .cardContainer {
+    &:not(:first-child) {
+      margin-top: 40px;
+    }
+  }
+
+  .pageSelector {
+    grid-column: span 24;
   }
 }

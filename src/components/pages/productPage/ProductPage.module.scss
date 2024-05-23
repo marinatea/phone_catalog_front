@@ -4,7 +4,7 @@
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
 @import '/src/constants/colors.module.scss';
 
-.cartPage {
+.productPage {
   display: grid;
   justify-content: center;
 
@@ -28,79 +28,95 @@
 
 @include mQ.phone {
   .title {
-    margin-top: 24px;
-    @include mHF.h1-font;
+    margin-top: 16px;
+    @include mHF.h2-font;
     grid-column: span 4;
     color: $primary;
   }
 
-  .cardsContainer {
+  .photos {
     grid-column: span 4;
     margin-top: 32px;
   }
 
-  .cardContainer {
-    &:not(:first-child) {
-      margin-top: 16px;
-    }
+  .actions {
+    grid-column: span 4;
+    margin-top: 40px;
   }
 
-  .checkoutContainer {
+  .about {
     grid-column: span 4;
-    margin-top: 32px;
-    padding: 24px;
-    text-align: center;
+    margin-top: 56px;
+  }
 
-    .infoContainer {
-      .cashInfo {
-        color: $primary;
-        @include dHF.h2-font;
-      }
+  .specs {
+    grid-column: span 4;
+    margin-top: 56px;
+  }
 
-      .itemInfo {
-        color: $secondary;
-        @include mF.body-font;
-      }
-    }
-
-    .checkoutButton {
-      margin-top: 32px;
-      width: 100%;
-      height: 48px;
-    }
+  .suggested {
+    grid-column: span 4;
+    margin-top: 56px;
   }
 }
 
 @include mQ.tablet {
   .title {
-    margin-top: 16px;
-    @include dHF.h1-font;
+    @include dHF.h2-font;
     grid-column: span 12;
   }
 
-  .cardsContainer {
-    grid-column: span 12;
-    margin-top: 32px;
+  .photos {
+    grid-column: span 7;
+    margin-top: 40px;
   }
 
-  .checkoutContainer {
+  .actions {
+    grid-column: span 5;
+  }
+
+  .about {
     grid-column: span 12;
+    margin-top: 64px;
+  }
+
+  .specs {
+    grid-column: span 12;
+    margin-top: 64px;
+  }
+
+  .suggested {
+    grid-column: span 12;
+    margin-top: 64px;
   }
 }
 
 @include mQ.desktop {
   .title {
-    margin-top: 16px;
-    @include dHF.h1-font;
     grid-column: span 24;
+    @include dHF.h2-font;
   }
 
-  .cardsContainer {
-    grid-column: span 16;
-    margin-top: 32px;
+  .photos {
+    grid-column: span 13;
   }
 
-  .checkoutContainer {
-    grid-column: span 8;
+  .actions {
+    grid-column: span 11;
+  }
+
+  .about {
+    grid-column: span 12;
+    margin-top: 80px;
+  }
+
+  .specs {
+    grid-column: span 12;
+    margin-top: 80px;
+  }
+
+  .suggested {
+    grid-column: span 24;
+    margin-top: 80px;
   }
 }
