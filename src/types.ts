@@ -46,5 +46,5 @@ export enum Icons {
   MINUS = 'Minus',
   PLUS = 'Plus',
   CLOSE = 'Close',
-  BURGER = 'Burger'
+  BURGER = 'Burger',
 }

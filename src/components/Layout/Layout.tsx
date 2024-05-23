@@ -3,7 +3,7 @@ import { ProductsProvider } from '../../context/ProductsContext';
 import Header from '../Header/Header';
 
 type Props = {};
-export default function Layout({ }: Props) {
+export default function Layout({}: Props) {
   return (
     <>
       <Header />
