@@ -8,6 +8,7 @@ import { IProductDetails } from '../../../types';
 import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
 import styles from './ProductPage.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
+import ImagesSelector from './components/ImagesSelector/ImagesSelector';
 
 export default function ProductPage({ productType }: Props) {
   const { productId } = useParams<{ productId: string }>();
@@ -41,8 +42,11 @@ export default function ProductPage({ productType }: Props) {
 
   return (
     <main className={styles.productPage}>
-      <h1 className={styles.title}>Name Placeholder</h1>
-      <div className={styles.photos}>Photos Placeholder</div>
+      <h1 className={styles.title}>{product?.name}</h1>
+      <div className={styles.photos}>
+        <ImagesSelector images={product?.images} />
+      </div>
+
       <div className={styles.actions}>
         <Actions product={product} />
       </div>

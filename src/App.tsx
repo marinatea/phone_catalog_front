@@ -4,7 +4,7 @@ import Layout from './components/Layout/Layout';
 import PhonesPage from './components/PhonesPage/PhonesPage';
 import HomePage from './components/HomePage/HomePage';
 import CartPage from './components/CartPage/CartPage';
-import ProductPage from './components/pages/productPage/ProductPage';
+import ProductPage from './components/pages/ProductPage/ProductPage';
 
 export const App = () => (
   <Router>
