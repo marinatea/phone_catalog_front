@@ -3,8 +3,13 @@
 @import '../../constants/colors.module.scss';
 
 .footer {
-  row-gap: 32px;
   display: grid;
+  grid-template-columns: repeat(4, 60px);
+  grid-template-rows: 48px;
+  column-gap: 16px;
+  justify-content: center;
+  align-items: center;
+  row-gap: 32px;
   margin-top: 64px;
   padding: 32px 0;
   border-top: 1px solid $elements;
@@ -12,14 +17,28 @@
   &__logo {
     grid-column: 1 / 5;
     height: 33px;
+
+    @include desktop {
+      grid-column: 1 / 7;
+    }
   }
 
   &__nav {
     grid-column: 1 / 5;
+
+    @include desktop {
+      grid-column: 7 / 19;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 
   &__top-link {
-    grid-column: 1 / 5;
+    grid-column: 1 / -1;
+    @include desktop {
+      grid-column: 19 / -1;
+    }
   }
 }
 

@@ -1,0 +1,152 @@
+@import '../../utils/desktopHeaderFonts';
+@import '../../utils/mobileHeaderFonts';
+@import '../../utils/mediaQueries.module';
+@import '../../constants/colors.module';
+
+body {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $white;
+  color: $primary;
+  height: 64px;
+  border: 1px solid $elements;
+
+  .divLogo {
+    width: 80px;
+    height: 28px;
+    padding: 18px 24px;
+  }
+
+  .navbar {
+    display: flex;
+    align-items: center;
+    margin-inline-start: 24px;
+    flex: 1;
+
+    @include tablet {
+      margin-inline-start: 12px;
+    }
+
+    .navlinks {
+      display: flex;
+      justify-content: space-between;
+      margin: 0;
+      padding: 0;
+      text-transform: uppercase;
+      flex-grow: 1;
+      max-width: 425px;
+
+      @include h1-font;
+
+      @include tablet {
+        max-width: 329px;
+
+      }
+
+      li {
+        a {
+          color: #89939a;
+          text-decoration: none;
+          font-size: 12px;
+          position: relative;
+
+          &:hover {
+            color: $primary;
+
+            &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: -21px;
+              height: 1px;
+              background-color: $primary;
+            }
+          }
+        }
+      }
+    }
+
+    @include phone {
+      display: none;
+    }
+
+    @include tablet {
+      display: flex;
+    }
+
+    @include desktop {
+      display: flex;
+    }
+  }
+
+  .icons {
+    display: flex;
+
+    .heart,
+    .cart {
+      height: 16px;
+      width: 16px;
+      padding: 24px;
+      border: 1px solid $elements;
+      position: relative;
+
+      &:hover {
+        border-color: $primary;
+
+        &::after {
+          content: '';
+          position: absolute;
+          background-color: $primary;
+        }
+      }
+
+      @include phone {
+        display: none;
+      }
+
+      @include tablet {
+        display: flex;
+      }
+
+      @include desktop {
+        display: flex;
+      }
+    }
+  }
+
+  .burger {
+    height: 16px;
+    width: 16px;
+    padding: 24px;
+    display: none;
+    border: 1px solid $elements;
+
+    &:hover {
+      border-color: $primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        background-color: $primary;
+      }
+    }
+
+    @include phone {
+      display: flex;
+    }
+
+    @include tablet {
+      display: none;
+    }
+
+    @include desktop {
+      display: none;
+    }
+  }
+}
