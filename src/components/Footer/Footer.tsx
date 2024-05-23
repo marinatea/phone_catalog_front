@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.scss';
+import Icon from '../Icon';
+import { Icons } from '../../types';
 
 export const Footer: React.FC = () => {
   return (
     <footer className={styles.footer}>
       <Link to="/" className={styles.footer__logo}>
-        <img src="/icons/logo.png" alt="logo" />
+        <Icon iconId={Icons.LOGO} />
       </Link>
 
       <nav className={`${styles['footer-nav']} ${styles.footer__nav}`}>

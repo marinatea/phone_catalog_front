@@ -12,7 +12,7 @@ export default function Layout({}: Props) {
         <Outlet />
       </ProductsProvider>
 
-      {<Footer />}
+      <Footer />
     </>
   );
 }
