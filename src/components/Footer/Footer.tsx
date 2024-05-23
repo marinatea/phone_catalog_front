@@ -23,13 +23,8 @@ export const Footer: React.FC = () => {
       </nav>
 
       <div className={styles['top-link']}>
-        <p
-          className={styles['top-link__text']}
-          onClick={() => window.scrollTo(0, 0)}
-        >
-          Back to top
-        </p>
-        <button>
+        <p className={styles['top-link__text']}>Back to top</p>
+        <button onClick={() => window.scrollTo(0, 0)}>
           <Icon iconId={Icons.ARROW_TOP} />
         </button>
       </div>
