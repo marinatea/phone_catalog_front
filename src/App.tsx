@@ -4,7 +4,8 @@ import Layout from './components/Layout/Layout';
 import PhonesPage from './components/PhonesPage/PhonesPage';
 import HomePage from './components/HomePage/HomePage';
 import CartPage from './components/CartPage/CartPage';
-import ProductPage from './components/pages/productPage/ProductPage';
+import ProductPage from './components/pages/ProductPage/ProductPage';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 export const App = () => (
   <Router>
@@ -20,7 +21,7 @@ export const App = () => (
         </Route>
         <Route path="cart" element={<CartPage />} />
 
-        {/* <Route path="*" element={<ErrorPage />} /> */}
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   </Router>
