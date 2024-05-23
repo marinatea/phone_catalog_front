@@ -1,17 +1,16 @@
 type Props = {};
 
-import { useParams } from 'react-router-dom';
-import styles from './ProductPage.module.scss';
-import { useProductsContext } from '../../../context/ProductsContext';
-import { useState, useEffect } from 'react';
-import { IProductDetails } from '../../../types';
+import { useEffect, useState } from 'react';
+
 import About from '../../ProductDetails/components/Description/About';
-import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
 import Actions from '../../ProductDetails/components/Actions/Actions';
+import { IProductDetails } from '../../../types';
+import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
+import styles from './ProductPage.module.scss';
+import { useParams } from 'react-router-dom';
 
 export default function ProductPage({}: Props) {
   const { productId } = useParams<{ productId: string }>();
-  const { phones } = useProductsContext();
   const [phone, setPhone] = useState<IProductDetails | null>(null);
 
   useEffect(() => {
@@ -19,10 +18,24 @@ export default function ProductPage({}: Props) {
       return;
     }
 
-    const product = phones.find(item => item.id === productId) || null;
+    fetch('/api/phones.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
 
-    setPhone(product);
-  }, [productId, phones]);
+        return response.json();
+      })
+      .then(data => {
+        const product =
+          data.find((item: IProductDetails) => item.id === productId) || null;
+
+        setPhone(product);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <main className={styles.productPage}>
