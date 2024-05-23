@@ -12,40 +12,40 @@
   align-items: center;
   row-gap: 32px;
   margin-top: 64px;
-  padding: 32px 16px;  // Dodano padding 16px dla odstępu od krawędzi
+  padding: 32px 16px;
   border-top: 1px solid $elements;
 
   &__logo {
     grid-column: 1 / 5;
     height: 33px;
-    padding-left: 16px; // Dodano padding dla logo
+    padding-left: 16px;
 
     @include desktop {
       grid-column: 1 / 7;
-      padding-left: 0;  // Usunięcie paddingu w wersji desktopowej
+      padding-left: 0;
     }
   }
 
   &__nav {
     grid-column: 1 / 5;
-    padding-left: 16px; // Dodano padding dla nawigacji
+    padding-left: 16px;
 
     @include desktop {
       grid-column: 7 / 19;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      padding-left: 0;  // Usunięcie paddingu w wersji desktopowej
+      padding-left: 0;
     }
   }
 
   &__top-link {
     grid-column: 1 / -1;
-    padding-left: 16px; // Dodano padding dla linku
+    padding-left: 16px;
 
     @include desktop {
       grid-column: 19 / -1;
-      padding-left: 0;  // Usunięcie paddingu w wersji desktopowej
+      padding-left: 0;
     }
   }
 }
@@ -55,6 +55,11 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+
+  @include desktop {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
   &__item {
     @include uppercase-font;
