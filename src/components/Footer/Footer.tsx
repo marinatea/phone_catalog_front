@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
           Back to top
         </p>
         <button>
-          <img src="/icons/footer_button.png" alt="button" />
+          <Icon iconId={Icons.ARROW_TOP} />
         </button>
       </div>
     </footer>
