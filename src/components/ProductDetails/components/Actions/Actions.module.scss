@@ -1,17 +1,23 @@
 @use './../../../../utils/miscFonts.scss' as fonts;
 @use './../../../../constants/colors.module.scss' as color;
-
-
-.container {
-  grid-column: 14 / 25;
-}
+@use '/src/utils/mediaQueries.module.scss' as mQ;
 
 .wrapper {
-  width: 320px;
+  width: 288px;
+  transition: width 0.5s ease;
+
+  @include mQ.tablet {
+    width: 237px;
+  }
+
+  @include mQ.desktop {
+    width: 320px;
+  }
 }
 
 .label {
   @include fonts.button-font;
+
   font-size: 12px;
   line-height: 15px;
   color: color.$secondary;
@@ -76,6 +82,7 @@
 
 .price {
   @include fonts.uppercase-font;
+
   font-size: 32px;
   line-height: 41px;
   margin-bottom: 16px;
@@ -85,6 +92,7 @@
 
 .priceRegular {
   @include fonts.body-font;
+
   color: color.$secondary;
   text-decoration: line-through;
   font-size: 22px;
@@ -111,6 +119,7 @@
 
 .infoItem {
   @include fonts.body-font;
+
   font-size: 12px;
   line-height: 15px;
   display: flex;
