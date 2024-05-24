@@ -24,7 +24,7 @@ export const Footer: React.FC = () => {
 
       <div className={styles['top-link']}>
         <p className={styles['top-link__text']}>Back to top</p>
-        <button onClick={() => window.scrollTo(0, 0)}>
+        <button className={styles.button} onClick={() => window.scrollTo(0, 0)}>
           <Icon iconId={Icons.ARROW_TOP} />
         </button>
       </div>

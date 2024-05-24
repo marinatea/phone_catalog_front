@@ -1,51 +1,57 @@
-@import '../../utils/miscFonts.scss';
-@import '../../utils/mediaQueries.module.scss';
-@import '../../constants/colors.module.scss';
+@import '../../utils/miscFonts';
+@import '../../utils/mediaQueries.module';
+@import '../../constants/colors.module';
 
 .footer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 48px;
-  column-gap: 16px;
   justify-content: start;
-  gap: 16px;
   align-items: center;
   row-gap: 32px;
-  margin-top: 64px;
   padding: 32px 16px;
   border-top: 1px solid $elements;
 
+  @include tablet {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px 24px;
+  }
+
+  @include desktop {
+    padding: 32px 152px;
+  }
+
   &__logo {
     grid-column: 1 / 5;
-    height: 33px;
-    padding-left: 16px;
 
-    @include desktop {
+    @include tablet {
       grid-column: 1 / 7;
-      padding-left: 0;
     }
   }
 
   &__nav {
     grid-column: 1 / 5;
-    padding-left: 16px;
 
-    @include desktop {
-      grid-column: 7 / 19;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding-left: 0;
+    @include tablet {
+      grid-column: 1 / 3;
     }
   }
 
   &__top-link {
     grid-column: 1 / -1;
-    padding-left: 16px;
+  }
 
-    @include desktop {
-      grid-column: 19 / -1;
-      padding-left: 0;
+  .button {
+    width: 32px;
+    height: 32px;
+    background-color: $white;
+    border: 1px solid $icons;
+    transition: border-color 0.3s ease;
+
+    &:hover {
+      border-color: $primary;
     }
   }
 }
@@ -56,15 +62,19 @@
   align-items: flex-start;
   gap: 16px;
 
-  @include desktop {
+  @include tablet {
     flex-direction: row;
-    justify-content: space-between;
+    gap: 6vw;
   }
 
   &__item {
     @include uppercase-font;
+
     color: $secondary;
     text-decoration: none;
+    text-transform: uppercase;
+
+    @include uppercase-font;
   }
 }
 
@@ -77,6 +87,7 @@
 
   &__text {
     @include small-font;
+
     text-align: right;
     background-color: transparent;
     border: none;
