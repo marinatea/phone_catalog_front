@@ -26,7 +26,9 @@ export const Header: React.FC = () => {
       </nav>
       <div className={styles.icons}>
         <Icon iconId={Icons.HEART} className={styles.heart} />
-        <Icon iconId={Icons.CART} className={styles.cart} />
+        <NavLink to="/cart">
+          <Icon iconId={Icons.CART} className={styles.cart} />
+        </NavLink>
         <div className={styles.union}>
           <Icon iconId={Icons.BURGER} className={styles.burger} />
         </div>
