@@ -6,6 +6,7 @@ import HomePage from './components/HomePage/HomePage';
 import CartPage from './components/CartPage/CartPage';
 import ProductPage from './components/pages/ProductPage/ProductPage';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import FavoritesPage from './components/pages/FavoritesPage/FavoritesPage';
 
 export const App = () => (
   <Router>
@@ -20,7 +21,7 @@ export const App = () => (
           />
         </Route>
         <Route path="cart" element={<CartPage />} />
-
+        <Route path="favorites" element={<FavoritesPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
