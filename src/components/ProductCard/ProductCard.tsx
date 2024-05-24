@@ -8,8 +8,9 @@ import { useProductsContext } from '../../context/ProductsContext';
 
 interface Props {
   product: IProductDetails;
+  isSlider?: boolean;
 }
-const ProductCard: FC<Props> = ({ product }) => {
+const ProductCard: FC<Props> = ({ product, isSlider }) => {
   const { isItemInCart, addItem } = useProductsContext();
   const {
     id,
@@ -33,11 +34,24 @@ const ProductCard: FC<Props> = ({ product }) => {
 
   return (
     <div
-      className={cn(s.container, '__app-PhoneCard-container')}
+      className={cn(
+        {
+          [s.sliderCardContainer]: isSlider,
+          [s.container]: !isSlider,
+        },
+        '__app-PhoneCard-container',
+      )}
       data-cy="cardsContainer"
     >
       <a href={`/*`} className={s.link}>
-        <img className={s.image} src={images[0]} alt={name} />
+        <img
+          className={cn({
+            [s.sliderCardImage]: isSlider,
+            [s.image]: !isSlider,
+          })}
+          src={images[0]}
+          alt={name}
+        />
       </a>
       <a href={`/*`} className={s.name}>
         {name}
