@@ -108,7 +108,7 @@ export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
           }}
         >
           {products.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} isSlider={true} />
           ))}
         </div>
       </div>
