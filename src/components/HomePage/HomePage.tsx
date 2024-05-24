@@ -1,9 +1,12 @@
 type Props = {};
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styles from './HomePage.module.scss';
+import { useProductsContext } from '../../context/ProductsContext';
+import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
 
 export default function HomePage({}: Props) {
+  const { products } = useProductsContext();
   const [categories, setCategories] = useState([
     { title: 'Mobile phones', type: 'phones', count: 0 },
     { title: 'Tablets', type: 'tablets', count: 0 },
@@ -34,11 +37,21 @@ export default function HomePage({}: Props) {
     }
   });
 
+  const newModelPhones = useMemo(() => {
+    return [...products]
+      .sort((a, b) => {
+        return b.year - a.year;
+      })
+      .slice(0, 20);
+  }, [products]);
+
   return (
     <main className={styles.homePage}>
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
       <div className={styles.slider}>Slider placeholder</div>
-      <div className={styles.newModels}>New Models placeholder</div>
+      <div className={styles.newModels}>
+        <ProductsSlider title="Brand new models" products={newModelPhones} />
+      </div>
       <div className={styles.categories}>
         <h2 className={styles.categoriesTitle}>Shop by category</h2>
         {categories[0].count !== 0 &&

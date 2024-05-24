@@ -4,7 +4,7 @@ import ProductCard from '../../ProductCard';
 import styles from './FavoritesPage.module.scss';
 
 export default function FavoritesPage({}: Props) {
-  const { phones: tempFaves } = useProductsContext();
+  const { products: tempFaves } = useProductsContext();
 
   return (
     <main className={styles.favoritesPage}>

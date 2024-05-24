@@ -7,7 +7,7 @@ import Icon from '../Icon';
 import { Icons } from '../../types';
 
 export default function PhonesPage({}: Props) {
-  const { phones } = useProductsContext();
+  const { products: phones } = useProductsContext();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 16;
 
