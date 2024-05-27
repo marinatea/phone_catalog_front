@@ -5,6 +5,7 @@ import ProductCard from '../ProductCard';
 import styles from './PhonesPage.module.scss';
 import Icon from '../Icon';
 import { Icons } from '../../types';
+import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 
 export default function PhonesPage({}: Props) {
   const { products: phones } = useProductsContext();
@@ -54,6 +55,7 @@ export default function PhonesPage({}: Props) {
 
   return (
     <main className={styles.phonesPage}>
+      <Breadcrumbs />
       <h1 className={styles.title}>Mobile Phones</h1>
       <span className={styles.subText}>95 models</span>
       <div className={styles.filter}>Sort placeholder</div>
