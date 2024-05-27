@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { ProductsProvider } from '../../context/ProductsContext';
+
 import Header from '../Header/Header';
 
 type Props = {};
@@ -8,9 +8,7 @@ export default function Layout({}: Props) {
     <>
       <Header />
 
-      <ProductsProvider>
-        <Outlet />
-      </ProductsProvider>
+      <Outlet />
 
       {/* <Footer /> */}
     </>

@@ -1,6 +1,4 @@
-type Props = { productType: 'phone' | 'tablet' | 'accessory' };
-
-import { useEffect, useState } from 'react';
+type Props = { productType: 'phones' | 'tablets' | 'accessories' };
 
 import About from '../../ProductDetails/components/Description/About';
 import Actions from '../../ProductDetails/components/Actions/Actions';
@@ -9,36 +7,21 @@ import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
 import styles from './ProductPage.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import ImagesSelector from './components/ImagesSelector/ImagesSelector';
+import { useEffect } from 'react';
+import { useProductsSelector } from '../../../hooks/reduxHooks';
 
 export default function ProductPage({ productType }: Props) {
-  const { productId } = useParams<{ productId: string }>();
-  const [product, setProduct] = useState<IProductDetails | null>(null);
   const navigate = useNavigate();
-  const productUrl = `/api/${productType}s.json`;
+  const { productId } = useParams<{ productId: string }>();
+  const allProducts = useProductsSelector(state => state);
+
+  const product = allProducts[productType].find(prod => prod.id === productId);
 
   useEffect(() => {
-    fetch(productUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        return response.json();
-      })
-      .then(data => {
-        const tempProduct =
-          data.find((item: IProductDetails) => item.id === productId) || null;
-
-        if (tempProduct === null) {
-          navigate('/product-not-found');
-        }
-
-        setProduct(tempProduct);
-      })
-      .catch(error => {
-        throw new Error(error);
-      });
-  }, [productId, productUrl, navigate]);
+    if (product === undefined && allProducts[productType].length !== 0) {
+      navigate('/product-not-found');
+    }
+  }, [allProducts, navigate, product, productType]);
 
   return (
     <main className={styles.productPage}>
@@ -48,13 +31,13 @@ export default function ProductPage({ productType }: Props) {
       </div>
 
       <div className={styles.actions}>
-        <Actions product={product} />
+        <Actions product={product as IProductDetails} />
       </div>
       <div className={styles.about}>
-        <About product={product} />
+        <About product={product as IProductDetails} />
       </div>
       <div className={styles.specs}>
-        <TechSpecs product={product} />
+        <TechSpecs product={product as IProductDetails} />
       </div>
       <div className={styles.suggested}>Suggested Placeholder</div>
     </main>
