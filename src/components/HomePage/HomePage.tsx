@@ -5,7 +5,7 @@ import styles from './HomePage.module.scss';
 import { useProductsContext } from '../../context/ProductsContext';
 import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
 
-export default function HomePage({}: Props) {
+export default function HomePage({ }: Props) {
   const { products } = useProductsContext();
   const [categories, setCategories] = useState([
     { title: 'Mobile phones', type: 'phones', count: 0 },
@@ -37,7 +37,7 @@ export default function HomePage({}: Props) {
     }
   });
 
-  const newModelPhones = useMemo(() => {
+  const newModelProducts = useMemo(() => {
     return [...products]
       .sort((a, b) => {
         return b.year - a.year;
@@ -45,12 +45,20 @@ export default function HomePage({}: Props) {
       .slice(0, 20);
   }, [products]);
 
+  const hotPriceProducts = useMemo(() => {
+    return [...products]
+      .sort((a, b) => {
+        return b.fullPrice - b.price - (a.fullPrice - a.price);
+      })
+      .slice(0, 16);
+  }, [products]);
+
   return (
     <main className={styles.homePage}>
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
       <div className={styles.slider}>Slider placeholder</div>
       <div className={styles.newModels}>
-        <ProductsSlider title="Brand new models" products={newModelPhones} />
+        <ProductsSlider title="Brand new models" products={newModelProducts} />
       </div>
       <div className={styles.categories}>
         <h2 className={styles.categoriesTitle}>Shop by category</h2>
@@ -69,7 +77,7 @@ export default function HomePage({}: Props) {
             </div>
           ))}
       </div>
-      <div className={styles.hotPrices}>Hot prices placeholder</div>
+      <div className={styles.hotPrices}><ProductsSlider products={hotPriceProducts} title='Hot prices' /></div>
     </main>
   );
 }
