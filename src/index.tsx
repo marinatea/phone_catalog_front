@@ -1,9 +1,10 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
-import { ProductsProvider } from './context/ProductsContext';
+import { Provider } from 'react-redux';
+import store from './store';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
-  <ProductsProvider>
+  <Provider store={store}>
     <App />
-  </ProductsProvider>,
+  </Provider>,
 );

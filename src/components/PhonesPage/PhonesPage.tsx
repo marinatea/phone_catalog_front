@@ -1,13 +1,14 @@
 type Props = {};
 import { useState } from 'react';
-import { useProductsContext } from '../../context/ProductsContext';
 import ProductCard from '../ProductCard';
 import styles from './PhonesPage.module.scss';
 import Icon from '../Icon';
 import { Icons } from '../../types';
+import { useProductsSelector } from '../../hooks/reduxHooks';
 
 export default function PhonesPage({}: Props) {
-  const { products: phones } = useProductsContext();
+  const { phones } = useProductsSelector(state => state);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 16;
 
