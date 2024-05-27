@@ -17,16 +17,19 @@ import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { IProductDetails, Icons } from '../../../../types';
 import style from './Actions.module.scss';
-import { useProductsContext } from '../../../../context/ProductsContext';
+
 import Button from '../../../Button';
 import getProductLink from '../../../../utils/getProductLink';
+import { useAppDispatch, useCartSelector } from '../../../../hooks/reduxHooks';
+import { addCartItem } from '../../../../slices/cartSlice';
 
 interface Props {
   product: IProductDetails | null;
 }
 
 export default function Description({ product }: Props) {
-  const { isItemInCart, addItem } = useProductsContext();
+  const { cart } = useCartSelector(state => state);
+  const dispatch = useAppDispatch();
 
   if (!product) {
     return;
@@ -68,7 +71,8 @@ export default function Description({ product }: Props) {
 
   const activeColor = id.split('-').pop();
 
-  const isProductInCard = isItemInCart(id);
+  const isProductInCard = Object.hasOwn(cart, id);
+
   const cartProduct = {
     id,
     name,
@@ -128,13 +132,13 @@ export default function Description({ product }: Props) {
         </div>
         <div className={style.actions}>
           <Button
-            onClick={() => addItem(cartProduct)}
+            onClick={() => dispatch(addCartItem(cartProduct))}
             isSelected={isProductInCard}
             className={style.addToCard}
             title={isProductInCard ? 'Added to cart' : 'Add to cart'}
           />
           <Button
-            onClick={() => { }}
+            onClick={() => {}}
             type="secondary"
             className={style.addToFavorite}
             icon={Icons.HEART}

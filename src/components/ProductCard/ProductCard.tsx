@@ -4,14 +4,17 @@ import cn from 'classnames';
 import s from './ProductCard.module.scss';
 import Button from '../../components/Button';
 import { IProductDetails, Icons } from '../../types';
-import { useProductsContext } from '../../context/ProductsContext';
+import { useAppDispatch, useCartSelector } from '../../hooks/reduxHooks';
+import { addCartItem } from '../../slices/cartSlice';
 
 interface Props {
   product: IProductDetails;
   isSlider?: boolean;
 }
 const ProductCard: FC<Props> = ({ product, isSlider }) => {
-  const { isItemInCart, addItem } = useProductsContext();
+  const { cart } = useCartSelector(state => state);
+  const dispatch = useAppDispatch();
+
   const {
     id,
     name,
@@ -23,7 +26,7 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
     images,
   } = product;
 
-  const isProductInCard = isItemInCart(id);
+  const isProductInCard = Object.hasOwn(cart, id);
 
   const cartProduct = {
     id,
@@ -76,7 +79,7 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
       </ul>
       <div className={s.buttons}>
         <Button
-          onClick={() => addItem(cartProduct)}
+          onClick={() => dispatch(addCartItem(cartProduct))}
           isSelected={false}
           className={s.addToCard}
           title={isProductInCard ? 'Added to cart' : 'Add to cart'}
