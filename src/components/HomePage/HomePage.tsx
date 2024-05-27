@@ -2,11 +2,11 @@ type Props = {};
 
 import { useEffect, useMemo, useState } from 'react';
 import styles from './HomePage.module.scss';
-import { useProductsContext } from '../../context/ProductsContext';
 import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
+import { useProductsSelector } from '../../hooks/reduxHooks';
 
 export default function HomePage({}: Props) {
-  const { products } = useProductsContext();
+  const { allProducts } = useProductsSelector(state => state);
   const [categories, setCategories] = useState([
     { title: 'Mobile phones', type: 'phones', count: 0 },
     { title: 'Tablets', type: 'tablets', count: 0 },
@@ -38,12 +38,12 @@ export default function HomePage({}: Props) {
   });
 
   const newModelPhones = useMemo(() => {
-    return [...products]
+    return [...allProducts]
       .sort((a, b) => {
         return b.year - a.year;
       })
       .slice(0, 20);
-  }, [products]);
+  }, [allProducts]);
 
   return (
     <main className={styles.homePage}>

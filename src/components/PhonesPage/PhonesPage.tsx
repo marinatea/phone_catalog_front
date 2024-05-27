@@ -7,16 +7,16 @@ import { Icons } from '../../types';
 import { useProductsSelector } from '../../hooks/reduxHooks';
 
 export default function PhonesPage({}: Props) {
-  const { phones } = useProductsSelector(state => state);
+  const { allProducts } = useProductsSelector(state => state);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 16;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = phones.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = allProducts.slice(indexOfFirstItem, indexOfLastItem);
 
-  const totalPages = Math.ceil(phones.length / itemsPerPage);
+  const totalPages = Math.ceil(allProducts.length / itemsPerPage);
 
   const pagination = (pageNumber: number) => setCurrentPage(pageNumber);
 
