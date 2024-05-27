@@ -3,7 +3,11 @@ import styles from './CartItem.module.scss';
 import { Icons } from '../../types';
 import Button from '../Button';
 import { useAppDispatch, useCartSelector } from '../../hooks/reduxHooks';
-import { addCartItem, removeCartItem } from '../../slices/cartSlice';
+import {
+  addCartItem,
+  removeCartItem,
+  removeCartItemsType,
+} from '../../slices/cartSlice';
 
 const CartItem: FC = () => {
   const { cart } = useCartSelector(state => state);
@@ -16,7 +20,9 @@ const CartItem: FC = () => {
           <div className={styles.cartItem} key={product.id}>
             <div className={styles.firstRow}>
               <Button
-                onClick={() => {}}
+                onClick={() => {
+                  dispatch(removeCartItemsType(product.id));
+                }}
                 className={styles.closeIcon}
                 title=""
                 type="secondary"

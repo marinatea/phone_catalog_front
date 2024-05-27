@@ -9,11 +9,13 @@ export interface CartState {
     [productId: string]: ICartProduct & { count: number };
   };
   itemCount: number;
+  totalPrice: number;
 }
 
 const initialState: CartState = {
   cart: {},
   itemCount: 0,
+  totalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -28,22 +30,33 @@ const cartSlice = createSlice({
     ) => {
       state.cart = action.payload;
 
+      state.totalPrice = Object.keys(state.cart).reduce(
+        (count, cartItemId) =>
+          count + state.cart[cartItemId].count * state.cart[cartItemId].price,
+        0,
+      );
+
       state.itemCount = Object.keys(state.cart).reduce(
         (count, cartItemId) => count + state.cart[cartItemId].count,
         0,
       );
     },
     addCartItem: (state, action: PayloadAction<ICartProduct>) => {
+      state.itemCount++;
+      state.totalPrice += action.payload.price;
+
       if (Object.hasOwn(state.cart, action.payload.id)) {
         state.cart[action.payload.id].count++;
       } else {
         state.cart[action.payload.id] = { ...action.payload, count: 1 };
       }
 
-      state.itemCount++;
       localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(state.cart));
     },
     removeCartItem: (state, action: PayloadAction<string>) => {
+      state.itemCount--;
+      state.totalPrice -= state.cart[action.payload].price;
+
       if (Object.hasOwn(state.cart, action.payload)) {
         if (state.cart[action.payload].count > 1) {
           state.cart[action.payload].count--;
@@ -52,11 +65,23 @@ const cartSlice = createSlice({
         }
       }
 
-      state.itemCount--;
+      localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(state.cart));
+    },
+    removeCartItemsType: (state, action: PayloadAction<string>) => {
+      const thisItemCount = state.cart[action.payload].count;
+
+      state.itemCount -= thisItemCount;
+      state.totalPrice -= state.cart[action.payload].price * thisItemCount;
+      delete state.cart[action.payload];
       localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(state.cart));
     },
   },
 });
 
-export const { setCartItems, addCartItem, removeCartItem } = cartSlice.actions;
+export const {
+  setCartItems,
+  addCartItem,
+  removeCartItem,
+  removeCartItemsType,
+} = cartSlice.actions;
 export default cartSlice.reducer;
