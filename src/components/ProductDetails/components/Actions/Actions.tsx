@@ -13,7 +13,6 @@ export const AVAILABLE_COLORS: { [key: string]: string } = {
   coral: '#ff6451',
 };
 
-
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { IProductDetails, Icons } from '../../../../types';
@@ -27,9 +26,12 @@ interface Props {
 }
 
 export default function Description({ product }: Props) {
+  const { isItemInCart, addItem } = useProductsContext();
+
   if (!product) {
     return;
   }
+
   const {
     name,
     capacityAvailable,
@@ -65,7 +67,6 @@ export default function Description({ product }: Props) {
   ];
 
   const activeColor = id.split('-').pop();
-  const { isItemInCart, addItem } = useProductsContext();
 
   const isProductInCard = isItemInCart(id);
   const cartProduct = {
@@ -81,8 +82,8 @@ export default function Description({ product }: Props) {
         <div className={style.colors}>
           <span className={style.label}>Available colors</span>
           <ul className={style.list}>
-            {colorsAvailable.map((color) => (
-              <li className={style.item}>
+            {colorsAvailable.map(color => (
+              <li key={color} className={style.item}>
                 <Link
                   to={`/phones/${getProductLink({
                     id,
@@ -100,8 +101,8 @@ export default function Description({ product }: Props) {
         <div className={style.capacity}>
           <span className={style.label}>Select capacity</span>
           <ul className={style.list}>
-            {capacityAvailable.map((capacityItem) => (
-              <li className={style.item}>
+            {capacityAvailable.map(capacityItem => (
+              <li key={capacityItem} className={style.item}>
                 <Link
                   to={`/phones/${getProductLink({
                     id,
@@ -127,13 +128,13 @@ export default function Description({ product }: Props) {
         </div>
         <div className={style.actions}>
           <Button
-            onClick={()=>addItem(cartProduct)}
+            onClick={() => addItem(cartProduct)}
             isSelected={isProductInCard}
             className={style.addToCard}
             title={isProductInCard ? 'Added to cart' : 'Add to cart'}
           />
           <Button
-            onClick={()=>{}}
+            onClick={() => { }}
             type="secondary"
             className={style.addToFavorite}
             icon={Icons.HEART}
@@ -150,4 +151,4 @@ export default function Description({ product }: Props) {
       </div>
     </div>
   );
-};
+}

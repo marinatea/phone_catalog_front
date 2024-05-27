@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import Icon from '../Icon/Icon';
 import { Icons } from '../../types';
+import CartBadge from '../Badge/Badge';
 
 export const Header: React.FC = () => {
   return (
@@ -30,6 +31,7 @@ export const Header: React.FC = () => {
         </NavLink>
         <NavLink to="/cart">
           <Icon iconId={Icons.CART} className={styles.cart} />
+          <CartBadge />
         </NavLink>
         <div className={styles.union}>
           <Icon iconId={Icons.BURGER} className={styles.burger} />
