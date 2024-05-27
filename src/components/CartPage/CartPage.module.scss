@@ -2,7 +2,7 @@
 @use '/src/utils/mobileHeaderFonts.scss' as mHF;
 @use '/src/utils/miscFonts.scss' as mF;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
-@import '/src/constants/colors.module.scss';
+@import '/src/constants/colors.module';
 
 .cartPage {
   display: grid;
@@ -29,7 +29,9 @@
 @include mQ.phone {
   .title {
     margin-top: 24px;
+
     @include mHF.h1-font;
+
     grid-column: span 4;
     color: $primary;
   }
@@ -54,11 +56,13 @@
     .infoContainer {
       .cashInfo {
         color: $primary;
+
         @include dHF.h2-font;
       }
 
       .itemInfo {
         color: $secondary;
+
         @include mF.body-font;
       }
     }
@@ -74,7 +78,9 @@
 @include mQ.tablet {
   .title {
     margin-top: 16px;
+
     @include dHF.h1-font;
+
     grid-column: span 12;
   }
 
@@ -91,7 +97,9 @@
 @include mQ.desktop {
   .title {
     margin-top: 16px;
+
     @include dHF.h1-font;
+    
     grid-column: span 24;
   }
 

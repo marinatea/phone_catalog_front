@@ -1,16 +1,15 @@
 @use '/src/utils/mediaQueries.module.scss' as mQ;
 @use './../../utils/miscFonts.scss' as mF;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
-@import '/src/constants/colors.module.scss';
+@import '/src/constants/colors.module';
 
 .cartItemContainer {
   display: grid;
   justify-content: center;
 
   @include mQ.phone {
-    row-gap: 16px;
+    gap: 16px;
     grid-template-columns: 1fr;
-    column-gap: 16px;
 
     .cartItem {
       border: 1px solid $elements;
@@ -26,10 +25,8 @@
         .closeIcon {
           color: $elements;
           align-items: center;
-          margin-left: 0px;
-          margin-right: 16px;
-          margin: 24px 16px 32px 0px;
-          border: 0px;
+          margin: 24px 16px 32px 0;
+          border: 0;
         }
 
         .phoneContainer {
@@ -44,9 +41,11 @@
         }
 
         .name {
-          margin: 24px 16px 32px 0px;
+          margin: 24px 16px 32px 0;
           text-align: center;
+
           @include mF.body-font;
+
           color: $primary;
           text-decoration: none;
         }
@@ -71,7 +70,9 @@
           .count {
             padding: 6px;
             text-align: center;
+
             @include mF.body-font;
+
             color: $primary;
           }
 
@@ -83,6 +84,7 @@
 
         .price {
           @include dHF.h3-font;
+          
           width: 80px;
           padding-left: 48px;
         }
