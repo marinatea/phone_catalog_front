@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import styles from './ProductsSlider.module.scss';
-import { IProductDetails, Icons } from '../../types';
+import { Icons, ProductT } from '../../types';
 import ProductCard from '../ProductCard';
 import Icon from '../Icon';
 
 type Props = {
   title: string;
-  products: IProductDetails[];
+  products: ProductT[];
 };
 
 export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
@@ -19,26 +19,32 @@ export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
   useEffect(() => {
     const handleResize = () => {
       const screenWidth = window.innerWidth;
-      let newVisibleCards = 1;
-      let newCardWidth = 272;
+      let newVisibleCards;
+      let newCardWidth;
 
-      if (screenWidth >= 1200) {
-        newVisibleCards = 4;
-      } else if (screenWidth >= 640) {
-        newVisibleCards = 2;
-        newCardWidth = 237;
-      } else {
-        newVisibleCards = 1;
-        newCardWidth = 223;
+      switch (true) {
+        case screenWidth >= 1200:
+          newVisibleCards = 5;
+          newCardWidth = 272;
+          break;
+        case screenWidth >= 640:
+          newVisibleCards = 2;
+          newCardWidth = 237;
+          break;
+        default:
+          newVisibleCards = 1;
+          newCardWidth = 223;
+          break;
       }
 
       setVisibleCards(newVisibleCards);
-      const newSliderWidth = screenWidth - 16 * visibleCards;
+      const newSliderWidth = screenWidth - 16 * (newVisibleCards - 1);
+      const adjustedSliderWidth = newSliderWidth > 1136 ? 1136 : newSliderWidth;
 
-      setSliderWidth(newSliderWidth);
+      setSliderWidth(adjustedSliderWidth);
       setCardWidth(newCardWidth);
       const maxTranslate = Math.max(
-        newCardWidth * products.length - newSliderWidth,
+        newCardWidth * products.length - adjustedSliderWidth,
         0,
       );
 
@@ -69,7 +75,12 @@ export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
     );
   };
 
-  const rightClickDisabled = translate >= maxTranslate;
+  const screenWidth = window.innerWidth;
+
+  const rightClickDisabled =
+    screenWidth >= 1200
+      ? translate >= maxTranslate - sliderWidth * 2
+      : translate >= maxTranslate;
   const leftClickDisabled = translate <= 0;
 
   return (

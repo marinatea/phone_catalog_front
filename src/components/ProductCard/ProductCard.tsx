@@ -3,12 +3,12 @@ import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
 import Button from '../../components/Button';
-import { IProductDetails, Icons } from '../../types';
+import { Icons } from '../../types';
 import { useAppDispatch, useCartSelector } from '../../hooks/reduxHooks';
 import { addCartItem } from '../../slices/cartSlice';
 
 interface Props {
-  product: IProductDetails;
+  product: ProductT;
   isSlider?: boolean;
 }
 const ProductCard: FC<Props> = ({ product, isSlider }) => {
@@ -16,14 +16,14 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
   const dispatch = useAppDispatch();
 
   const {
-    id,
+    itemId: id,
     name,
     capacity,
     ram,
-    priceDiscount,
-    priceRegular,
+    price,
+    fullPrice,
     screen,
-    images,
+    image,
   } = product;
 
   const isProductInCard = Object.hasOwn(cart, id);
@@ -31,8 +31,8 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
   const cartProduct = {
     id,
     name,
-    image: images[0],
-    price: priceDiscount,
+    image,
+    price,
   };
 
   return (
@@ -52,7 +52,7 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
             [s.sliderCardImage]: isSlider,
             [s.image]: !isSlider,
           })}
-          src={images[0]}
+          src={image}
           alt={name}
         />
       </a>
@@ -60,8 +60,8 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
         {name}
       </a>
       <div className={s.price}>
-        <span className={s.currentPrice}>{`$${priceDiscount}`}</span>
-        <span className={s.fullPrice}>{`$${priceRegular}`}</span>
+        <span className={s.currentPrice}>{`$${price}`}</span>
+        <span className={s.fullPrice}>{`$${fullPrice}`}</span>
       </div>
       <ul className={s.detailsList}>
         <li className={s.detailsItem}>
