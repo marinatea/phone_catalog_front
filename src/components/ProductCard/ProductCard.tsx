@@ -52,7 +52,7 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
             [s.sliderCardImage]: isSlider,
             [s.image]: !isSlider,
           })}
-          src={image}
+          src={`/${image}`}
           alt={name}
         />
       </a>
