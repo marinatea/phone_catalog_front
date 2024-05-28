@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import styles from './HomePage.module.scss';
 import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
 import { useProductsSelector } from '../../hooks/reduxHooks';
+import { Banner } from '../Banner/Banner';
 
 export default function HomePage({}: Props) {
   const { phones, tablets, accessories, allProducts } = useProductsSelector(
@@ -35,7 +36,9 @@ export default function HomePage({}: Props) {
   return (
     <main className={styles.homePage}>
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
-      <div className={styles.slider}>Slider placeholder</div>
+      <div className={styles.slider}>
+        <Banner />
+      </div>
       <div className={styles.newModels}>
         <ProductsSlider title="Brand new models" products={newModelProducts} />
       </div>
