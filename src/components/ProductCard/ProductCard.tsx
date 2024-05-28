@@ -13,7 +13,7 @@ import { addCartItem } from '../../slices/cartSlice';
 import {
   addToFavorites,
   removeFromFavorites,
-} from '../../slices/FavoriteSlice';
+} from '../../slices/favoriteSlice';
 import Icon from '../Icon';
 
 interface Props {

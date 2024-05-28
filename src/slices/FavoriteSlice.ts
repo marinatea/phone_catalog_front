@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductT } from '../types';
+import { LOCAL_FAVORITES_KEY } from '../constants/localStorageKeys';
 
 export interface FavoritesState {
-  cart: {};
   favorites: ProductT[];
 }
 
 export const initialState: FavoritesState = {
-  cart: {},
   favorites: [],
 };
 
@@ -17,7 +16,10 @@ const favoritesSlice = createSlice({
   reducers: {
     addToFavorites: (state, action: PayloadAction<ProductT>) => {
       state.favorites.push(action.payload);
-      localStorage.setItem('favorites', JSON.stringify(state.favorites));
+      localStorage.setItem(
+        LOCAL_FAVORITES_KEY,
+        JSON.stringify(state.favorites),
+      );
     },
     removeFromFavorites: (state, action: PayloadAction<string>) => {
       const index = state.favorites.findIndex(
@@ -26,7 +28,10 @@ const favoritesSlice = createSlice({
 
       if (index !== -1) {
         state.favorites.splice(index, 1);
-        localStorage.setItem('favorites', JSON.stringify(state.favorites));
+        localStorage.setItem(
+          LOCAL_FAVORITES_KEY,
+          JSON.stringify(state.favorites),
+        );
       }
     },
   },
