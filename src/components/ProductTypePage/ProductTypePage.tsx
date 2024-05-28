@@ -1,23 +1,43 @@
-type Props = {};
+type Props = { productsType: 'phones' | 'tablets' | 'accessories' };
 import { useState } from 'react';
 import ProductCard from '../ProductCard';
-import styles from './PhonesPage.module.scss';
+import styles from './ProductTypePage.module.scss';
 import Icon from '../Icon';
 import { Icons } from '../../types';
 import { useProductsSelector } from '../../hooks/reduxHooks';
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 
-export default function PhonesPage({}: Props) {
-  const { phones } = useProductsSelector(state => state);
+export default function ProductTypePage({ productsType }: Props) {
+  const { allProducts } = useProductsSelector(state => state);
+
+  const filteredProducts = allProducts.filter(
+    product => product.category === productsType,
+  );
+
+  let pageTitle = '';
+
+  switch (productsType) {
+    case 'phones':
+      pageTitle = 'Mobile Phones';
+      break;
+    case 'tablets':
+      pageTitle = 'Tablets';
+      break;
+    case 'accessories':
+      pageTitle = 'Accessories';
+      break;
+  }
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 16;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = phones.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem,
+  );
 
-  const totalPages = Math.ceil(phones.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
 
   const pagination = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -56,14 +76,13 @@ export default function PhonesPage({}: Props) {
 
   return (
     <main className={styles.phonesPage}>
-      <Breadcrumbs />
-      <h1 className={styles.title}>Mobile Phones</h1>
-      <span className={styles.subText}>95 models</span>
+      <h1 className={styles.title}>{pageTitle}</h1>
+      <span className={styles.subText}>{filteredProducts.length} models</span>
       <div className={styles.filter}>Sort placeholder</div>
       <div className={styles.filter}>Items placeholder</div>
       <div className={styles.cardsContainer}>
-        {currentItems.map(phone => (
-          <ProductCard key={phone.id} product={phone} />
+        {currentItems.map(product => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
       <div className={styles.pageSelector}>

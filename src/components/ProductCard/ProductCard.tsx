@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
 import Button from '../../components/Button';
-import { Icons } from '../../types';
+import { Icons, ProductT } from '../../types';
 import { useAppDispatch, useCartSelector } from '../../hooks/reduxHooks';
 import { addCartItem } from '../../slices/cartSlice';
 
