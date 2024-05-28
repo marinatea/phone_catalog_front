@@ -144,4 +144,9 @@
 
 .addToFavorite {
   padding: 11px;
+  border: 1px solid color.$elements;
+
+  &:hover {
+    border-color: color.$secondary;
+  }
 }
