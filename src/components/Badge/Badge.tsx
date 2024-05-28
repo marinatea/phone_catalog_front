@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './Badge.module.scss';
-import { useProductsContext } from '../../context/ProductsContext';
+import { useCartSelector } from '../../hooks/reduxHooks';
 
 const CartBadge: React.FC = () => {
-  const { cartItemsCount } = useProductsContext();
+  const { itemCount } = useCartSelector(state => state);
 
   return (
     <div className={styles.cartBadge}>
-      <span className={styles.quantity}>{cartItemsCount}</span>
+      <span className={styles.quantity}>{itemCount}</span>
     </div>
   );
 };

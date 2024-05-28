@@ -1,57 +1,36 @@
 type Props = {};
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import styles from './HomePage.module.scss';
-import { useProductsContext } from '../../context/ProductsContext';
 import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
+import { useProductsSelector } from '../../hooks/reduxHooks';
 
-export default function HomePage({ }: Props) {
-  const { products } = useProductsContext();
-  const [categories, setCategories] = useState([
-    { title: 'Mobile phones', type: 'phones', count: 0 },
-    { title: 'Tablets', type: 'tablets', count: 0 },
-    { title: 'Accessories', type: 'accessories', count: 0 },
-  ]);
+export default function HomePage({}: Props) {
+  const { phones, tablets, accessories, allProducts } = useProductsSelector(
+    state => state,
+  );
 
-  useEffect(() => {
-    if (categories[0].count === 0) {
-      categories.forEach(({ type }, i) => {
-        fetch(`/api/${type}.json`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-
-            return response.json();
-          })
-          .then(data => {
-            setCategories(prevCats => {
-              const newCats = [...prevCats];
-
-              newCats[i].count = data.length;
-
-              return newCats;
-            });
-          });
-      }, []);
-    }
-  });
+  const categories = [
+    { title: 'Mobile phones', type: 'phones', count: phones.length },
+    { title: 'Tablets', type: 'tablets', count: tablets.length },
+    { title: 'Accessories', type: 'accessories', count: accessories.length },
+  ];
 
   const newModelProducts = useMemo(() => {
-    return [...products]
+    return [...allProducts]
       .sort((a, b) => {
         return b.year - a.year;
       })
       .slice(0, 20);
-  }, [products]);
-
+  }, [allProducts]);
+  
   const hotPriceProducts = useMemo(() => {
-    return [...products]
+    return [...allProducts]
       .sort((a, b) => {
         return b.fullPrice - b.price - (a.fullPrice - a.price);
       })
       .slice(0, 16);
-  }, [products]);
+  }, [allProducts]);
 
   return (
     <main className={styles.homePage}>
