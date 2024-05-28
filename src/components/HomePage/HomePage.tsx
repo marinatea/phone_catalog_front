@@ -16,12 +16,20 @@ export default function HomePage({}: Props) {
     { title: 'Accessories', type: 'accessories', count: accessories.length },
   ];
 
-  const newModelPhones = useMemo(() => {
+  const newModelProducts = useMemo(() => {
     return [...allProducts]
       .sort((a, b) => {
         return b.year - a.year;
       })
       .slice(0, 20);
+  }, [allProducts]);
+  
+  const hotPriceProducts = useMemo(() => {
+    return [...allProducts]
+      .sort((a, b) => {
+        return b.fullPrice - b.price - (a.fullPrice - a.price);
+      })
+      .slice(0, 16);
   }, [allProducts]);
 
   return (
@@ -29,7 +37,7 @@ export default function HomePage({}: Props) {
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
       <div className={styles.slider}>Slider placeholder</div>
       <div className={styles.newModels}>
-        <ProductsSlider title="Brand new models" products={newModelPhones} />
+        <ProductsSlider title="Brand new models" products={newModelProducts} />
       </div>
       <div className={styles.categories}>
         <h2 className={styles.categoriesTitle}>Shop by category</h2>
@@ -48,7 +56,7 @@ export default function HomePage({}: Props) {
             </div>
           ))}
       </div>
-      <div className={styles.hotPrices}>Hot prices placeholder</div>
+      <div className={styles.hotPrices}><ProductsSlider products={hotPriceProducts} title='Hot prices' /></div>
     </main>
   );
 }
