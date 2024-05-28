@@ -14,7 +14,7 @@ const Icon: FC<Props> = ({ iconId, className, onClick, disabled }) => {
       className={cn(s.container, className, { [s.disabled]: disabled })}
       onClick={!disabled ? onClick : undefined}
     >
-      <use href={`img/sprite.svg#${iconId}`} />
+      <use href={`/img/sprite.svg#${iconId}`} />
     </svg>
   );
 };
