@@ -17,10 +17,11 @@ export const Banner: React.FC = () => {
 
       if (screenWidth >= 1200) {
         newImageWidth = 1040;
-      } else if (screenWidth >= 640) {
-        newImageWidth = screenWidth - 138;
+      }
+      else if (screenWidth >= 640) {
+        newImageWidth = screenWidth - 156.6;
       } else if (screenWidth >= 450) {
-        newImageWidth = screenWidth - 32;
+        newImageWidth = screenWidth - 50.19;
       } else {
         newImageWidth = screenWidth - 31.7;
       }
@@ -38,7 +39,7 @@ export const Banner: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSliderCounter(counter => (counter + 1 > 4 ? 1 : counter + 1)); // Assuming 4 images
-    }, 5000000);
+    }, 5000);
 
     return () => {
       clearInterval(interval);
