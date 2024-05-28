@@ -1,41 +1,20 @@
 type Props = {};
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import styles from './HomePage.module.scss';
 import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
 import { useProductsSelector } from '../../hooks/reduxHooks';
 
 export default function HomePage({}: Props) {
-  const { allProducts } = useProductsSelector(state => state);
-  const [categories, setCategories] = useState([
-    { title: 'Mobile phones', type: 'phones', count: 0 },
-    { title: 'Tablets', type: 'tablets', count: 0 },
-    { title: 'Accessories', type: 'accessories', count: 0 },
-  ]);
+  const { phones, tablets, accessories, allProducts } = useProductsSelector(
+    state => state,
+  );
 
-  useEffect(() => {
-    if (categories[0].count === 0) {
-      categories.forEach(({ type }, i) => {
-        fetch(`/api/${type}.json`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-
-            return response.json();
-          })
-          .then(data => {
-            setCategories(prevCats => {
-              const newCats = [...prevCats];
-
-              newCats[i].count = data.length;
-
-              return newCats;
-            });
-          });
-      }, []);
-    }
-  });
+  const categories = [
+    { title: 'Mobile phones', type: 'phones', count: phones.length },
+    { title: 'Tablets', type: 'tablets', count: tablets.length },
+    { title: 'Accessories', type: 'accessories', count: accessories.length },
+  ];
 
   const newModelPhones = useMemo(() => {
     return [...allProducts]
