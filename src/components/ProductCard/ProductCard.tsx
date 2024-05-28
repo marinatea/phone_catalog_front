@@ -1,11 +1,20 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
 import Button from '../../components/Button';
 import { Icons, ProductT } from '../../types';
-import { useAppDispatch, useCartSelector } from '../../hooks/reduxHooks';
+import {
+  useAppDispatch,
+  useCartSelector,
+  useFavoritesSelector,
+} from '../../hooks/reduxHooks';
 import { addCartItem } from '../../slices/cartSlice';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../slices/FavoriteSlice';
+import Icon from '../Icon';
 
 interface Props {
   product: ProductT;
@@ -13,6 +22,7 @@ interface Props {
 }
 const ProductCard: FC<Props> = ({ product, isSlider }) => {
   const { cart } = useCartSelector(state => state);
+  const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();
 
   const {
@@ -33,6 +43,47 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
     name,
     image,
     price,
+  };
+
+  const favoriteCard: ProductT = {
+    name: product.name,
+    capacity,
+    color: product.color,
+    screen,
+    ram,
+    id: product.id,
+    category: 'phones',
+    itemId: product.itemId,
+    fullPrice: product.fullPrice,
+    price: product.price,
+    year: product.year,
+    image: product.image,
+  };
+
+  const isProductInFavorites = favorites.some(item => item.name === name);
+
+  const [icon, setIcon] = useState(
+    isProductInFavorites ? Icons.HEART_FILL : Icons.HEART,
+  );
+
+  useEffect(() => {
+    setIcon(
+      favorites.some(item => item.name === name)
+        ? Icons.HEART_FILL
+        : Icons.HEART,
+    );
+  }, [favorites, name]);
+
+  const handleFavoriteClick = () => {
+    if (isProductInFavorites) {
+      dispatch(removeFromFavorites(favoriteCard.name));
+
+      setIcon(Icons.HEART);
+    } else {
+      dispatch(addToFavorites(favoriteCard));
+
+      setIcon(Icons.HEART_FILL);
+    }
   };
 
   return (
@@ -84,11 +135,10 @@ const ProductCard: FC<Props> = ({ product, isSlider }) => {
           className={s.addToCard}
           title={isProductInCard ? 'Added to cart' : 'Add to cart'}
         />
-        <Button
-          onClick={() => {}}
-          type="secondary"
+        <Icon
+          onClick={handleFavoriteClick}
           className={s.addToFavorite}
-          icon={Icons.HEART}
+          iconId={icon}
         />
       </div>
     </div>

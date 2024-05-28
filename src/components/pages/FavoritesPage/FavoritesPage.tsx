@@ -1,18 +1,29 @@
-type Props = {};
-
+import React from 'react';
 import styles from './FavoritesPage.module.scss';
+import ProductCard from '../../ProductCard';
+import { useFavoritesSelector } from '../../../hooks/reduxHooks';
+import { ProductT } from '../../../types';
+import { FavoritesState } from '../../../slices/FavoriteSlice';
 
-export default function FavoritesPage({}: Props) {
+const FavoritesPage: React.FC = () => {
+  const favorites = useFavoritesSelector(
+    (state: FavoritesState) => state.favorites,
+  );
+
   return (
     <main className={styles.favoritesPage}>
       <h1 className={styles.title}>Favorites</h1>
-      {/* <span className={styles.subText}>{[].length} items</span>
-
+      <span className={styles.subText}>{favorites.length} items</span>
       <div className={styles.cardsContainer}>
-        {[].map(phone => (
-          <ProductCard key={phone.id} product={phone} />
+        {favorites.map((product: ProductT, index: number) => (
+          <ProductCard
+            key={product.name ? `${product.name}-${index}` : `product_${index}`}
+            product={product}
+          />
         ))}
-      </div> */}
+      </div>
     </main>
   );
-}
+};
+
+export default FavoritesPage;
