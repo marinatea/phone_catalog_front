@@ -34,8 +34,17 @@ const favoritesSlice = createSlice({
         );
       }
     },
+    loadFavoritesFromStorage: state => {
+      const storedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY);
+
+      return {
+        ...state,
+        favorites: storedFavorites ? JSON.parse(storedFavorites) : [],
+      };
+    },
   },
 });
 
-export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions;
+export const { addToFavorites, removeFromFavorites, loadFavoritesFromStorage } =
+  favoritesSlice.actions;
 export default favoritesSlice.reducer;
