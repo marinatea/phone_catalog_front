@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { ProductsState } from '../slices/productsSlice';
 import { CartState } from '../slices/cartSlice';
-import { FavoritesState } from '../slices/FavoriteSlice';
+import { FavoritesState } from '../slices/favoriteSlice';
 
 export const useProductsSelector = <T>(selector: (state: ProductsState) => T) =>
   useSelector<RootState, T>(state => selector(state.products));

@@ -3,7 +3,7 @@ import styles from './FavoritesPage.module.scss';
 import ProductCard from '../../ProductCard';
 import { useFavoritesSelector } from '../../../hooks/reduxHooks';
 import { ProductT } from '../../../types';
-import { FavoritesState } from '../../../slices/FavoriteSlice';
+import { FavoritesState } from '../../../slices/favoriteSlice';
 
 const FavoritesPage: React.FC = () => {
   const favorites = useFavoritesSelector(
