@@ -5,6 +5,7 @@ import styles from './HomePage.module.scss';
 import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
 import { useProductsSelector } from '../../hooks/reduxHooks';
 import { Banner } from '../Banner/Banner';
+import { Link } from 'react-router-dom';
 
 export default function HomePage({}: Props) {
   const { phones, tablets, accessories, allProducts } = useProductsSelector(
@@ -24,7 +25,7 @@ export default function HomePage({}: Props) {
       })
       .slice(0, 20);
   }, [allProducts]);
-  
+
   const hotPriceProducts = useMemo(() => {
     return [...allProducts]
       .sort((a, b) => {
@@ -47,19 +48,28 @@ export default function HomePage({}: Props) {
         {categories[0].count !== 0 &&
           categories.map(({ title, type, count }) => (
             <div className={styles.categoryContainer} key={type}>
-              <div className={styles.categoryImgContainer}>
-                <img
-                  className={styles.categoryImg}
-                  src={`/img/category-${type}.png`}
-                  alt="category"
-                />
-              </div>
-              <h4 className={styles.categoryTitle}>{title}</h4>
-              <p className={styles.categoryCount}>{count} models</p>
+              <Link
+                to={type}
+                onClick={() => {
+                  window.scroll(0, 0);
+                }}
+              >
+                <div className={styles.categoryImgContainer}>
+                  <img
+                    className={styles.categoryImg}
+                    src={`/img/category-${type}.png`}
+                    alt="category"
+                  />
+                </div>
+                <h4 className={styles.categoryTitle}>{title}</h4>
+                <p className={styles.categoryCount}>{count} models</p>
+              </Link>
             </div>
           ))}
       </div>
-      <div className={styles.hotPrices}><ProductsSlider products={hotPriceProducts} title='Hot prices' /></div>
+      <div className={styles.hotPrices}>
+        <ProductsSlider products={hotPriceProducts} title="Hot prices" />
+      </div>
     </main>
   );
 }
