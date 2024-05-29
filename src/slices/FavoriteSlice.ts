@@ -7,7 +7,7 @@ export interface FavoritesState {
 }
 
 export const initialState: FavoritesState = {
-  favorites: [],
+  favorites: JSON.parse(localStorage.getItem(LOCAL_FAVORITES_KEY) || '{}'),
 };
 
 const favoritesSlice = createSlice({
@@ -34,17 +34,8 @@ const favoritesSlice = createSlice({
         );
       }
     },
-    loadFavoritesFromStorage: state => {
-      const storedFavorites = localStorage.getItem(LOCAL_FAVORITES_KEY);
-
-      return {
-        ...state,
-        favorites: storedFavorites ? JSON.parse(storedFavorites) : [],
-      };
-    },
   },
 });
 
-export const { addToFavorites, removeFromFavorites, loadFavoritesFromStorage } =
-  favoritesSlice.actions;
+export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;
