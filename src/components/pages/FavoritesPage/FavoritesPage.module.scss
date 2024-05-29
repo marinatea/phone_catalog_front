@@ -2,9 +2,9 @@
 @use '/src/utils/mobileHeaderFonts.scss' as mHF;
 @use '/src/utils/miscFonts.scss' as mF;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
-@import '/src/constants/colors.module';
+@use '/src/constants/colors.module.scss' as cM;
 
-.cartPage {
+.favoritesPage {
   display: grid;
   justify-content: center;
 
@@ -29,86 +29,64 @@
 @include mQ.phone {
   .title {
     margin-top: 24px;
-
     @include mHF.h1-font;
-
     grid-column: span 4;
-    color: $primary;
+    color: cM.$primary;
+  }
+
+  .subText {
+    margin-top: 8px;
+    @include mF.body-font;
+    grid-column: span 4;
+    color: cM.$secondary;
   }
 
   .cardsContainer {
+    display: flex;
     grid-column: span 4;
+    flex-direction: column;
+    align-items: center;
     margin-top: 32px;
   }
 
   .cardContainer {
     &:not(:first-child) {
-      margin-top: 16px;
-    }
-  }
-
-  .checkoutContainer {
-    grid-column: span 4;
-    margin-top: 32px;
-    padding: 24px;
-    text-align: center;
-
-    .infoContainer {
-      .cashInfo {
-        color: $primary;
-
-        @include dHF.h2-font;
-      }
-
-      .itemInfo {
-        color: $secondary;
-
-        @include mF.body-font;
-      }
-    }
-
-    .checkoutButton {
-      margin-top: 32px;
-      width: 100%;
-      height: 48px;
+      margin-top: 40px;
     }
   }
 }
 
 @include mQ.tablet {
   .title {
-    margin-top: 16px;
-
+    margin-top: 40px;
     @include dHF.h1-font;
+    grid-column: span 12;
+  }
 
+  .subText {
     grid-column: span 12;
   }
 
   .cardsContainer {
+    column-gap: 16px;
     grid-column: span 12;
-    margin-top: 32px;
-  }
-
-  .checkoutContainer {
-    grid-column: span 12;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
   }
 }
 
 @include mQ.desktop {
   .title {
-    margin-top: 16px;
+    grid-column: span 24;
+  }
 
-    @include dHF.h1-font;
-    
+  .subText {
     grid-column: span 24;
   }
 
   .cardsContainer {
-    grid-column: span 16;
-    margin-top: 32px;
-  }
-
-  .checkoutContainer {
-    grid-column: span 8;
+    grid-column: span 24;
   }
 }

@@ -3,48 +3,65 @@ import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
 import Button from '../../components/Button';
-import { IProductDetails, Icons } from '../../types';
-import { useProductsContext } from '../../context/ProductsContext';
+import { Icons, ProductT } from '../../types';
+import { useAppDispatch, useCartSelector } from '../../hooks/reduxHooks';
+import { addCartItem } from '../../slices/cartSlice';
 
 interface Props {
-  product: IProductDetails;
+  product: ProductT;
+  isSlider?: boolean;
 }
-const ProductCard: FC<Props> = ({ product }) => {
-  const { isItemInCart, addItem } = useProductsContext();
+const ProductCard: FC<Props> = ({ product, isSlider }) => {
+  const { cart } = useCartSelector(state => state);
+  const dispatch = useAppDispatch();
+
   const {
-    id,
+    itemId: id,
     name,
     capacity,
     ram,
-    priceDiscount,
-    priceRegular,
+    price,
+    fullPrice,
     screen,
-    images,
+    image,
   } = product;
 
-  const isProductInCard = isItemInCart(id);
+  const isProductInCard = Object.hasOwn(cart, id);
 
   const cartProduct = {
     id,
     name,
-    image: images[0],
-    price: priceDiscount,
+    image,
+    price,
   };
 
   return (
     <div
-      className={cn(s.container, '__app-PhoneCard-container')}
+      className={cn(
+        {
+          [s.sliderCardContainer]: isSlider,
+          [s.container]: !isSlider,
+        },
+        '__app-PhoneCard-container',
+      )}
       data-cy="cardsContainer"
     >
       <a href={`/*`} className={s.link}>
-        <img className={s.image} src={images[0]} alt={name} />
+        <img
+          className={cn({
+            [s.sliderCardImage]: isSlider,
+            [s.image]: !isSlider,
+          })}
+          src={`/${image}`}
+          alt={name}
+        />
       </a>
       <a href={`/*`} className={s.name}>
         {name}
       </a>
       <div className={s.price}>
-        <span className={s.currentPrice}>{`$${priceDiscount}`}</span>
-        <span className={s.fullPrice}>{`$${priceRegular}`}</span>
+        <span className={s.currentPrice}>{`$${price}`}</span>
+        <span className={s.fullPrice}>{`$${fullPrice}`}</span>
       </div>
       <ul className={s.detailsList}>
         <li className={s.detailsItem}>
@@ -62,7 +79,7 @@ const ProductCard: FC<Props> = ({ product }) => {
       </ul>
       <div className={s.buttons}>
         <Button
-          onClick={() => addItem(cartProduct)}
+          onClick={() => dispatch(addCartItem(cartProduct))}
           isSelected={false}
           className={s.addToCard}
           title={isProductInCard ? 'Added to cart' : 'Add to cart'}

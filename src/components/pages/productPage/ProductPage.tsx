@@ -1,6 +1,4 @@
-type Props = { productType: 'phone' | 'tablet' | 'accessory' };
-
-import { useEffect, useState } from 'react';
+type Props = { productType: 'phones' | 'tablets' | 'accessories' };
 
 import About from '../../ProductDetails/components/Description/About';
 import Actions from '../../ProductDetails/components/Actions/Actions';
@@ -8,51 +6,59 @@ import { IProductDetails } from '../../../types';
 import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
 import styles from './ProductPage.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
+import ImagesSelector from './components/ImagesSelector/ImagesSelector';
+import { useEffect, useMemo } from 'react';
+import { useProductsSelector } from '../../../hooks/reduxHooks';
+import { ProductsSlider } from '../../ProductsSlider/ProductsSlider';
 
 export default function ProductPage({ productType }: Props) {
-  const { productId } = useParams<{ productId: string }>();
-  const [product, setProduct] = useState<IProductDetails | null>(null);
   const navigate = useNavigate();
-  const productUrl = `/api/${productType}s.json`;
+  const { productId } = useParams<{ productId: string }>();
+  const allProducts = useProductsSelector(state => state);
+  const { allProducts: products } = useProductsSelector(state => state);
+
+  const product = allProducts[productType].find(prod => prod.id === productId);
 
   useEffect(() => {
-    fetch(productUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+    if (product === undefined && allProducts[productType].length !== 0) {
+      navigate('/product-not-found');
+    }
+  }, [allProducts, navigate, product, productType]);
 
-        return response.json();
-      })
-      .then(data => {
-        const tempProduct =
-          data.find((item: IProductDetails) => item.id === productId) || null;
+  const recomendedProducts = useMemo(() => {
+    const filteredProducts = [...products].filter(
+      p =>
+        p.category === product?.category &&
+        (p.color === product.color ||
+          p.capacity === product.capacity ||
+          p.ram === product.ram),
+    );
 
-        if (tempProduct === null) {
-          navigate('/product-not-found');
-        }
-
-        setProduct(tempProduct);
-      })
-      .catch(error => {
-        throw new Error(error);
-      });
-  }, [productId, productUrl, navigate]);
+    return filteredProducts.slice(0, 12);
+  }, [products, product]);
 
   return (
     <main className={styles.productPage}>
-      <h1 className={styles.title}>Name Placeholder</h1>
-      <div className={styles.photos}>Photos Placeholder</div>
+      <h1 className={styles.title}>{product?.name}</h1>
+      <div className={styles.photos}>
+        <ImagesSelector images={product?.images} />
+      </div>
+
       <div className={styles.actions}>
-        <Actions product={product} />
+        <Actions product={product as IProductDetails} />
       </div>
       <div className={styles.about}>
-        <About product={product} />
+        <About product={product as IProductDetails} />
       </div>
       <div className={styles.specs}>
-        <TechSpecs product={product} />
+        <TechSpecs product={product as IProductDetails} />
       </div>
-      <div className={styles.suggested}>Suggested Placeholder</div>
+      <div className={styles.suggested}>
+        <ProductsSlider
+          products={recomendedProducts}
+          title="You may also like"
+        />
+      </div>
     </main>
   );
 }
