@@ -7,13 +7,15 @@ import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
 import styles from './ProductPage.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import ImagesSelector from './components/ImagesSelector/ImagesSelector';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useProductsSelector } from '../../../hooks/reduxHooks';
+import { ProductsSlider } from '../../ProductsSlider/ProductsSlider';
 
 export default function ProductPage({ productType }: Props) {
   const navigate = useNavigate();
   const { productId } = useParams<{ productId: string }>();
   const allProducts = useProductsSelector(state => state);
+  const { allProducts: products } = useProductsSelector(state => state);
 
   const product = allProducts[productType].find(prod => prod.id === productId);
 
@@ -22,6 +24,18 @@ export default function ProductPage({ productType }: Props) {
       navigate('/product-not-found');
     }
   }, [allProducts, navigate, product, productType]);
+
+  const recomendedProducts = useMemo(() => {
+    const filteredProducts = [...products].filter(
+      p =>
+        p.category === product?.category &&
+        (p.color === product.color ||
+          p.capacity === product.capacity ||
+          p.ram === product.ram),
+    );
+
+    return filteredProducts.slice(0, 12);
+  }, [products, product]);
 
   return (
     <main className={styles.productPage}>
@@ -39,7 +53,12 @@ export default function ProductPage({ productType }: Props) {
       <div className={styles.specs}>
         <TechSpecs product={product as IProductDetails} />
       </div>
-      <div className={styles.suggested}>Suggested Placeholder</div>
+      <div className={styles.suggested}>
+        <ProductsSlider
+          products={recomendedProducts}
+          title="You may also like"
+        />
+      </div>
     </main>
   );
 }

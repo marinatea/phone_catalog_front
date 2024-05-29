@@ -1,0 +1,205 @@
+@use './../../utils/miscFonts.scss' as fonts;
+@use '/src/utils/mobileHeaderFonts.scss' as mHF;
+@use './../../constants/colors.module.scss' as color;
+@use '/src/utils/desktopHeaderFonts.scss' as dHF;
+@use '/src/utils/mediaQueries.module.scss' as mQ;
+
+.banner {
+  width: 100%;
+  overflow: hidden;
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+    &Buttons {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+  }
+
+  &__imagesWrapper {
+    padding-bottom: 100%;
+    height: 0;
+
+    @include mQ.tablet {
+      padding-bottom: 0;
+      height: 100%;
+    }
+
+    overflow: hidden;
+    width: 100%;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  &__images {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+
+  &__button {
+    display: none;
+    background-color: inherit;
+    border: 1px solid color.$icons;
+    cursor: pointer;
+
+    @include mQ.tablet {
+      display: flex;
+    }
+
+    &:hover {
+      border: 1px solid color.$primary;
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    margin: 18px auto 0;
+    padding: 0;
+    justify-content: center;
+    list-style: none;
+    gap: 14px;
+  }
+
+  &__item {
+    width: 14px;
+    height: 4px;
+    background-color: color.$elements;
+
+    &--active {
+      background-color: color.$primary;
+      animation: animation-appearing 0.5s ease-in-out forwards;
+    }
+  }
+
+  &__imageContainer {
+    min-width: 100%;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    height: 60vh;
+
+    @include mQ.tablet {
+      background-position: center;
+    }
+  }
+
+  &__imageContainer1 {
+    background-color: black;
+    background-size: contain;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    flex-grow: 1;
+    height: 40vh;
+    background-position: top;
+
+    @include mQ.tablet {
+      background-position: center;
+      height: 60vh;
+    }
+  }
+  &__image1 {
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    background-image: url('../../../public/img/banner-small.png');
+
+    @include mQ.tablet {
+      width: 50%;
+    }
+  }
+  &__imageContainer2 {
+    background-image: url('../../../public/img/banner-accessories.png');
+  }
+  &__imageContainer3 {
+    background-image: url('../../../public/img/banner-phones.png');
+  }
+  &__imageContainer4 {
+    background-image: url('../../../public/img/banner-tablets.png');
+  }
+
+  &__overlayContainer {
+    display: none;
+
+    @include mQ.tablet {
+      box-sizing: border-box;
+
+      width: 45%;
+      height: 94%;
+      padding: 20px;
+      background: linear-gradient(
+        90deg,
+        rgba(20, 20, 20, 1) 0%,
+        rgba(36, 37, 41, 1) 100%
+      );
+      border-radius: 6%;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-around;
+    }
+  }
+
+  &__overlayTitle {
+    @include mHF.h2-font;
+
+    @include mQ.desktop {
+      @include dHF.h1-font;
+    }
+
+    background: linear-gradient(
+      45deg,
+      rgba(210, 41, 144, 1) 5%,
+      rgba(111, 86, 207, 1) 43%,
+      rgba(128, 84, 195, 1) 54%,
+      rgba(252, 70, 107, 1) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  &__smile {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    -webkit-text-fill-color: initial;
+  }
+
+  &__overlayText {
+    @include fonts.body-font;
+  }
+
+  &__overlayButton {
+    background-color: color.$primary;
+    color: white;
+    padding: 15px 20px;
+    border: 0.8px solid color.$icons;
+    border-radius: 40px;
+    cursor: pointer;
+
+    @include fonts.body-font;
+
+    &:hover {
+      background-color: color.$primary;
+    }
+  }
+}
+
+.bannerSlide1 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
