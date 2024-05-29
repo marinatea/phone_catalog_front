@@ -2,6 +2,11 @@
 @import '../../utils/mediaQueries.module';
 @import '../../constants/colors.module';
 
+.footerWrapper {
+  border-top: 1px solid $elements;
+
+}
+
 .footer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -10,7 +15,6 @@
   align-items: center;
   row-gap: 32px;
   padding: 32px 16px;
-  border-top: 1px solid $elements;
 
   @include tablet {
     display: flex;
