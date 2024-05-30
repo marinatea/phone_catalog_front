@@ -1,9 +1,11 @@
+import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 import Button from '../Button';
 import styles from './Login.module.scss';
 
 const Login = () => {
   return (
     <div className={styles.loginContainer}>
+      <Breadcrumbs />
       <h2 className={styles.loginTitle}>Login</h2>
       <form className={styles.loginForm}>
         <div className={styles.formGroup}>

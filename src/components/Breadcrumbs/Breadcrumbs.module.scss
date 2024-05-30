@@ -9,6 +9,7 @@
   align-items: center;
   gap: 8px;
   color: $secondary;
+  align-self: flex-start;
 
   @include body-font;
 
@@ -19,8 +20,14 @@
   }
 
   .home,
-  .arrowRight {
+  .arrowRight,
+  .arrowLeft {
+    cursor: pointer;
     display: flex;
     align-items: center;
+  }
+
+  .backText {
+    cursor: pointer;
   }
 }
