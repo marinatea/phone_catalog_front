@@ -1,12 +1,10 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 import Icon from '../Icon/Icon';
 import { Icons } from '../../types';
 
 const Header: React.FC = () => {
-  const location = useLocation();
-
   return (
     <header className={styles.header}>
       <img className={styles.divLogo} src={'/img/Logo.png'} alt="logo" />
@@ -15,7 +13,7 @@ const Header: React.FC = () => {
           <li>
             <NavLink
               to="/"
-              className={location.pathname === '/' ? styles.active : ''}
+              className={({ isActive }) => (isActive ? styles.active : '')}
             >
               Home
             </NavLink>
@@ -23,7 +21,7 @@ const Header: React.FC = () => {
           <li>
             <NavLink
               to="/phones"
-              className={location.pathname === '/phones' ? styles.active : ''}
+              className={({ isActive }) => (isActive ? styles.active : '')}
             >
               Phones
             </NavLink>
@@ -31,7 +29,7 @@ const Header: React.FC = () => {
           <li>
             <NavLink
               to="/tablets"
-              className={location.pathname === '/tablets' ? styles.active : ''}
+              className={({ isActive }) => (isActive ? styles.active : '')}
             >
               Tablets
             </NavLink>
@@ -39,9 +37,7 @@ const Header: React.FC = () => {
           <li>
             <NavLink
               to="/accessories"
-              className={
-                location.pathname === '/accessories' ? styles.active : ''
-              }
+              className={({ isActive }) => (isActive ? styles.active : '')}
             >
               Accessories
             </NavLink>
