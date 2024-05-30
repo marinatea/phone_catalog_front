@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
     <div className={styles.footerWrapper}>
       <footer className={styles.footer}>
         <Link to="/" className={styles.footer__logo}>
-          <img src="/img/Logo.png" alt="logo" />
+          <img src="/img/logo.png" alt="logo" />
         </Link>
 
         <nav className={`${styles['footer-nav']} ${styles.footer__nav}`}>

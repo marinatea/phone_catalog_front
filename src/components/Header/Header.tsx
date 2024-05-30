@@ -8,7 +8,7 @@ import CartBadge from '../Badge/Badge';
 export const Header: React.FC = () => {
   return (
     <header className={styles.header}>
-      <img className={styles.divLogo} src={'/img/Logo.png'} alt="logo" />
+      <img className={styles.divLogo} src={'/img/logo.png'} alt="logo" />
       <nav className={styles.navbar}>
         <ul className={styles.navlinks}>
           <li>

@@ -33,7 +33,6 @@ export interface ICartProduct {
 }
 
 export enum Icons {
-  LOGO = 'logo-icon',
   HEART = 'Heart-icon',
   HEART_FILL = 'Heart-icon-fill',
   CART = 'Cart',
