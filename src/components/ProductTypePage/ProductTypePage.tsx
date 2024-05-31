@@ -5,7 +5,7 @@ import styles from './ProductTypePage.module.scss';
 import Icon from '../Icon';
 import { Icons } from '../../types';
 import { useProductsSelector } from '../../hooks/reduxHooks';
-
+import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 export default function ProductTypePage({ productsType }: Props) {
   const { allProducts } = useProductsSelector(state => state);
 
@@ -76,6 +76,7 @@ export default function ProductTypePage({ productsType }: Props) {
 
   return (
     <main className={styles.phonesPage}>
+      <Breadcrumbs />
       <h1 className={styles.title}>{pageTitle}</h1>
       <span className={styles.subText}>{filteredProducts.length} models</span>
       <div className={styles.filter}>Sort placeholder</div>

@@ -12,6 +12,7 @@ import { setCartItems } from './slices/cartSlice';
 import { LOCAL_CART_KEY } from './constants/localStorageKeys';
 import { fetchProducts } from './slices/productsSlice';
 import ProductTypePage from './components/ProductTypePage/ProductTypePage';
+import AuthPage from './components/Auth/AuthPage';
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -56,6 +57,7 @@ export const App = () => {
           ))}
           <Route path="cart" element={<CartPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
+          <Route path="auth" element={<AuthPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

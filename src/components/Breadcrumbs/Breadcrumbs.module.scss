@@ -1,0 +1,33 @@
+@import '../../constants/colors.module';
+@import '../../utils/miscFonts';
+
+.breadcrumbs {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  align-items: center;
+  gap: 8px;
+  color: $secondary;
+  align-self: flex-start;
+
+  @include body-font;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .home,
+  .arrowRight,
+  .arrowLeft {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  .backText {
+    cursor: pointer;
+  }
+}

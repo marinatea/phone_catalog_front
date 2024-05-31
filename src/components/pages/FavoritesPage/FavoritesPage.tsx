@@ -1,4 +1,4 @@
-import React from 'react';
+import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
 import styles from './FavoritesPage.module.scss';
 import ProductCard from '../../ProductCard';
 import { useFavoritesSelector } from '../../../hooks/reduxHooks';
@@ -12,6 +12,7 @@ const FavoritesPage: React.FC = () => {
 
   return (
     <main className={styles.favoritesPage}>
+      <Breadcrumbs />
       <h1 className={styles.title}>Favorites</h1>
       <span className={styles.subText}>{favorites.length} items</span>
       <div className={styles.cardsContainer}>

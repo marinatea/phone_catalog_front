@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 import styles from './NotFoundPage.module.scss';
 
 type Props = {};
@@ -5,6 +6,7 @@ type Props = {};
 export default function NotFoundPage({}: Props) {
   return (
     <div className={styles.all}>
+      <Breadcrumbs />
       <h1 className={styles.title}>Page not found</h1>
       <img
         className={styles.photo}
