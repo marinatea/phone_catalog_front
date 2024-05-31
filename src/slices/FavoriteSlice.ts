@@ -7,7 +7,7 @@ export interface FavoritesState {
 }
 
 export const initialState: FavoritesState = {
-  favorites: JSON.parse(localStorage.getItem(LOCAL_FAVORITES_KEY) || '{}'),
+  favorites: JSON.parse(localStorage.getItem(LOCAL_FAVORITES_KEY) || '[]'),
 };
 
 const favoritesSlice = createSlice({

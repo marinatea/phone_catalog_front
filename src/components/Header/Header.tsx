@@ -4,6 +4,7 @@ import styles from './Header.module.scss';
 import Icon from '../Icon/Icon';
 import { Icons } from '../../types';
 import CartBadge from '../Badge/Badge';
+import FavoriteBadge from '../FavoriteBadge/FavoriteBadge';
 
 const Header: React.FC = () => {
   return (
@@ -48,6 +49,7 @@ const Header: React.FC = () => {
       <div className={styles.icons}>
         <NavLink to="/favorites">
           <Icon iconId={Icons.HEART} className={styles.heart} />
+          <FavoriteBadge />
         </NavLink>
         <NavLink to="/cart">
           <Icon iconId={Icons.CART} className={styles.cart} />
