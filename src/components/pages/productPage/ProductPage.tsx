@@ -10,6 +10,7 @@ import ImagesSelector from './components/ImagesSelector/ImagesSelector';
 import { useEffect, useMemo } from 'react';
 import { useProductsSelector } from '../../../hooks/reduxHooks';
 import { ProductsSlider } from '../../ProductsSlider/ProductsSlider';
+import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
 
 export default function ProductPage({ productType }: Props) {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ export default function ProductPage({ productType }: Props) {
 
   return (
     <main className={styles.productPage}>
+      <Breadcrumbs />
       <h1 className={styles.title}>{product?.name}</h1>
       <div className={styles.photos}>
         <ImagesSelector images={product?.images} />

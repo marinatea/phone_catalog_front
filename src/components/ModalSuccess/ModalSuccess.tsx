@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom';
 import Button from '../Button';
 import styles from './ModalSuccess.module.scss';
+import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 
 export const ModalSuccess = () => {
   return (
     <div id="success-modal" className={styles.modal}>
       <div className={styles.modalContent}>
+        <Breadcrumbs />
         <h2 className={styles.title}>
           Thank you for your purchase! <span>&#x1F49C;</span>
         </h2>
