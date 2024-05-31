@@ -1,0 +1,70 @@
+@use '/src/utils/mediaQueries.module.scss' as mQ;
+@use '/src/utils/mobileHeaderFonts.scss' as mHF;
+@use '/src/utils/miscFonts.scss' as mF;
+@use '/src/constants/colors.module.scss' as cM;
+
+.customSelect {
+  position: relative;
+  width: 136px;
+  height: 40px;
+  border: 1px solid cM.$elements;
+  background-color: cM.$white;
+  margin-bottom: 24px;
+
+  &:hover {
+    border-color: cM.$primary;
+  }
+
+  .selectedOption {
+    display: flex;
+    padding: 9px 12px;
+    background-color: cM.$white;
+    cursor: pointer;
+
+    @include mF.body-font;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid cM.$secondary;
+      border-bottom: 2px solid cM.$secondary;
+      transform: translateY(-50%) rotate(45deg);
+    }
+  }
+
+  .optionsContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: cM.$white;
+    z-index: 1;
+    color: cM.$secondary;
+
+    .option {
+      padding: 8px 12px;
+      cursor: pointer;
+      
+      @include mF.body-font;
+
+      &:hover {
+        background-color: cM.$elements;
+        color: cM.$primary;
+      }
+    }
+  }
+}
+
+@include mQ.tablet {
+  .customSelect {
+    width: 187px;
+    height: 40px;
+    top: 19px;
+  }
+}
