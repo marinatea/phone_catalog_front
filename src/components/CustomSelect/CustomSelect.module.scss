@@ -10,6 +10,7 @@
   border: 1px solid cM.$elements;
   background-color: cM.$white;
   margin-bottom: 24px;
+  transition: border-color 0.3s ease;
 
   &:hover {
     border-color: cM.$primary;
@@ -50,7 +51,7 @@
     .option {
       padding: 8px 12px;
       cursor: pointer;
-      
+
       @include mF.body-font;
 
       &:hover {
