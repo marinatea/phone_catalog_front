@@ -10,16 +10,8 @@ export default function TechSpecs({ product }: Props) {
   if (!product) {
     return;
   }
-  const {
-    screen,
-    resolution,
-    processor,
-    ram,
-    camera,
-    capacity,
-    zoom,
-    cell,
-  } = product;
+  const { screen, resolution, processor, ram, camera, capacity, zoom, cell } =
+    product;
 
   const techItems = [
     {
