@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './ProductsSlider.module.scss';
 import { Icons, ProductT } from '../../types';
 import ProductCard from '../ProductCard';
-import Icon from '../Icon';
+import Button from '../Button';
 
 type Props = {
   title: string;
@@ -88,26 +88,24 @@ export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
       <div className={styles.productsSlider__top}>
         <h1 className={styles.productsSlider__topTitle}>{title}</h1>
         <div className={styles.productsSlider__topButtons}>
-          <button
-            type="button"
+          <Button
             className={classNames(styles.productsSlider__topButton, {
               [styles.smallButtonDisabled]: leftClickDisabled,
             })}
             onClick={onLeftClick}
-            disabled={leftClickDisabled}
-          >
-            <Icon iconId={Icons.ARROW_LEFT} />
-          </button>
-          <button
-            type="button"
+            isDisabled={leftClickDisabled}
+            icon={Icons.ARROW_LEFT}
+            type="secondary"
+          />
+          <Button
             className={classNames(styles.productsSlider__topButton, {
               [styles.smallButtonDisabled]: rightClickDisabled,
             })}
             onClick={onRightClick}
-            disabled={rightClickDisabled}
-          >
-            <Icon iconId={Icons.ARROW_RIGHT} />
-          </button>
+            isDisabled={rightClickDisabled}
+            icon={Icons.ARROW_RIGHT}
+            type="secondary"
+          />
         </div>
       </div>
       <div className={styles.productsSlider__wrapper}>
