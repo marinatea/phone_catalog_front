@@ -30,8 +30,8 @@
 @include mQ.phone {
   .title {
     @include mHF.h1-font;
-    grid-column: span 4;
 
+    grid-column: span 4;
     margin-top: 24px;
     color: cM.$primary;
   }
@@ -74,8 +74,7 @@
   .cardsContainer {
     column-gap: 16px;
     grid-column: span 12;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     justify-content: center;
     margin-top: 40px;
   }

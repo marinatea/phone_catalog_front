@@ -3,6 +3,7 @@
 
 .title {
   @include fonts.uppercase-font;
+
   border-bottom: 1px solid color.$icons;
   padding-bottom: 16px;
   font-size: 22px;
@@ -20,6 +21,7 @@
 
 .aboutItemTitle {
   @include fonts.button-font;
+
   margin-bottom: 16px;
   font-size: 20px;
   line-height: 26px;
@@ -27,6 +29,7 @@
 
 .aboutItemText {
   @include fonts.button-font;
+
   color: color.$secondary;
 }
 
@@ -40,6 +43,7 @@
 
 .techItem {
   @include fonts.button-font;
+
   display: flex;
   justify-content: space-between;
   align-items: center;

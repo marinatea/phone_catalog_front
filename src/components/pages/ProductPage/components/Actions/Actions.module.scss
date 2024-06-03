@@ -17,10 +17,10 @@
 
 .label {
   @include fonts.button-font;
+
   display: block;
   margin-bottom: 8px;
   color: color.$secondary;
-
   font-size: 12px;
   line-height: 15px;
 }
@@ -82,18 +82,18 @@
 
 .price {
   @include fonts.uppercase-font;
+
   display: flex;
   align-items: center;
   margin-bottom: 16px;
-
   font-size: 32px;
   line-height: 41px;
 }
 
 .priceRegular {
   @include fonts.body-font;
-  margin-left: 8px;
 
+  margin-left: 8px;
   color: color.$secondary;
   font-size: 22px;
   line-height: 28px;
@@ -119,6 +119,7 @@
 
 .infoItem {
   @include fonts.body-font;
+
   display: flex;
   justify-content: space-between;
   align-items: center;

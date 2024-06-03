@@ -1,5 +1,5 @@
 @use '/src/utils/mediaQueries.module.scss' as mQ;
-@import '/src/constants/colors.module.scss';
+@import '/src/constants/colors.module';
 
 @include mQ.phone {
   .selectedImgContainer {
@@ -50,9 +50,6 @@
     margin-top: 0;
   }
 
-  .selectedImg {
-  }
-
   .secondaryImgsContainer {
     flex-direction: column;
     order: -1;
@@ -63,8 +60,5 @@
 
   .secondaryImgContainer {
     align-items: start;
-  }
-
-  .secondaryImg {
   }
 }

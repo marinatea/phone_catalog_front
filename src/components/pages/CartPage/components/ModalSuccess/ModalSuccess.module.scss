@@ -1,7 +1,7 @@
-@import '/src/utils/desktopHeaderFonts.scss';
-@import '/src/utils/mobileHeaderFonts.scss';
-@import '/src/utils/mediaQueries.module.scss';
-@import '/src/constants/colors.module.scss';
+@import '/src/utils/desktopHeaderFonts';
+@import '/src/utils/mobileHeaderFonts';
+@import '/src/utils/mediaQueries.module';
+@import '/src/constants/colors.module';
 @import '../Button/Button.module';
 
 .modal {

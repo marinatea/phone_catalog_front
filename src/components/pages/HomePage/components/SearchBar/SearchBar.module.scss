@@ -1,5 +1,5 @@
 @use '/src/utils/miscFonts.scss' as mF;
-@import '/src/constants/colors.module.scss';
+@import '/src/constants/colors.module';
 
 .container {
   display: flex;
@@ -24,6 +24,7 @@
       width: 100%;
       height: 30px;
       text-align: center;
+
       @include mF.body-font;
 
       &:focus {
@@ -63,8 +64,9 @@
         }
 
         .name {
-          padding-right: 10px;
           @include mF.body-font;
+
+          padding-right: 10px;
           overflow: hidden;
           color: $primary;
           text-overflow: ellipsis;

@@ -2,7 +2,7 @@
 @use '/src/utils/mobileHeaderFonts.scss' as mHF;
 @use '/src/utils/miscFonts.scss' as mF;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
-@import '/src/constants/colors.module.scss';
+@import '/src/constants/colors.module';
 
 .homePage {
   display: grid;
@@ -28,9 +28,10 @@
 
 @include mQ.phone {
   .title {
-    margin-top: 24px;
     @include mHF.h1-font;
+
     grid-column: span 4;
+    margin-top: 24px;
     color: $primary;
   }
 
@@ -50,6 +51,7 @@
 
     .categoriesTitle {
       @include mHF.h2-font;
+
       color: $primary;
     }
 
@@ -76,12 +78,14 @@
         }
       }
       .categoryTitle {
-        margin-top: 32px;
         @include dHF.h4-font;
+
+        margin-top: 32px;
         color: $primary;
       }
       .categoryCount {
         @include mF.body-font;
+
         color: $secondary;
       }
     }
@@ -120,9 +124,10 @@
 
 @include mQ.tablet {
   .title {
-    margin-top: 32px;
     @include dHF.h1-font;
+
     grid-column: span 12;
+    margin-top: 32px;
   }
 
   .slider {
@@ -138,13 +143,13 @@
   .categories {
     display: flex;
     grid-column: span 12;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     gap: 16px;
     margin-top: 64px;
 
     .categoriesTitle {
       @include mHF.h2-font;
+
       flex-basis: 100%;
       color: $primary;
     }
@@ -164,12 +169,14 @@
         }
       }
       .categoryTitle {
-        margin-top: 32px;
         @include dHF.h4-font;
+
+        margin-top: 32px;
         color: $primary;
       }
       .categoryCount {
         @include mF.body-font;
+
         color: $secondary;
       }
     }
@@ -225,13 +232,13 @@
   .categories {
     display: flex;
     grid-column: span 24;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-flow: row wrap;
     gap: 16px;
     margin-top: 80px;
 
     .categoriesTitle {
       @include mHF.h2-font;
+
       flex-basis: 100%;
       color: $primary;
     }
@@ -252,11 +259,14 @@
       }
       .categoryTitle {
         margin-top: 32px;
+
         @include dHF.h4-font;
+
         color: $primary;
       }
       .categoryCount {
         @include mF.body-font;
+
         color: $secondary;
       }
     }
