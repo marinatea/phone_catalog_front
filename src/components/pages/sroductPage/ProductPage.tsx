@@ -6,11 +6,11 @@ import { IProductDetails } from '../../../types';
 import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
 import styles from './ProductPage.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
-import ImagesSelector from './components/ImagesSelector/ImagesSelector';
 import { useEffect, useMemo } from 'react';
 import { useProductsSelector } from '../../../hooks/reduxHooks';
 import { ProductsSlider } from '../../ProductsSlider/ProductsSlider';
 import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
+import { ImagesSelector } from './components/ImagesSelector/ImagesSelector';
 
 export default function ProductPage({ productType }: Props) {
   const navigate = useNavigate();
