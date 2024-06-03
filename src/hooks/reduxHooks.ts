@@ -1,13 +1,12 @@
-import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store';
-
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { ProductsState } from '../slices/productsSlice';
 import { CartState } from '../slices/cartSlice';
 import { FavoritesState } from '../slices/favoriteSlice';
+import { ProductsState } from '../slices/productsSlice';
+import { RootState } from '../store';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export const useProductsSelector = <T>(selector: (state: ProductsState) => T) =>
   useSelector<RootState, T>(state => selector(state.products));

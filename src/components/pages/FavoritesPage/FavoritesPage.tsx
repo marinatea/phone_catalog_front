@@ -1,6 +1,6 @@
-import Breadcrumbs from '../../Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '../../generic/Breadcrumbs/Breadcrumbs';
 import { FavoritesState } from '../../../slices/favoriteSlice';
-import ProductCard from '../../ProductCard/ProductCard';
+import ProductCard from '../ProductTypePage/components/ProductCard/ProductCard';
 import { ProductT } from '../../../types';
 import styles from './FavoritesPage.module.scss';
 import { useFavoritesSelector } from '../../../hooks/reduxHooks';

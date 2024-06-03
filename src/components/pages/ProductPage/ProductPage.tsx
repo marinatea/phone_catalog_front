@@ -1,16 +1,17 @@
 type Props = { productType: 'phones' | 'tablets' | 'accessories' };
 
-import About from '../../ProductDetails/components/Description/About';
-import Actions from '../../ProductDetails/components/Actions/Actions';
-import { IProductDetails } from '../../../types';
-import TechSpecs from '../../ProductDetails/components/Description/TechSpecs';
-import styles from './ProductPage.module.scss';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
-import { useProductsSelector } from '../../../hooks/reduxHooks';
-import ProductsSlider from '../../ProductsSlider/ProductsSlider';
-import Breadcrumbs from '../../Breadcrumbs/Breadcrumbs';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import About from './components/Description/About';
+import Actions from './components/Actions/Actions';
+import Breadcrumbs from '../../generic/Breadcrumbs/Breadcrumbs';
+import { IProductDetails } from '../../../types';
 import ImagesSelector from './components/ImagesSelector/ImagesSelector';
+import ProductsSlider from '../../generic/ProductsSlider/ProductsSlider';
+import TechSpecs from './components/Description/TechSpecs';
+import styles from './ProductPage.module.scss';
+import { useProductsSelector } from '../../../hooks/reduxHooks';
 
 const ProductPage: React.FC<Props> = ({ productType }) => {
   const navigate = useNavigate();

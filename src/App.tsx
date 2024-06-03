@@ -1,18 +1,23 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+/* eslint-disable max-len */
 import './App.scss';
-import Layout from './components/Layout/Layout';
-import HomePage from './components/HomePage/HomePage';
-import CartPage from './components/CartPage/CartPage';
-import ProductPage from './components/pages/ProductPage/ProductPage';
-import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+
+import AuthPage from './components/pages/AuthPage/AuthPage';
+import CartPage from './components/pages/CartPage/CartPage';
 import FavoritesPage from './components/pages/FavoritesPage/FavoritesPage';
-import { useEffect } from 'react';
-import { useAppDispatch } from './hooks/reduxHooks';
-import { setCartItems } from './slices/cartSlice';
+import HomePage from './components/pages/HomePage/HomePage';
 import { LOCAL_CART_KEY } from './constants/localStorageKeys';
+import Layout from './components/layout/Layout';
+import Login from './components/pages/AuthPage/components/Login/Login';
+import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage';
+import ProductPage from './components/pages/ProductPage/ProductPage';
+import ProductTypePage from './components/pages/ProductTypePage/ProductTypePage';
+import Registration from './components/pages/AuthPage/components/Registration/Registration';
 import { fetchProducts } from './slices/productsSlice';
-import ProductTypePage from './components/ProductTypePage/ProductTypePage';
-import AuthPage from './components/Auth/AuthPage';
+import { setCartItems } from './slices/cartSlice';
+import { useAppDispatch } from './hooks/reduxHooks';
+import { useEffect } from 'react';
 
 export const App = () => {
   const dispatch = useAppDispatch();
@@ -57,7 +62,10 @@ export const App = () => {
           ))}
           <Route path="cart" element={<CartPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
-          <Route path="auth" element={<AuthPage />} />
+          <Route path="auth" element={<AuthPage />}>
+            <Route path="login" element={<Login />} />
+            <Route path="registration" element={<Registration />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
