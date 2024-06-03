@@ -3,9 +3,30 @@
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
 @use '/src/utils/mediaQueries.module.scss' as mQ;
 
+.main {
+  display: grid;
+  justify-content: center;
+
+  @include mQ.phone {
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 16px;
+    margin: 0 16px;
+  }
+
+  @include mQ.tablet {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 16px;
+    padding: 0 24px;
+  }
+
+  @include mQ.desktop {
+    grid-template-columns: repeat(24, 32px);
+    column-gap: 16px;
+  }
+}
 .loginContainer {
   grid-column: span 4;
-  margin: 0 auto;
+  margin: 10vh auto 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: color.$hoverBG;

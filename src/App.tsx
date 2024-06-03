@@ -3,17 +3,16 @@ import './App.scss';
 
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import AuthPage from './components/pages/AuthPage/AuthPage';
 import CartPage from './components/pages/CartPage/CartPage';
 import FavoritesPage from './components/pages/FavoritesPage/FavoritesPage';
 import HomePage from './components/pages/HomePage/HomePage';
 import { LOCAL_CART_KEY } from './constants/localStorageKeys';
 import Layout from './components/layout/Layout';
-import Login from './components/pages/AuthPage/components/Login/Login';
+import LoginPage from './components/pages/LoginPage/LoginPage';
 import NotFoundPage from './components/pages/NotFoundPage/NotFoundPage';
 import ProductPage from './components/pages/ProductPage/ProductPage';
 import ProductTypePage from './components/pages/ProductTypePage/ProductTypePage';
-import Registration from './components/pages/AuthPage/components/Registration/Registration';
+import RegistrationPage from './components/pages/RegistrationPage/RegistrationPage';
 import { fetchProducts } from './slices/productsSlice';
 import { setCartItems } from './slices/cartSlice';
 import { useAppDispatch } from './hooks/reduxHooks';
@@ -62,10 +61,8 @@ export const App = () => {
           ))}
           <Route path="cart" element={<CartPage />} />
           <Route path="favorites" element={<FavoritesPage />} />
-          <Route path="auth" element={<AuthPage />}>
-            <Route path="login" element={<Login />} />
-            <Route path="registration" element={<Registration />} />
-          </Route>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="registration" element={<RegistrationPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
