@@ -68,6 +68,20 @@ body {
               background-color: $primary;
             }
           }
+
+          &.active {
+            color: $primary;
+
+            &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              right: 0;
+              bottom: -21px;
+              height: 1px;
+              background-color: $primary;
+            }
+          }
         }
       }
     }

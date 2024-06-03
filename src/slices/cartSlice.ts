@@ -2,7 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ICartProduct } from '../types';
-import { LOCAL_CART_KEY } from '../constants/localCartKey';
+import { LOCAL_CART_KEY } from '../constants/localStorageKeys';
 
 export interface CartState {
   cart: {

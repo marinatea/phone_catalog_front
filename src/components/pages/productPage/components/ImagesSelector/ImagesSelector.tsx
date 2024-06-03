@@ -2,10 +2,16 @@ type Props = { images: string[] | undefined };
 
 import classNames from 'classnames';
 import styles from './ImagesSelector.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function ImagesSelector({ images }: Props) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    setSelectedImageIndex(0);
+  }, [location.pathname]);
 
   if (images === undefined) {
     return;

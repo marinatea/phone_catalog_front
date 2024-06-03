@@ -6,6 +6,7 @@ import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
 import { useProductsSelector } from '../../hooks/reduxHooks';
 import { Banner } from '../Banner/Banner';
 import { Link } from 'react-router-dom';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function HomePage({}: Props) {
   const { phones, tablets, accessories, allProducts } = useProductsSelector(
@@ -36,6 +37,7 @@ export default function HomePage({}: Props) {
 
   return (
     <main className={styles.homePage}>
+      <SearchBar />
       <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
       <div className={styles.slider}>
         <Banner />

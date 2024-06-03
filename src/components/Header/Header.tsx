@@ -4,30 +4,52 @@ import styles from './Header.module.scss';
 import Icon from '../Icon/Icon';
 import { Icons } from '../../types';
 import CartBadge from '../Badge/Badge';
+import FavoriteBadge from '../FavoriteBadge/FavoriteBadge';
 
-export const Header: React.FC = () => {
+const Header: React.FC = () => {
   return (
     <header className={styles.header}>
-      <img className={styles.divLogo} src={'/img/Logo.png'} alt="logo" />
+      <img className={styles.divLogo} src={'/img/logo.png'} alt="logo" />
       <nav className={styles.navbar}>
         <ul className={styles.navlinks}>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? styles.active : '')}
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/phones">Phones</NavLink>
+            <NavLink
+              to="/phones"
+              className={({ isActive }) => (isActive ? styles.active : '')}
+            >
+              Phones
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/tablets">Tablets</NavLink>
+            <NavLink
+              to="/tablets"
+              className={({ isActive }) => (isActive ? styles.active : '')}
+            >
+              Tablets
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/accessories">Accessories</NavLink>
+            <NavLink
+              to="/accessories"
+              className={({ isActive }) => (isActive ? styles.active : '')}
+            >
+              Accessories
+            </NavLink>
           </li>
         </ul>
       </nav>
       <div className={styles.icons}>
         <NavLink to="/favorites">
           <Icon iconId={Icons.HEART} className={styles.heart} />
+          <FavoriteBadge />
         </NavLink>
         <NavLink to="/cart">
           <Icon iconId={Icons.CART} className={styles.cart} />
