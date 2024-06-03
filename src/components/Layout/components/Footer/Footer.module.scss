@@ -1,35 +1,35 @@
-@import '../../utils/miscFonts';
-@import '../../utils/mediaQueries.module';
-@import '../../constants/colors.module';
+@import '/src/utils/mediaQueries.module';
+@import '/src/utils/miscFonts';
+@import '/src/constants/colors.module';
 
 .footerWrapper {
-  border-top: 1px solid $elements;
-  margin-top: 80px;
   z-index: 999;
+  margin-top: 80px;
+  border-top: 1px solid $elements;
   background-color: $white;
   width: 100%;
 }
 
 .footer {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 48px;
-  align-items: center;
+  grid-template-columns: repeat(4, 1fr);
   row-gap: 32px;
+  align-items: center;
   padding: 32px 16px;
 
   @include tablet {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     padding: 32px 24px;
   }
 
   @include desktop {
-    max-width: 1200px;
-    width: 100%;
     margin: 0 auto;
     padding: 32px 0;
+    width: 100%;
+    max-width: 1200px;
   }
 
   &__logo {
@@ -53,11 +53,11 @@
   }
 
   .button {
+    transition: border-color 0.3s ease;
+    border: 1px solid $icons;
+    background-color: $white;
     width: 32px;
     height: 32px;
-    background-color: $white;
-    border: 1px solid $icons;
-    transition: border-color 0.3s ease;
 
     &:hover {
       border-color: $primary;
@@ -88,8 +88,8 @@
 }
 
 .top-link {
-  grid-column: 2 / 4;
   display: flex;
+  grid-column: 2 / 4;
   justify-content: center;
   align-items: center;
   gap: 16px;
@@ -97,10 +97,11 @@
   &__text {
     @include small-font;
 
-    text-align: right;
-    background-color: transparent;
     border: none;
+    background-color: transparent;
     color: $secondary;
+
+    text-align: right;
     text-decoration: none;
   }
 }

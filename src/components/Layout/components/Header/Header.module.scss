@@ -1,7 +1,7 @@
-@import '../../utils/desktopHeaderFonts';
-@import '../../utils/mobileHeaderFonts';
-@import '../../utils/mediaQueries.module';
-@import '../../constants/colors.module';
+@import '/src/utils/desktopHeaderFonts';
+@import '/src/utils/mobileHeaderFonts';
+@import '/src/utils/mediaQueries.module';
+@import '/src/constants/colors.module';
 
 body {
   margin: 0;
@@ -9,24 +9,24 @@ body {
 
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background-color: $white;
-  color: $primary;
-  height: 64px;
+  align-items: center;
   border: 1px solid $elements;
+  background-color: $white;
+  height: 64px;
+  color: $primary;
 
   .divLogo {
+    padding: 18px 24px;
     width: 80px;
     height: 28px;
-    padding: 18px 24px;
   }
 
   .navbar {
     display: flex;
+    flex: 1;
     align-items: center;
     margin-inline-start: 24px;
-    flex: 1;
 
     @include tablet {
       margin-inline-start: 12px;
@@ -34,38 +34,37 @@ body {
 
     .navlinks {
       display: flex;
+      flex-grow: 1;
       justify-content: space-between;
       margin: 0;
       padding: 0;
-      text-transform: uppercase;
-      flex-grow: 1;
       max-width: 425px;
+      text-transform: uppercase;
 
       @include h1-font;
 
       @include tablet {
         max-width: 329px;
-
       }
 
       li {
         a {
-          color: #89939a;
-          text-decoration: none;
-          font-size: 12px;
           position: relative;
+          color: #89939a;
+          font-size: 12px;
+          text-decoration: none;
 
           &:hover {
             color: $primary;
 
             &::after {
-              content: '';
               position: absolute;
-              left: 0;
               right: 0;
               bottom: -21px;
-              height: 1px;
+              left: 0;
               background-color: $primary;
+              height: 1px;
+              content: '';
             }
           }
 
@@ -73,13 +72,13 @@ body {
             color: $primary;
 
             &::after {
-              content: '';
               position: absolute;
-              left: 0;
               right: 0;
               bottom: -21px;
-              height: 1px;
+              left: 0;
               background-color: $primary;
+              height: 1px;
+              content: '';
             }
           }
         }
@@ -104,19 +103,19 @@ body {
 
     .heart,
     .cart {
-      height: 16px;
-      width: 16px;
-      padding: 24px;
-      border: 1px solid $elements;
       position: relative;
+      border: 1px solid $elements;
+      padding: 24px;
+      width: 16px;
+      height: 16px;
 
       &:hover {
         border-color: $primary;
 
         &::after {
-          content: '';
           position: absolute;
           background-color: $primary;
+          content: '';
         }
       }
 
@@ -135,19 +134,19 @@ body {
   }
 
   .burger {
-    height: 16px;
-    width: 16px;
-    padding: 24px;
     display: none;
     border: 1px solid $elements;
+    padding: 24px;
+    width: 16px;
+    height: 16px;
 
     &:hover {
       border-color: $primary;
 
       &::after {
-        content: '';
         position: absolute;
         background-color: $primary;
+        content: '';
       }
     }
 
