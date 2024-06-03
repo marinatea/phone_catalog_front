@@ -52,10 +52,14 @@ export const Breadcrumbs = () => {
           return (
             <li key={pathname}>
               {isLast ? (
-                <span>{formatBreadcrumb(pathname)}</span>
+                <span className={styles.text}>
+                  {formatBreadcrumb(pathname)}
+                </span>
               ) : (
                 <>
-                  <NavLink to={routeTo}>{formatBreadcrumb(pathname)}</NavLink>
+                  <NavLink className={styles.active} to={routeTo}>
+                    {formatBreadcrumb(pathname)}
+                  </NavLink>
                   <Icon
                     iconId={Icons.ARROW_RIGHT}
                     className={styles.arrowRight}

@@ -45,9 +45,20 @@
     color: cM.$secondary;
   }
 
-  .filter {
-    grid-column: span 2;
-    margin-top: 32px;
+  .filterWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    .filter {
+      margin-top: 32px;
+
+      .label {
+        @include mF.body-font;
+
+        color: cM.$primary;
+      }
+    }
   }
 
   .cardsContainer {

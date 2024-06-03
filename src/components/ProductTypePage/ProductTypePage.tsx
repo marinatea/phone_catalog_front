@@ -176,27 +176,29 @@ export default function ProductTypePage({ productsType }: Props) {
       <Breadcrumbs />
       <h1 className={styles.title}>{pageTitle}</h1>
       <span className={styles.subText}>{filteredProducts.length} models</span>
-      <div className={styles.filter}>
-        <label className={styles.label} htmlFor="sort">
-          Sort by:
-        </label>
-        <CustomSelect
-          options={sortOptions}
-          value={sortType}
-          onChange={handleSortChange}
-          className="my-custom-select"
-        />
-      </div>
-      <div className={styles.filter}>
-        <label className={styles.label} htmlFor="itemsPerPage">
-          Items per page:
-        </label>
-        <CustomSelect
-          options={itemsPerPageOptions}
-          value={itemsPerPage}
-          onChange={handleItemsPerPageChange}
-          className="my-custom-select"
-        />
+      <div className={styles.filterWrapper}>
+        <div className={styles.filter}>
+          <label className={styles.label} htmlFor="sort">
+            Sort by:
+          </label>
+          <CustomSelect
+            options={sortOptions}
+            value={sortType}
+            onChange={handleSortChange}
+            className="my-custom-select"
+          />
+        </div>
+        <div className={styles.filter}>
+          <label className={styles.label} htmlFor="itemsPerPage">
+            Items per page:
+          </label>
+          <CustomSelect
+            options={itemsPerPageOptions}
+            value={itemsPerPage}
+            onChange={handleItemsPerPageChange}
+            className="my-custom-select"
+          />
+        </div>
       </div>
       <div className={styles.cardsContainer}>
         {currentItems.map(product => (
