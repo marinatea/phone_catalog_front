@@ -3,7 +3,7 @@ import Breadcrumbs from '../../generic/Breadcrumbs/Breadcrumbs';
 import Button from '../../generic/Button/Button';
 import styles from './Login.module.scss';
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
@@ -41,4 +41,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

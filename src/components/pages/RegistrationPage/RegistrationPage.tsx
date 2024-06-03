@@ -3,7 +3,7 @@ import Breadcrumbs from '../../generic/Breadcrumbs/Breadcrumbs';
 import Button from '../../generic/Button/Button';
 import styles from './Registration.module.scss';
 
-const Registration: React.FC = () => {
+const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
@@ -58,4 +58,4 @@ const Registration: React.FC = () => {
   );
 };
 
-export default Registration;
+export default RegistrationPage;
