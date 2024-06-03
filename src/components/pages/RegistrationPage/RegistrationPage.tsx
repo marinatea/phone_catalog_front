@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import Breadcrumbs from '../../generic/Breadcrumbs/Breadcrumbs';
 import Button from '../../generic/Button/Button';
 import styles from './RegistrationPage.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();

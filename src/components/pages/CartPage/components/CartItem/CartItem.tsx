@@ -11,10 +11,12 @@ import {
 import Button from '../../../../generic/Button/Button';
 import { Icons } from '../../../../../types';
 import styles from './CartItem.module.scss';
+import { useUser } from '@clerk/clerk-react';
 
 const CartItem: React.FC = () => {
   const { cart } = useCartSelector(state => state);
   const dispatch = useAppDispatch();
+  const { user } = useUser();
 
   return (
     <div className={styles.cartItemContainer}>
@@ -24,7 +26,12 @@ const CartItem: React.FC = () => {
             <div className={styles.firstRow}>
               <Button
                 onClick={() => {
-                  dispatch(removeCartItemsType(product.id));
+                  dispatch(
+                    removeCartItemsType({
+                      productId: product.id,
+                      userId: user?.id as string,
+                    }),
+                  );
                 }}
                 className={styles.closeIcon}
                 title=""
@@ -46,7 +53,12 @@ const CartItem: React.FC = () => {
               <div className={styles.counter}>
                 <Button
                   onClick={() => {
-                    dispatch(removeCartItem(product.id));
+                    dispatch(
+                      removeCartItem({
+                        productId: product.id,
+                        userId: user?.id as string,
+                      }),
+                    );
                   }}
                   type="secondary"
                   className={styles.minusButton}
@@ -55,7 +67,12 @@ const CartItem: React.FC = () => {
                 <div className={styles.count}>{product.count}</div>
                 <Button
                   onClick={() => {
-                    dispatch(addCartItem(product));
+                    dispatch(
+                      addCartItem({
+                        product: product,
+                        userId: user?.id as string,
+                      }),
+                    );
                   }}
                   type="secondary"
                   className={styles.plusButton}

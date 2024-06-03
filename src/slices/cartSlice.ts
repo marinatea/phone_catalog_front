@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { ICartProduct } from '../types';
 import { LOCAL_CART_KEY } from '../constants/localStorageKeys';
 
@@ -25,10 +26,11 @@ const cartSlice = createSlice({
     setCartItems: (
       state,
       action: PayloadAction<{
-        [productId: string]: ICartProduct & { count: number };
+        products: { [productId: string]: ICartProduct & { count: number } };
+        userId: string;
       }>,
     ) => {
-      state.cart = action.payload;
+      state.cart = action.payload.products;
 
       state.totalPrice = Object.keys(state.cart).reduce(
         (count, cartItemId) =>
@@ -41,39 +43,61 @@ const cartSlice = createSlice({
         0,
       );
     },
-    addCartItem: (state, action: PayloadAction<ICartProduct>) => {
+    addCartItem: (
+      state,
+      action: PayloadAction<{ product: ICartProduct; userId: string }>,
+    ) => {
       state.itemCount++;
-      state.totalPrice += action.payload.price;
+      state.totalPrice += action.payload.product.price;
 
-      if (Object.hasOwn(state.cart, action.payload.id)) {
-        state.cart[action.payload.id].count++;
+      if (Object.hasOwn(state.cart, action.payload.product.id)) {
+        state.cart[action.payload.product.id].count++;
       } else {
-        state.cart[action.payload.id] = { ...action.payload, count: 1 };
+        state.cart[action.payload.product.id] = {
+          ...action.payload.product,
+          count: 1,
+        };
       }
 
-      localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(state.cart));
+      localStorage.setItem(
+        LOCAL_CART_KEY + action.payload.userId,
+        JSON.stringify(state.cart),
+      );
     },
-    removeCartItem: (state, action: PayloadAction<string>) => {
+    removeCartItem: (
+      state,
+      action: PayloadAction<{ productId: string; userId: string }>,
+    ) => {
       state.itemCount--;
-      state.totalPrice -= state.cart[action.payload].price;
+      state.totalPrice -= state.cart[action.payload.productId].price;
 
-      if (Object.hasOwn(state.cart, action.payload)) {
-        if (state.cart[action.payload].count > 1) {
-          state.cart[action.payload].count--;
+      if (Object.hasOwn(state.cart, action.payload.productId)) {
+        if (state.cart[action.payload.productId].count > 1) {
+          state.cart[action.payload.productId].count--;
         } else {
-          delete state.cart[action.payload];
+          delete state.cart[action.payload.productId];
         }
       }
 
-      localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(state.cart));
+      localStorage.setItem(
+        LOCAL_CART_KEY + action.payload.userId,
+        JSON.stringify(state.cart),
+      );
     },
-    removeCartItemsType: (state, action: PayloadAction<string>) => {
-      const thisItemCount = state.cart[action.payload].count;
+    removeCartItemsType: (
+      state,
+      action: PayloadAction<{ productId: string; userId: string }>,
+    ) => {
+      const thisItemCount = state.cart[action.payload.productId].count;
 
       state.itemCount -= thisItemCount;
-      state.totalPrice -= state.cart[action.payload].price * thisItemCount;
-      delete state.cart[action.payload];
-      localStorage.setItem(LOCAL_CART_KEY, JSON.stringify(state.cart));
+      state.totalPrice -=
+        state.cart[action.payload.productId].price * thisItemCount;
+      delete state.cart[action.payload.productId];
+      localStorage.setItem(
+        LOCAL_CART_KEY + action.payload.userId,
+        JSON.stringify(state.cart),
+      );
     },
   },
 });
