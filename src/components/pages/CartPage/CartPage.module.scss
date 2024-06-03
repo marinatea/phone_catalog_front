@@ -6,8 +6,8 @@
 
 .cartPage {
   display: grid;
-  justify-content: center;
   min-height: 100vh;
+  place-content: start center;
 
   @include mQ.phone {
     grid-template-columns: repeat(4, 1fr);
@@ -79,7 +79,7 @@
 @include mQ.tablet {
   .title {
     margin-top: 16px;
-
+    
     @include dHF.h1-font;
 
     grid-column: span 12;
