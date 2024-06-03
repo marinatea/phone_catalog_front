@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
-import ProductCard from '../ProductCard';
+import ProductCard from '../ProductCard/ProductCard';
 import styles from './ProductTypePage.module.scss';
-import Icon from '../Icon';
+import Icon from '../Icon/Icon';
 import { Icons, SortType, IProductDetails } from '../../types';
 import { useProductsSelector } from '../../hooks/reduxHooks';
-import { CustomSelect } from '../CustomSelect/CustomSelect';
+import CustomSelect from '../CustomSelect/CustomSelect';
 
 type Props = {
   productsType: 'phones' | 'tablets' | 'accessories';
@@ -28,13 +28,13 @@ const itemsPerPageOptions = [
   { value: Number.MAX_SAFE_INTEGER, label: 'All' },
 ];
 
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import {
   convertToProductDetails,
   convertToProductT,
 } from '../../utils/helpers';
 
-export default function ProductTypePage({ productsType }: Props) {
+const ProductTypePage: React.FC<Props> = ({ productsType }) => {
   const { allProducts } = useProductsSelector(state => state);
   const filteredProducts = allProducts.filter(
     product => product.category === productsType,
@@ -226,4 +226,6 @@ export default function ProductTypePage({ productsType }: Props) {
       </div>
     </main>
   );
-}
+};
+
+export default ProductTypePage;

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.scss';
-import Icon from '../Icon';
+import Icon from '../Icon/Icon';
 import { Icons } from '../../types';
 
-export const Footer: React.FC = () => {
+const Footer: React.FC = () => {
   return (
     <div className={styles.footerWrapper}>
       <footer className={styles.footer}>
@@ -36,3 +36,5 @@ export const Footer: React.FC = () => {
     </div>
   );
 };
+
+export default Footer;

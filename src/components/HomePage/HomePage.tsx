@@ -2,13 +2,13 @@ type Props = {};
 
 import { useMemo } from 'react';
 import styles from './HomePage.module.scss';
-import { ProductsSlider } from '../ProductsSlider/ProductsSlider';
+import ProductsSlider from '../ProductsSlider/ProductsSlider';
 import { useProductsSelector } from '../../hooks/reduxHooks';
-import { Banner } from '../Banner/Banner';
+import Banner from '../Banner/Banner';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 
-export default function HomePage({}: Props) {
+const HomePage = ({}: Props) => {
   const { phones, tablets, accessories, allProducts } = useProductsSelector(
     state => state,
   );
@@ -74,4 +74,6 @@ export default function HomePage({}: Props) {
       </div>
     </main>
   );
-}
+};
+
+export default HomePage;

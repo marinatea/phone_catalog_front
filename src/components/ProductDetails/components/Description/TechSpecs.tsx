@@ -6,10 +6,11 @@ interface Props {
   product: IProductDetails | null;
 }
 
-export default function TechSpecs({ product }: Props) {
+const TechSpecs: React.FC<Props> = ({ product }) => {
   if (!product) {
     return;
   }
+
   const { screen, resolution, processor, ram, camera, capacity, zoom, cell } =
     product;
 
@@ -63,4 +64,6 @@ export default function TechSpecs({ product }: Props) {
       </div>
     </>
   );
-}
+};
+
+export default TechSpecs;

@@ -1,11 +1,10 @@
-type Props = {};
 import { useCartSelector } from '../../hooks/reduxHooks';
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
-import Button from '../Button';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import Button from '../Button/Button';
 import CartItem from '../CartItem/CartItem';
 import styles from './CartPage.module.scss';
 
-export default function CartPage({}: Props) {
+const CartPage: React.FC = () => {
   const { itemCount, totalPrice } = useCartSelector(state => state);
 
   return (
@@ -30,4 +29,6 @@ export default function CartPage({}: Props) {
       </div>
     </main>
   );
-}
+};
+
+export default CartPage;

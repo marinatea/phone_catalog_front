@@ -1,7 +1,6 @@
-import { FC } from 'react';
 import styles from './CartItem.module.scss';
 import { Icons } from '../../types';
-import Button from '../Button';
+import Button from '../Button/Button';
 import { useAppDispatch, useCartSelector } from '../../hooks/reduxHooks';
 import {
   addCartItem,
@@ -9,7 +8,7 @@ import {
   removeCartItemsType,
 } from '../../slices/cartSlice';
 
-const CartItem: FC = () => {
+const CartItem: React.FC = () => {
   const { cart } = useCartSelector(state => state);
   const dispatch = useAppDispatch();
 

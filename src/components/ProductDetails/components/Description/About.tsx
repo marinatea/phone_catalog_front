@@ -6,23 +6,26 @@ interface Props {
   product: IProductDetails | null;
 }
 
-export default function About({ product }: Props) {
+const About: React.FC<Props> = ({ product }) => {
   return (
     <>
-      {product &&
+      {product && (
         <div className={s.about}>
-        <h2 title="About" className={s.title}>
-          About
-        </h2>
-        <ul>
-          {product.description.map(({ title, text }) => (
-            <li key={title} className={s.aboutItem}>
-              <h3 className={s.aboutItemTitle}>{title}</h3>
-              <p className={s.aboutItemText}>{text}</p>
-            </li>
-          ))}
-        </ul>
-      </div>}
+          <h2 title="About" className={s.title}>
+            About
+          </h2>
+          <ul>
+            {product.description.map(({ title, text }) => (
+              <li key={title} className={s.aboutItem}>
+                <h3 className={s.aboutItemTitle}>{title}</h3>
+                <p className={s.aboutItemText}>{text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </>
   );
-}
+};
+
+export default About;

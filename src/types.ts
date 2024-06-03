@@ -74,5 +74,3 @@ export enum SortType {
   NEWEST_TO_OLDEST = 'newest-to-oldest',
   OLDEST_TO_NEWEST = 'oldest-to-newest',
 }
-
-export const SHOW_ALL_PRODUCTS = 'show-all-products';

@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import Icon from '../Icon';
+import Icon from '../Icon/Icon';
 import { Icons } from '../../types';
 import styles from './SearchBar.module.scss';
 import { useProductsSelector } from '../../hooks/reduxHooks';
 import { Link } from 'react-router-dom';
 
-type Props = {};
-function SearchBar({}: Props) {
+const SearchBar: React.FC = () => {
   const [isListOpen, setIsListOpen] = useState(false);
   const [search, setSearch] = useState('');
   const inputContainerRef = useRef<HTMLDivElement>(null);
@@ -91,6 +90,6 @@ function SearchBar({}: Props) {
       </div>
     </div>
   );
-}
+};
 
 export default SearchBar;

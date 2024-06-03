@@ -1,8 +1,8 @@
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
-import Button from '../Button';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import Button from '../Button/Button';
 import styles from './Registration.module.scss';
 
-export const Registration = () => {
+const Registration: React.FC = () => {
   return (
     <div className={styles.registerContainer}>
       <Breadcrumbs />

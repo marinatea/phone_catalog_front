@@ -1,9 +1,7 @@
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import styles from './NotFoundPage.module.scss';
 
-type Props = {};
-
-export default function NotFoundPage({}: Props) {
+const NotFoundPage = () => {
   return (
     <div className={styles.all}>
       <Breadcrumbs />
@@ -15,4 +13,6 @@ export default function NotFoundPage({}: Props) {
       />
     </div>
   );
-}
+};
+
+export default NotFoundPage;

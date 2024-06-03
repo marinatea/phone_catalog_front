@@ -5,7 +5,7 @@ import styles from './ImagesSelector.module.scss';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-export default function ImagesSelector({ images }: Props) {
+const ImagesSelector: React.FC<Props> = ({ images }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const location = useLocation();
 
@@ -51,4 +51,6 @@ export default function ImagesSelector({ images }: Props) {
       </div>
     </>
   );
-}
+};
+
+export default ImagesSelector;

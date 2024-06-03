@@ -1,4 +1,4 @@
-export const AVAILABLE_COLORS: { [key: string]: string } = {
+const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
   spacegray: '#4d4c4a',
   midnightgreen: '#49534b',
@@ -18,7 +18,7 @@ import cn from 'classnames';
 import { IProductDetails, Icons } from '../../../../types';
 import style from './Actions.module.scss';
 
-import Button from '../../../Button';
+import Button from '../../../Button/Button';
 import getProductLink from '../../../../utils/getProductLink';
 import { useAppDispatch, useCartSelector } from '../../../../hooks/reduxHooks';
 import { addCartItem } from '../../../../slices/cartSlice';
@@ -27,7 +27,7 @@ interface Props {
   product: IProductDetails | null;
 }
 
-export default function Description({ product }: Props) {
+const Description: React.FC<Props> = ({ product }) => {
   const { cart } = useCartSelector(state => state);
   const dispatch = useAppDispatch();
 
@@ -155,4 +155,6 @@ export default function Description({ product }: Props) {
       </div>
     </div>
   );
-}
+};
+
+export default Description;

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import styles from './Banner.module.scss';
 import { Icons } from '../../types';
-import Button from '../Button';
+import Button from '../Button/Button';
 import { useSwipeable } from 'react-swipeable';
 
-export const Banner: React.FC = () => {
+const Banner: React.FC = () => {
   const [sliderCounter, setSliderCounter] = useState(1);
   const [imageWidth, setImageWidth] = useState(0);
   const [translate, setTranslate] = useState(0);
@@ -17,8 +17,7 @@ export const Banner: React.FC = () => {
 
       if (screenWidth >= 1200) {
         newImageWidth = 1040;
-      }
-      else if (screenWidth >= 640) {
+      } else if (screenWidth >= 640) {
         newImageWidth = screenWidth - 156.6;
       } else if (screenWidth >= 450) {
         newImageWidth = screenWidth - 50.19;
@@ -147,3 +146,5 @@ export const Banner: React.FC = () => {
     </section>
   );
 };
+
+export default Banner;

@@ -7,19 +7,19 @@ interface Option {
   label: string;
 }
 
-interface CustomSelectProps {
+interface Props {
   options: Option[];
   value: SortType | number | undefined;
   onChange: (value: SortType | number | undefined) => void;
   className: string;
 }
 
-export const CustomSelect: React.FC<CustomSelectProps> = ({
+const CustomSelect: React.FC<Props> = ({
   options,
   value,
   onChange,
   className,
-}: CustomSelectProps) => {
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -74,3 +74,5 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
     </div>
   );
 };
+
+export default CustomSelect;

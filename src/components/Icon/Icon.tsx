@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import s from './Icon.module.scss';
 import cn from 'classnames';
 
@@ -8,7 +7,8 @@ interface Props {
   onClick?: () => void;
   disabled?: boolean;
 }
-const Icon: FC<Props> = ({ iconId, className, onClick, disabled }) => {
+
+const Icon: React.FC<Props> = ({ iconId, className, onClick, disabled }) => {
   return (
     <svg
       className={cn(s.container, className, { [s.disabled]: disabled })}

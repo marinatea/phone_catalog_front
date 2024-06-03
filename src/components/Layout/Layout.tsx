@@ -1,10 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
 import Header from '../Header/Header';
-import { Footer } from '../Footer/Footer';
+import Footer from '../Footer/Footer';
 
-type Props = {};
-export default function Layout({}: Props) {
+const Layout: React.FC = () => {
   return (
     <>
       <Header />
@@ -14,4 +13,6 @@ export default function Layout({}: Props) {
       <Footer />
     </>
   );
-}
+};
+
+export default Layout;

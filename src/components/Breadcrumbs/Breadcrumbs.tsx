@@ -1,9 +1,9 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Breadcrumbs.module.scss';
-import Icon from '../Icon';
+import Icon from '../Icon/Icon';
 import { Icons } from '../../types';
 
-export const Breadcrumbs = () => {
+const Breadcrumbs: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const pathnames = location.pathname.split('/').filter(pathname => pathname);
@@ -72,3 +72,5 @@ export const Breadcrumbs = () => {
     </ol>
   );
 };
+
+export default Breadcrumbs;

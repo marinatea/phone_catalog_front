@@ -1,8 +1,8 @@
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
-import Button from '../Button';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import Button from '../Button/Button';
 import styles from './Login.module.scss';
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <div className={styles.loginContainer}>
       <Breadcrumbs />

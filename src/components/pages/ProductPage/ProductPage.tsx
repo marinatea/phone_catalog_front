@@ -8,11 +8,11 @@ import styles from './ProductPage.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useMemo } from 'react';
 import { useProductsSelector } from '../../../hooks/reduxHooks';
-import { ProductsSlider } from '../../ProductsSlider/ProductsSlider';
-import { Breadcrumbs } from '../../Breadcrumbs/Breadcrumbs';
-import { ImagesSelector } from './components/ImagesSelector/ImagesSelector';
+import ProductsSlider from '../../ProductsSlider/ProductsSlider';
+import Breadcrumbs from '../../Breadcrumbs/Breadcrumbs';
+import ImagesSelector from './components/ImagesSelector/ImagesSelector';
 
-export default function ProductPage({ productType }: Props) {
+const ProductPage: React.FC<Props> = ({ productType }) => {
   const navigate = useNavigate();
   const { productId } = useParams<{ productId: string }>();
   const allProducts = useProductsSelector(state => state);
@@ -63,4 +63,6 @@ export default function ProductPage({ productType }: Props) {
       </div>
     </main>
   );
-}
+};
+
+export default ProductPage;

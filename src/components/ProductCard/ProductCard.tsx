@@ -1,8 +1,8 @@
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import s from './ProductCard.module.scss';
-import Button from '../../components/Button';
+import Button from '../../components/Button/Button';
 import { Icons, ProductT } from '../../types';
 import {
   useAppDispatch,
@@ -14,13 +14,13 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from '../../slices/favoriteSlice';
-import Icon from '../Icon';
+import Icon from '../Icon/Icon';
 
 interface Props {
   product: ProductT;
   isSlider?: boolean;
 }
-const ProductCard: FC<Props> = ({ product, isSlider }) => {
+const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
   const { cart } = useCartSelector(state => state);
   const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();

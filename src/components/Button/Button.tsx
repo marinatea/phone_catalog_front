@@ -1,8 +1,6 @@
-import { FC } from 'react';
 import cn from 'classnames';
-
 import s from './Button.module.scss';
-import Icon from '../../components/Icon';
+import Icon from '../../components/Icon/Icon';
 import { Icons } from '../../types';
 
 interface Props {
@@ -14,7 +12,8 @@ interface Props {
   isSelected?: boolean;
   className?: string;
 }
-const Button: FC<Props> = ({
+
+const Button: React.FC<Props> = ({
   type = 'primary',
   onClick = () => {},
   isDisabled = false,

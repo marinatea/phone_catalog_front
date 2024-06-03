@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import Button from '../Button';
+import Button from '../Button/Button';
 import styles from './ModalSuccess.module.scss';
-import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 
-export const ModalSuccess = () => {
+const ModalSuccess: React.FC = () => {
   return (
     <div id="success-modal" className={styles.modal}>
       <div className={styles.modalContent}>
@@ -33,3 +33,5 @@ export const ModalSuccess = () => {
     </div>
   );
 };
+
+export default ModalSuccess;

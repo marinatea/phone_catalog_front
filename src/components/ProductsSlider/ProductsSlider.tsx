@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import styles from './ProductsSlider.module.scss';
 import { Icons, ProductT } from '../../types';
-import ProductCard from '../ProductCard';
-import Button from '../Button';
+import ProductCard from '../ProductCard/ProductCard';
+import Button from '../Button/Button';
 
 type Props = {
   title: string;
   products: ProductT[];
 };
 
-export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
+const ProductsSlider: React.FC<Props> = ({ title, products }) => {
   const [translate, setTranslate] = useState(0);
   const [visibleCards, setVisibleCards] = useState(1);
   const [sliderWidth, setSliderWidth] = useState(0);
@@ -124,3 +124,5 @@ export const ProductsSlider: React.FC<Props> = ({ title, products }) => {
     </div>
   );
 };
+
+export default ProductsSlider;
