@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import Breadcrumbs from '../../generic/Breadcrumbs/Breadcrumbs';
 import Button from '../../generic/Button/Button';
-import styles from './Login.module.scss';
+import styles from './LoginPage.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -9,6 +9,7 @@ const LoginPage: React.FC = () => {
   const handleRegisterClick = () => {
     navigate('/registration');
   };
+
   return (
     <div className={styles.main}>
       <div className={styles.loginContainer}>
@@ -27,7 +28,7 @@ const LoginPage: React.FC = () => {
             type="primary"
             title="Login"
             className={styles.loginButton}
-            onClick={() => { }}
+            onClick={() => {}}
           />
         </form>
         <Button

@@ -3,17 +3,19 @@ interface Props {
 }
 
 import { IProductDetails, Icons } from '../../../../../types';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   useAppDispatch,
   useCartSelector,
 } from '../../../../../hooks/reduxHooks';
 
 import Button from '../../../../generic/Button/Button';
-import { Link } from 'react-router-dom';
 import { addCartItem } from '../../../../../slices/cartSlice';
+// import { addToFavorites } from '../../../../../slices/favoriteSlice';
 import classnames from 'classnames';
 import getProductLink from '../../../../../utils/getProductLink';
 import style from './Actions.module.scss';
+import { useUser } from '@clerk/clerk-react';
 
 const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
@@ -33,6 +35,8 @@ const AVAILABLE_COLORS: { [key: string]: string } = {
 const Actions: React.FC<Props> = ({ product }) => {
   const { cart } = useCartSelector(state => state);
   const dispatch = useAppDispatch();
+  const { user, isSignedIn } = useUser();
+  const navigate = useNavigate();
 
   if (!product) {
     return;
@@ -135,13 +139,42 @@ const Actions: React.FC<Props> = ({ product }) => {
         </div>
         <div className={style.actions}>
           <Button
-            onClick={() => dispatch(addCartItem(cartProduct))}
+            onClick={() => {
+              if (isSignedIn) {
+                dispatch(
+                  addCartItem({
+                    product: cartProduct,
+                    userId: user?.id as string,
+                  }),
+                );
+              } else {
+                navigate('/signin/');
+              }
+            }}
             isSelected={isProductInCard}
             className={style.addToCard}
             title={isProductInCard ? 'Added to cart' : 'Add to cart'}
           />
           <Button
-            onClick={() => {}}
+            onClick={() => {
+              if (isSignedIn) {
+                // dispatch(
+                //   addToFavorites({
+                //     product: {
+                //       ...product,
+                //       id:product.
+                //       itemId: product.id,
+                //       image: product.images[0],
+                //       fullPrice: product.priceRegular,
+                //       price: product.priceDiscount,
+                //     },
+                //     userId: user?.id as string,
+                //   }),
+                // );
+              } else {
+                navigate('/signin/');
+              }
+            }}
             type="secondary"
             className={style.addToFavorite}
             icon={Icons.HEART}
