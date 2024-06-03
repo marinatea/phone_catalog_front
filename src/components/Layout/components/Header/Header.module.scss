@@ -1,20 +1,19 @@
-@import '/src/utils/desktopHeaderFonts';
-@import '/src/utils/mobileHeaderFonts';
-@import '/src/utils/mediaQueries.module';
-@import '/src/constants/colors.module';
-
-body {
-  margin: 0;
-}
+@use '/src/utils/desktopHeaderFonts' as dF;
+@use '/src/utils/mobileHeaderFonts' as mHF;
+@use '/src/utils/mediaQueries.module' as mQ;
+@use '/src/constants/colors.module' as c;
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid $elements;
-  background-color: $white;
+  border: 1px solid c.$elements;
+  background-color: c.$white;
   height: 64px;
-  color: $primary;
+  color: c.$primary;
+  position: sticky;
+  top: 0;
+  z-index: 999;
 
   .divLogo {
     padding: 18px 24px;
@@ -28,7 +27,7 @@ body {
     align-items: center;
     margin-inline-start: 24px;
 
-    @include tablet {
+    @include mQ.tablet {
       margin-inline-start: 12px;
     }
 
@@ -41,9 +40,9 @@ body {
       max-width: 425px;
       text-transform: uppercase;
 
-      @include h1-font;
+      @include dF.h1-font;
 
-      @include tablet {
+      @include mQ.tablet {
         max-width: 329px;
       }
 
@@ -55,28 +54,28 @@ body {
           text-decoration: none;
 
           &:hover {
-            color: $primary;
+            color: c.$primary;
 
             &::after {
               position: absolute;
               right: 0;
               bottom: -21px;
               left: 0;
-              background-color: $primary;
+              background-color: c.$primary;
               height: 1px;
               content: '';
             }
           }
 
           &.active {
-            color: $primary;
+            color: c.$primary;
 
             &::after {
               position: absolute;
               right: 0;
               bottom: -21px;
               left: 0;
-              background-color: $primary;
+              background-color: c.$primary;
               height: 1px;
               content: '';
             }
@@ -85,15 +84,15 @@ body {
       }
     }
 
-    @include phone {
+    @include mQ.phone {
       display: none;
     }
 
-    @include tablet {
+    @include mQ.tablet {
       display: flex;
     }
 
-    @include desktop {
+    @include mQ.desktop {
       display: flex;
     }
   }
@@ -104,30 +103,30 @@ body {
     .heart,
     .cart {
       position: relative;
-      border: 1px solid $elements;
+      border: 1px solid c.$elements;
       padding: 24px;
       width: 16px;
       height: 16px;
 
       &:hover {
-        border-color: $primary;
+        border-color: c.$primary;
 
         &::after {
           position: absolute;
-          background-color: $primary;
+          background-color: c.$primary;
           content: '';
         }
       }
 
-      @include phone {
+      @include mQ.phone {
         display: none;
       }
 
-      @include tablet {
+      @include mQ.tablet {
         display: flex;
       }
 
-      @include desktop {
+      @include mQ.desktop {
         display: flex;
       }
     }
@@ -135,30 +134,30 @@ body {
 
   .burger {
     display: none;
-    border: 1px solid $elements;
+    border: 1px solid c.$elements;
     padding: 24px;
     width: 16px;
     height: 16px;
 
     &:hover {
-      border-color: $primary;
+      border-color: c.$primary;
 
       &::after {
         position: absolute;
-        background-color: $primary;
+        background-color: c.$primary;
         content: '';
       }
     }
 
-    @include phone {
+    @include mQ.phone {
       display: flex;
     }
 
-    @include tablet {
+    @include mQ.tablet {
       display: none;
     }
 
-    @include desktop {
+    @include mQ.desktop {
       display: none;
     }
   }
