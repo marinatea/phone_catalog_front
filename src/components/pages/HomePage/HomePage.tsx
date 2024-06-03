@@ -5,11 +5,13 @@ import SearchBar from './components/SearchBar/SearchBar';
 import styles from './HomePage.module.scss';
 import { useMemo } from 'react';
 import { useProductsSelector } from '../../../hooks/reduxHooks';
+import { useUser } from '@clerk/clerk-react';
 
 const HomePage: React.FC = () => {
   const { phones, tablets, accessories, allProducts } = useProductsSelector(
     state => state,
   );
+  const { user } = useUser();
 
   const categories = [
     { title: 'Mobile phones', type: 'phones', count: phones.length },
@@ -36,7 +38,10 @@ const HomePage: React.FC = () => {
   return (
     <main className={styles.homePage}>
       <SearchBar />
-      <h1 className={styles.title}>Welcome to Nice Gadgets store!</h1>
+      <h1 className={styles.title}>
+        Hey{user?.firstName && ' '}
+        {user?.firstName}, welcome to Nice Gadgets store!
+      </h1>
       <div className={styles.slider}>
         <Banner />
       </div>
