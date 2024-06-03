@@ -56,10 +56,19 @@
     .categoryContainer {
       margin-top: 24px;
 
+      a {
+        text-decoration: none;
+      }
+
       .categoryImgContainer {
+        transition: scale 0.2s ease;
         aspect-ratio: 1/1;
         width: 100%;
         overflow: hidden;
+
+        &:hover {
+          scale: 1.04;
+        }
 
         .categoryImg {
           padding: 6% 12%;
