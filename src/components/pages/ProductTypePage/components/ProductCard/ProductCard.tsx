@@ -20,11 +20,15 @@ import Icon from '../../../../generic/Icon/Icon';
 import { addCartItem } from '../../../../../slices/cartSlice';
 import classnames from 'classnames';
 import styles from './ProductCard.module.scss';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
 
 const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
   const { cart } = useCartSelector(state => state);
   const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();
+  const { user, isSignedIn } = useUser();
+  const navigate = useNavigate();
 
   const {
     itemId: id,
@@ -76,14 +80,25 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
   }, [favorites, name]);
 
   const handleFavoriteClick = () => {
-    if (isProductInFavorites) {
-      dispatch(removeFromFavorites(favoriteCard.name));
+    if (isSignedIn) {
+      if (isProductInFavorites) {
+        dispatch(
+          removeFromFavorites({
+            productId: favoriteCard.name,
+            userId: user?.id as string,
+          }),
+        );
 
-      setIcon(Icons.HEART);
+        setIcon(Icons.HEART);
+      } else {
+        dispatch(
+          addToFavorites({ product: favoriteCard, userId: user?.id as string }),
+        );
+
+        setIcon(Icons.HEART_FILL);
+      }
     } else {
-      dispatch(addToFavorites(favoriteCard));
-
-      setIcon(Icons.HEART_FILL);
+      navigate('/signin/');
     }
   };
 
@@ -133,10 +148,22 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
       </ul>
       <div className={styles.buttons}>
         <Button
-          onClick={() => dispatch(addCartItem(cartProduct))}
+          onClick={() => {
+            if (isSignedIn) {
+              dispatch(
+                addCartItem({
+                  product: cartProduct,
+                  userId: user?.id as string,
+                }),
+              );
+            } else {
+              navigate('/signin/');
+            }
+          }}
           isSelected={false}
           className={styles.addToCard}
           title={isProductInCard ? 'Added to cart' : 'Add to cart'}
+          isDisabled={isProductInCard}
         />
         <Icon
           onClick={handleFavoriteClick}
