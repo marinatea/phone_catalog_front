@@ -1,14 +1,14 @@
-@import '../../constants/colors.module';
-@import '../../utils/miscFonts';
+@import '/src/constants/colors.module';
+@import '/src/utils/miscFonts';
 
 .breadcrumbs {
-  margin-top: 24px;
   display: flex;
   flex-direction: row;
-  list-style: none;
   align-items: left;
   gap: 8px;
+  margin-top: 24px;
   color: $secondary;
+  list-style: none;
 
   @include body-font;
 
@@ -18,17 +18,17 @@
     gap: 8px;
 
     .active {
-      text-decoration: none;
       color: $secondary;
+      text-decoration: none;
     }
   }
 
   .home,
   .arrowRight,
   .arrowLeft {
-    cursor: pointer;
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 
   .backText {

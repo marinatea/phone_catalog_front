@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 type Props = {
   title: string;
   products: ProductT[];

@@ -1,20 +1,20 @@
-@use './../../constants/colors.module.scss' as color;
-@use './../../utils/miscFonts.scss' as fonts;
+@use '/src/constants/colors.module.scss' as color;
+@use '/src/utils/miscFonts.scss' as fonts;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
 @use '/src/utils/mediaQueries.module.scss' as mQ;
 
 .loginContainer {
-  background-color: color.$hoverBG;
-  padding: 20px;
-  border-radius: 8px;
   grid-column: span 4;
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: color.$hoverBG;
+  padding: 20px;
   width: 75%;
 
   @include mQ.tablet {
-    width: 50%;
     grid-column: span 12;
+    width: 50%;
   }
 
   @include mQ.desktop {
@@ -23,60 +23,60 @@
 }
 
 .loginTitle {
+  margin-bottom: 20px;
   color: color.$primary;
   text-align: center;
-  margin-bottom: 20px;
 
   @include dHF.h2-font;
 }
 
 .loginForm {
   .formGroup {
-    padding-right: 20px;
     margin-bottom: 15px;
+    padding-right: 20px;
 
     label {
-      color: color.$primary;
       display: block;
       margin-bottom: 5px;
+      color: color.$primary;
 
       @include fonts.body-font;
     }
 
     input {
-      width: 100%;
-      padding: 10px;
       border: 1px solid color.$elements;
       border-radius: 4px;
+      padding: 10px;
+      width: 100%;
 
       @include fonts.body-font;
     }
   }
 
   .loginButton {
-    width: 100%;
-    padding: 10px;
-    background-color: color.$positive;
-    color: color.$white;
+    cursor: pointer;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
-    
+    background-color: color.$positive;
+    padding: 10px;
+    width: 100%;
+    color: color.$white;
+
     @include fonts.button-font;
   }
 }
 
 .registerRedirectButton {
   display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: color.$negative;
-  color: color.$white;
+  cursor: pointer;
+  margin-top: 10px;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  background-color: color.$negative;
+  padding: 10px;
+  width: 100%;
+  color: color.$white;
   text-align: center;
-  margin-top: 10px;
 
   @include fonts.button-font;
 }

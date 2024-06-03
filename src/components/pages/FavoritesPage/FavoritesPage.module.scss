@@ -29,16 +29,18 @@
 
 @include mQ.phone {
   .title {
-    margin-top: 24px;
     @include mHF.h1-font;
     grid-column: span 4;
+
+    margin-top: 24px;
     color: cM.$primary;
   }
 
   .subText {
-    margin-top: 8px;
     @include mF.body-font;
+
     grid-column: span 4;
+    margin-top: 8px;
     color: cM.$secondary;
   }
 
@@ -59,9 +61,10 @@
 
 @include mQ.tablet {
   .title {
-    margin-top: 40px;
     @include dHF.h1-font;
+
     grid-column: span 12;
+    margin-top: 40px;
   }
 
   .subText {

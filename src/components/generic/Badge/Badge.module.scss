@@ -1,6 +1,6 @@
 @use '/src/utils/mediaQueries.module.scss' as mQ;
-@use './../../utils/miscFonts.scss' as fonts;
-@use './../../constants/colors.module.scss' as color;
+@use '/src/utils/miscFonts.scss' as fonts;
+@use '/src/constants/colors.module.scss' as color;
 
 .cartBadge {
   display: none;
@@ -8,17 +8,18 @@
   @include mQ.tablet {
     @include fonts.body-font;
 
-    font-size: 9px;
-    color: color.$white;
+    display: flex;
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: color.$negative;
-    border-radius: 50%;
-    width: 14px;
-    height: 14px;
-    display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 50%;
+    background-color: color.$negative;
+    width: 14px;
+    height: 14px;
+    color: color.$white;
+
+    font-size: 9px;
   }
 }

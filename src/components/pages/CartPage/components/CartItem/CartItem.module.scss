@@ -1,5 +1,5 @@
 @use '/src/utils/mediaQueries.module.scss' as mQ;
-@use './../../utils/miscFonts.scss' as mF;
+@use '/src/utils/miscFonts.scss' as mF;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
 @import '/src/constants/colors.module';
 
@@ -84,7 +84,7 @@
 
         .price {
           @include dHF.h3-font;
-          
+
           width: 80px;
           padding-left: 48px;
         }

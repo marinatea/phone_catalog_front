@@ -1,11 +1,11 @@
-@use './../../utils/miscFonts.scss' as fonts;
-@use './../../constants/colors.module.scss' as color;
+@use '/src/utils/miscFonts.scss' as fonts;
+@use '/src/constants/colors.module.scss' as color;
 @use '/src/utils/mediaQueries.module.scss' as mQ;
 
 .container {
-  width: 287px;
-  padding: 32px;
   border: 1px solid color.$elements;
+  padding: 32px;
+  width: 287px;
   color: color.$primary;
 
   @include mQ.tablet {
@@ -18,9 +18,9 @@
 }
 
 .sliderCardContainer {
-  width: 212px;
-  padding: 32px;
   border: 1px solid color.$elements;
+  padding: 32px;
+  width: 212px;
   color: color.$primary;
 
   @include mQ.tablet {
@@ -35,8 +35,8 @@
 .link {
   display: flex;
   justify-content: center;
-  margin-bottom: 32px;
   transition: transform 0.3s ease;
+  margin-bottom: 32px;
 
   &:hover {
     transform: scale(1.03);
@@ -79,12 +79,12 @@
   @include fonts.body-font;
 
   display: flex;
+  transition: color 0.3s ease;
+  margin-bottom: 8px;
+  height: 40px;
+  color: color.$primary;
   font-size: 14px;
   line-height: 20px;
-  margin-bottom: 8px;
-  color: color.$primary;
-  height: 40px;
-  transition: color 0.3s ease;
 
   &:hover {
     color: color.$secondary;
@@ -99,20 +99,20 @@
 }
 
 .currentPrice {
-  line-height: 50px;
   margin-right: 8px;
+  line-height: 50px;
 }
 
 .fullPrice {
+  color: #89939a;
   line-height: 50px;
   text-decoration: line-through;
-  color: #89939a;
 }
 
 .detailsList {
-  padding-top: 16px;
-  border-top: 1px solid color.$elements;
   margin-bottom: 16px;
+  border-top: 1px solid color.$elements;
+  padding-top: 16px;
   padding-inline-start: 0;
 }
 
@@ -127,14 +127,14 @@
 }
 
 .detailsTitle {
-  line-height: 15px;
   color: color.$secondary;
+  line-height: 15px;
 }
 
 .buttons {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .addToCard {
@@ -143,8 +143,8 @@
 }
 
 .addToFavorite {
-  padding: 11px;
   border: 1px solid color.$elements;
+  padding: 11px;
 
   &:hover {
     border-color: color.$secondary;

@@ -1,10 +1,10 @@
-@use './../../../../utils/miscFonts.scss' as fonts;
-@use './../../../../constants/colors.module.scss' as color;
+@use '/src/utils/miscFonts.scss' as fonts;
+@use '/src/constants/colors.module.scss' as color;
 @use '/src/utils/mediaQueries.module.scss' as mQ;
 
 .wrapper {
-  width: 288px;
   transition: width 0.5s ease;
+  width: 288px;
 
   @include mQ.tablet {
     width: 237px;
@@ -17,24 +17,24 @@
 
 .label {
   @include fonts.button-font;
+  display: block;
+  margin-bottom: 8px;
+  color: color.$secondary;
 
   font-size: 12px;
   line-height: 15px;
-  color: color.$secondary;
-  margin-bottom: 8px;
-  display: block;
 }
 
 .colors {
-  padding-bottom: 24px;
-  border-bottom: 1px solid color.$elements;
   margin-bottom: 24px;
+  border-bottom: 1px solid color.$elements;
+  padding-bottom: 24px;
 }
 
 .capacity {
-  padding-bottom: 24px;
-  border-bottom: 1px solid color.$elements;
   margin-bottom: 32px;
+  border-bottom: 1px solid color.$elements;
+  padding-bottom: 24px;
 }
 
 .list {
@@ -50,20 +50,20 @@
 
 .colorsLink {
   display: block;
+  transition: box-shadow 0.3s ease;
+  box-shadow: 0 0 0 1px color.$elements;
   border: 2px solid color.$white;
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  box-shadow: 0 0 0 1px color.$elements;
-  transition: box-shadow 0.3s ease;
 
   &:hover {
     box-shadow: 0 0 0 1px color.$primary;
   }
 
   &.activeLink {
-    box-shadow: 0 0 0 1px color.$primary;
     cursor: default;
+    box-shadow: 0 0 0 1px color.$primary;
   }
 }
 
@@ -82,28 +82,28 @@
 
 .price {
   @include fonts.uppercase-font;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
 
   font-size: 32px;
   line-height: 41px;
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
 }
 
 .priceRegular {
   @include fonts.body-font;
+  margin-left: 8px;
 
   color: color.$secondary;
-  text-decoration: line-through;
   font-size: 22px;
   line-height: 28px;
-  margin-left: 8px;
+  text-decoration: line-through;
 }
 
 .actions {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 32px;
 }
 
@@ -119,12 +119,12 @@
 
 .infoItem {
   @include fonts.body-font;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   font-size: 12px;
   line-height: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 
   &:not(:last-child) {
     margin-bottom: 8px;

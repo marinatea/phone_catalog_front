@@ -1,7 +1,7 @@
 @use '/src/utils/mediaQueries.module.scss' as mQ;
 @use '/src/utils/mobileHeaderFonts.scss' as mHF;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
-@use './../../constants/colors.module.scss' as color;
+@use '/src/constants/colors.module.scss' as color;
 
 .productsSlider {
   width: 100%;
@@ -10,8 +10,8 @@
   &__top {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 24px;
     align-items: center;
+    margin-bottom: 24px;
 
     &Buttons {
       display: flex;
@@ -21,8 +21,8 @@
   }
 
   &__wrapper {
-    overflow: hidden;
     width: 100%;
+    overflow: hidden;
   }
 
   &__content {
@@ -40,11 +40,11 @@
   }
 
   &__topButton {
-    height: 32px;
-    width: 32px;
-    background-color: transparent;
     display: flex;
     align-items: center;
+    background-color: transparent;
+    width: 32px;
+    height: 32px;
 
     &.smallButtonDisabled {
       opacity: 0.5;

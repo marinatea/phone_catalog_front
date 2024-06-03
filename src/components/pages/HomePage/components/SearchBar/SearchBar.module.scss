@@ -1,5 +1,5 @@
-@use '../../utils/miscFonts.scss' as mF;
-@import '../../constants/colors.module';
+@use '/src/utils/miscFonts.scss' as mF;
+@import '/src/constants/colors.module.scss';
 
 .container {
   display: flex;

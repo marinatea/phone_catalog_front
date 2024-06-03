@@ -1,6 +1,6 @@
-@use './../../utils/miscFonts.scss' as fonts;
+@use '/src/utils/miscFonts.scss' as fonts;
 @use '/src/utils/mobileHeaderFonts.scss' as mHF;
-@use './../../constants/colors.module.scss' as color;
+@use '/src/constants/colors.module.scss' as color;
 @use '/src/utils/desktopHeaderFonts.scss' as dHF;
 @use '/src/utils/mediaQueries.module.scss' as mQ;
 
@@ -28,11 +28,11 @@
       padding-bottom: 0;
       height: 100%;
     }
-
-    overflow: hidden;
+    margin: 0 auto;
     width: 100%;
     max-width: 1040px;
-    margin: 0 auto;
+
+    overflow: hidden;
   }
 
   &__images {
@@ -42,9 +42,9 @@
 
   &__button {
     display: none;
-    background-color: inherit;
-    border: 1px solid color.$icons;
     cursor: pointer;
+    border: 1px solid color.$icons;
+    background-color: inherit;
 
     @include mQ.tablet {
       display: flex;
@@ -63,29 +63,29 @@
   &__list {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    gap: 14px;
     margin: 18px auto 0;
     padding: 0;
-    justify-content: center;
     list-style: none;
-    gap: 14px;
   }
 
   &__item {
+    background-color: color.$elements;
     width: 14px;
     height: 4px;
-    background-color: color.$elements;
 
     &--active {
-      background-color: color.$primary;
       animation: animation-appearing 0.5s ease-in-out forwards;
+      background-color: color.$primary;
     }
   }
 
   &__imageContainer {
-    min-width: 100%;
-    background-size: cover;
     background-position: top;
+    background-size: cover;
     background-repeat: no-repeat;
+    min-width: 100%;
     height: 60vh;
 
     @include mQ.tablet {
@@ -94,14 +94,14 @@
   }
 
   &__imageContainer1 {
-    background-color: black;
-    background-size: contain;
     display: flex;
+    flex-grow: 1;
     flex-direction: row-reverse;
     align-items: center;
-    flex-grow: 1;
-    height: 40vh;
     background-position: top;
+    background-size: contain;
+    background-color: black;
+    height: 40vh;
 
     @include mQ.tablet {
       background-position: center;
@@ -109,46 +109,46 @@
     }
   }
   &__image1 {
-    background-repeat: no-repeat;
+    background-image: url('../../../../../../public/img/banner-small.png');
     background-position: center;
-    height: 100%;
+    background-repeat: no-repeat;
     width: 100%;
-    background-image: url('../../../public/img/banner-small.png');
+    height: 100%;
 
     @include mQ.tablet {
       width: 50%;
     }
   }
   &__imageContainer2 {
-    background-image: url('../../../public/img/banner-accessories.png');
+    background-image: url('../../../../../../public/img/banner-accessories.png');
   }
   &__imageContainer3 {
-    background-image: url('../../../public/img/banner-phones.png');
+    background-image: url('../../../../../../public/img/banner-phones.png');
   }
   &__imageContainer4 {
-    background-image: url('../../../public/img/banner-tablets.png');
+    background-image: url('../../../../../../public/img/banner-tablets.png');
   }
 
   &__overlayContainer {
     display: none;
 
     @include mQ.tablet {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: flex-start;
       box-sizing: border-box;
-
-      width: 45%;
-      height: 94%;
-      padding: 20px;
+      border-radius: 6%;
       background: linear-gradient(
         90deg,
         rgba(20, 20, 20, 1) 0%,
         rgba(36, 37, 41, 1) 100%
       );
-      border-radius: 6%;
+      padding: 20px;
+
+      width: 45%;
+      height: 94%;
       color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-around;
     }
   }
 
@@ -158,6 +158,7 @@
     @include mQ.desktop {
       @include dHF.h1-font;
     }
+    -webkit-background-clip: text;
 
     background: linear-gradient(
       45deg,
@@ -166,14 +167,13 @@
       rgba(128, 84, 195, 1) 54%,
       rgba(252, 70, 107, 1) 100%
     );
-    -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   &__smile {
-    background: none;
     -webkit-background-clip: initial;
+    background: none;
     background-clip: initial;
     -webkit-text-fill-color: initial;
   }
@@ -183,12 +183,12 @@
   }
 
   &__overlayButton {
-    background-color: color.$primary;
-    color: white;
-    padding: 15px 20px;
+    cursor: pointer;
     border: 0.8px solid color.$icons;
     border-radius: 40px;
-    cursor: pointer;
+    background-color: color.$primary;
+    padding: 15px 20px;
+    color: white;
 
     @include fonts.body-font;
 
