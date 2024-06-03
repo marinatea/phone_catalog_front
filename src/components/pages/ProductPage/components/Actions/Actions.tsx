@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import {
   useAppDispatch,
   useCartSelector,
+  useFavoritesSelector,
+  useProductsSelector,
 } from '../../../../../hooks/reduxHooks';
 
 import Button from '../../../../generic/Button/Button';
@@ -16,6 +18,8 @@ import classnames from 'classnames';
 import getProductLink from '../../../../../utils/getProductLink';
 import style from './Actions.module.scss';
 import { useUser } from '@clerk/clerk-react';
+import { addToFavorites, removeFromFavorites } from '../../../../../slices/favoriteSlice';
+import { useEffect, useState } from 'react';
 
 const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
@@ -34,14 +38,51 @@ const AVAILABLE_COLORS: { [key: string]: string } = {
 
 const Actions: React.FC<Props> = ({ product }) => {
   const { cart } = useCartSelector(state => state);
+  const { allProducts } = useProductsSelector(state => state);
+  const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();
   const { user, isSignedIn } = useUser();
   const navigate = useNavigate();
 
-  if (!product) {
-    return;
+  const isProductInFavorites = favorites.some(item => item.itemId === product?.id);
+
+  const [icon, setIcon] = useState(
+    isProductInFavorites ? Icons.HEART_FILL : Icons.HEART,
+  );
+
+  useEffect(() => {
+    setIcon(
+      favorites.some(item => item.name === product?.name)
+        ? Icons.HEART_FILL
+        : Icons.HEART,
+    );
+  }, [favorites, product]);
+
+  const favoriteCard = allProducts.find(p => p.name === product?.name)
+  if (!product || !favoriteCard) {
+    return null;
   }
 
+  const toggleProductFavorites = () => {
+    if (isSignedIn) {
+      if (isProductInFavorites) {
+        dispatch(
+          removeFromFavorites({
+            productId: favoriteCard?.name || '', 
+            userId: user?.id as string,
+          }),
+        );
+        setIcon(Icons.HEART);
+      } else {
+        dispatch(
+          addToFavorites({ product: favoriteCard, userId: user?.id as string }),
+        );
+        setIcon(Icons.HEART_FILL);
+      }
+    } else {
+      navigate('/signin/');
+    }
+  };
   const {
     name,
     capacityAvailable,
@@ -156,28 +197,10 @@ const Actions: React.FC<Props> = ({ product }) => {
             title={isProductInCard ? 'Added to cart' : 'Add to cart'}
           />
           <Button
-            onClick={() => {
-              if (isSignedIn) {
-                // dispatch(
-                //   addToFavorites({
-                //     product: {
-                //       ...product,
-                //       id:product.
-                //       itemId: product.id,
-                //       image: product.images[0],
-                //       fullPrice: product.priceRegular,
-                //       price: product.priceDiscount,
-                //     },
-                //     userId: user?.id as string,
-                //   }),
-                // );
-              } else {
-                navigate('/signin/');
-              }
-            }}
+            onClick={toggleProductFavorites}
             type="secondary"
             className={style.addToFavorite}
-            icon={Icons.HEART}
+            icon={icon}
           />
         </div>
         <ul>

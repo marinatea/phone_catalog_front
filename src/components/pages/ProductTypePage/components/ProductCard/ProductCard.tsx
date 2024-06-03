@@ -160,7 +160,7 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
               navigate('/signin/');
             }
           }}
-          isSelected={false}
+          isSelected={isProductInCard}
           className={styles.addToCard}
           title={isProductInCard ? 'Added to cart' : 'Add to cart'}
           isDisabled={isProductInCard}
