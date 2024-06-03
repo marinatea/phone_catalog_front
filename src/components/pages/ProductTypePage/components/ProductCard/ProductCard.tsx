@@ -87,6 +87,8 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
     }
   };
 
+  const link = '/' + product.category + '/' + product.itemId;
+
   return (
     <div
       className={classnames(
@@ -98,7 +100,7 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
       )}
       data-cy="cardsContainer"
     >
-      <a href={`/*`} className={styles.link}>
+      <a href={link} className={styles.link}>
         <img
           className={classnames({
             [styles.sliderCardImage]: isSlider,
@@ -108,7 +110,7 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
           alt={name}
         />
       </a>
-      <a href={`/*`} className={styles.name}>
+      <a href={link} className={styles.name}>
         {name}
       </a>
       <div className={styles.price}>
