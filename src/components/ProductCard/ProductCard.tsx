@@ -1,25 +1,26 @@
-import { useEffect, useState } from 'react';
-import cn from 'classnames';
+interface Props {
+  product: ProductT;
+  isSlider?: boolean;
+}
 
-import s from './ProductCard.module.scss';
-import Button from '../../components/Button/Button';
 import { Icons, ProductT } from '../../types';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../slices/favoriteSlice';
 import {
   useAppDispatch,
   useCartSelector,
   useFavoritesSelector,
 } from '../../hooks/reduxHooks';
-import { addCartItem } from '../../slices/cartSlice';
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from '../../slices/favoriteSlice';
-import Icon from '../Icon/Icon';
+import { useEffect, useState } from 'react';
 
-interface Props {
-  product: ProductT;
-  isSlider?: boolean;
-}
+import Button from '../../components/Button/Button';
+import Icon from '../Icon/Icon';
+import { addCartItem } from '../../slices/cartSlice';
+import classnames from 'classnames';
+import styles from './ProductCard.module.scss';
+
 const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
   const { cart } = useCartSelector(state => state);
   const { favorites } = useFavoritesSelector(state => state);
@@ -88,56 +89,56 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
 
   return (
     <div
-      className={cn(
+      className={classnames(
         {
-          [s.sliderCardContainer]: isSlider,
-          [s.container]: !isSlider,
+          [styles.sliderCardContainer]: isSlider,
+          [styles.container]: !isSlider,
         },
         '__app-PhoneCard-container',
       )}
       data-cy="cardsContainer"
     >
-      <a href={`/*`} className={s.link}>
+      <a href={`/*`} className={styles.link}>
         <img
-          className={cn({
-            [s.sliderCardImage]: isSlider,
-            [s.image]: !isSlider,
+          className={classnames({
+            [styles.sliderCardImage]: isSlider,
+            [styles.image]: !isSlider,
           })}
           src={`/${image}`}
           alt={name}
         />
       </a>
-      <a href={`/*`} className={s.name}>
+      <a href={`/*`} className={styles.name}>
         {name}
       </a>
-      <div className={s.price}>
-        <span className={s.currentPrice}>{`$${price}`}</span>
-        <span className={s.fullPrice}>{`$${fullPrice}`}</span>
+      <div className={styles.price}>
+        <span className={styles.currentPrice}>{`$${price}`}</span>
+        <span className={styles.fullPrice}>{`$${fullPrice}`}</span>
       </div>
-      <ul className={s.detailsList}>
-        <li className={s.detailsItem}>
-          <span className={s.detailsTitle}>Screen</span>
+      <ul className={styles.detailsList}>
+        <li className={styles.detailsItem}>
+          <span className={styles.detailsTitle}>Screen</span>
           <span>{screen}</span>
         </li>
-        <li className={s.detailsItem}>
-          <span className={s.detailsTitle}>Capacity</span>
+        <li className={styles.detailsItem}>
+          <span className={styles.detailsTitle}>Capacity</span>
           <span>{capacity}</span>
         </li>
-        <li className={s.detailsItem}>
-          <span className={s.detailsTitle}>RAM</span>
+        <li className={styles.detailsItem}>
+          <span className={styles.detailsTitle}>RAM</span>
           <span>{ram}</span>
         </li>
       </ul>
-      <div className={s.buttons}>
+      <div className={styles.buttons}>
         <Button
           onClick={() => dispatch(addCartItem(cartProduct))}
           isSelected={false}
-          className={s.addToCard}
+          className={styles.addToCard}
           title={isProductInCard ? 'Added to cart' : 'Add to cart'}
         />
         <Icon
           onClick={handleFavoriteClick}
-          className={s.addToFavorite}
+          className={styles.addToFavorite}
           iconId={icon}
         />
       </div>

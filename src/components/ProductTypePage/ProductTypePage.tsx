@@ -1,14 +1,20 @@
-import { useState, useEffect, useMemo } from 'react';
-import ProductCard from '../ProductCard/ProductCard';
-import styles from './ProductTypePage.module.scss';
-import Icon from '../Icon/Icon';
-import { Icons, SortType, IProductDetails } from '../../types';
-import { useProductsSelector } from '../../hooks/reduxHooks';
-import CustomSelect from '../CustomSelect/CustomSelect';
-
 type Props = {
   productsType: 'phones' | 'tablets' | 'accessories';
 };
+
+import { IProductDetails, Icons, SortType } from '../../types';
+import {
+  convertToProductDetails,
+  convertToProductT,
+} from '../../utils/helpers';
+import { useEffect, useMemo, useState } from 'react';
+
+import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
+import CustomSelect from '../CustomSelect/CustomSelect';
+import Icon from '../Icon/Icon';
+import ProductCard from '../ProductCard/ProductCard';
+import styles from './ProductTypePage.module.scss';
+import { useProductsSelector } from '../../hooks/reduxHooks';
 
 const sortOptions = [
   { value: SortType.WITHOUT_SORT, label: 'Without Sort' },
@@ -27,12 +33,6 @@ const itemsPerPageOptions = [
   { value: 32, label: '32' },
   { value: Number.MAX_SAFE_INTEGER, label: 'All' },
 ];
-
-import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
-import {
-  convertToProductDetails,
-  convertToProductT,
-} from '../../utils/helpers';
 
 const ProductTypePage: React.FC<Props> = ({ productsType }) => {
   const { allProducts } = useProductsSelector(state => state);

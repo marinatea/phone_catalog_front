@@ -1,3 +1,10 @@
+interface Props {
+  options: Option[];
+  value: SortType | number | undefined;
+  onChange: (value: SortType | number | undefined) => void;
+  className: string;
+}
+
 import { useState, useRef, useEffect } from 'react';
 import { SortType } from '../../types';
 import styles from './CustomSelect.module.scss';
@@ -7,19 +14,12 @@ interface Option {
   label: string;
 }
 
-interface Props {
-  options: Option[];
-  value: SortType | number | undefined;
-  onChange: (value: SortType | number | undefined) => void;
-  className: string;
-}
-
 const CustomSelect: React.FC<Props> = ({
   options,
   value,
   onChange,
   className,
-}: Props) => {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

@@ -1,6 +1,3 @@
-import s from './Icon.module.scss';
-import cn from 'classnames';
-
 interface Props {
   iconId: string;
   className?: string;
@@ -8,10 +5,15 @@ interface Props {
   disabled?: boolean;
 }
 
+import classnames from 'classnames';
+import styles from './Icon.module.scss';
+
 const Icon: React.FC<Props> = ({ iconId, className, onClick, disabled }) => {
   return (
     <svg
-      className={cn(s.container, className, { [s.disabled]: disabled })}
+      className={classnames(styles.container, className, {
+        [styles.disabled]: disabled,
+      })}
       onClick={!disabled ? onClick : undefined}
     >
       <use href={`/img/sprite.svg#${iconId}`} />

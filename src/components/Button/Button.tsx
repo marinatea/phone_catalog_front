@@ -1,8 +1,3 @@
-import cn from 'classnames';
-import s from './Button.module.scss';
-import Icon from '../../components/Icon/Icon';
-import { Icons } from '../../types';
-
 interface Props {
   onClick?: VoidFunction;
   icon?: Icons;
@@ -12,6 +7,11 @@ interface Props {
   isSelected?: boolean;
   className?: string;
 }
+
+import Icon from '../../components/Icon/Icon';
+import { Icons } from '../../types';
+import classnames from 'classnames';
+import styles from './Button.module.scss';
 
 const Button: React.FC<Props> = ({
   type = 'primary',
@@ -27,13 +27,13 @@ const Button: React.FC<Props> = ({
       type="button"
       disabled={isDisabled}
       onClick={onClick}
-      className={cn(s.container, className, {
-        [s.isDisabled]: isDisabled,
-        [s.isSpaceBetween]: !!title && !!icon,
-        [s.primary]: type === 'primary',
-        [s.secondary]: type === 'secondary',
-        [s.transparent]: type === 'transparent',
-        [s.selected]: isSelected,
+      className={classnames(styles.container, className, {
+        [styles.isDisabled]: isDisabled,
+        [styles.isSpaceBetween]: !!title && !!icon,
+        [styles.primary]: type === 'primary',
+        [styles.secondary]: type === 'secondary',
+        [styles.transparent]: type === 'transparent',
+        [styles.selected]: isSelected,
       })}
     >
       {title}

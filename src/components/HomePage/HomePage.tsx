@@ -1,5 +1,3 @@
-type Props = {};
-
 import { useMemo } from 'react';
 import styles from './HomePage.module.scss';
 import ProductsSlider from '../ProductsSlider/ProductsSlider';
@@ -8,7 +6,7 @@ import Banner from '../Banner/Banner';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 
-const HomePage = ({}: Props) => {
+const HomePage: React.FC = () => {
   const { phones, tablets, accessories, allProducts } = useProductsSelector(
     state => state,
   );

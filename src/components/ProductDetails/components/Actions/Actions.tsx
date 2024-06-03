@@ -1,3 +1,17 @@
+interface Props {
+  product: IProductDetails | null;
+}
+
+import { IProductDetails, Icons } from '../../../../types';
+import { useAppDispatch, useCartSelector } from '../../../../hooks/reduxHooks';
+
+import Button from '../../../Button/Button';
+import { Link } from 'react-router-dom';
+import { addCartItem } from '../../../../slices/cartSlice';
+import classnames from 'classnames';
+import getProductLink from '../../../../utils/getProductLink';
+import style from './Actions.module.scss';
+
 const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
   spacegray: '#4d4c4a',
@@ -12,20 +26,6 @@ const AVAILABLE_COLORS: { [key: string]: string } = {
   red: '#cd273f',
   coral: '#ff6451',
 };
-
-import { Link } from 'react-router-dom';
-import cn from 'classnames';
-import { IProductDetails, Icons } from '../../../../types';
-import style from './Actions.module.scss';
-
-import Button from '../../../Button/Button';
-import getProductLink from '../../../../utils/getProductLink';
-import { useAppDispatch, useCartSelector } from '../../../../hooks/reduxHooks';
-import { addCartItem } from '../../../../slices/cartSlice';
-
-interface Props {
-  product: IProductDetails | null;
-}
 
 const Description: React.FC<Props> = ({ product }) => {
   const { cart } = useCartSelector(state => state);
@@ -93,7 +93,7 @@ const Description: React.FC<Props> = ({ product }) => {
                     id,
                     newPart: color,
                   })}`}
-                  className={cn(style.colorsLink, {
+                  className={classnames(style.colorsLink, {
                     [style.activeLink]: color === activeColor,
                   })}
                   style={{ backgroundColor: AVAILABLE_COLORS[color] || color }}
@@ -117,7 +117,7 @@ const Description: React.FC<Props> = ({ product }) => {
                   <Button
                     title={capacityItem}
                     type={capacityItem === capacity ? 'primary' : 'secondary'}
-                    className={cn(style.capacityButton, {
+                    className={classnames(style.capacityButton, {
                       [style.capacityButtonActive]: capacityItem === capacity,
                     })}
                   />

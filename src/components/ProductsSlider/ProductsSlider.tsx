@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import classNames from 'classnames';
-import styles from './ProductsSlider.module.scss';
-import { Icons, ProductT } from '../../types';
-import ProductCard from '../ProductCard/ProductCard';
-import Button from '../Button/Button';
-
 type Props = {
   title: string;
   products: ProductT[];
 };
+
+import { Icons, ProductT } from '../../types';
+import React, { useEffect, useState } from 'react';
+
+import Button from '../Button/Button';
+import ProductCard from '../ProductCard/ProductCard';
+import classNames from 'classnames';
+import styles from './ProductsSlider.module.scss';
 
 const ProductsSlider: React.FC<Props> = ({ title, products }) => {
   const [translate, setTranslate] = useState(0);

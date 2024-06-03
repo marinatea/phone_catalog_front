@@ -1,10 +1,9 @@
-import { IProductDetails } from '../../../../types';
-
-import s from './Description.module.scss';
-
 interface Props {
   product: IProductDetails | null;
 }
+
+import { IProductDetails } from '../../../../types';
+import styles from './Description.module.scss';
 
 const TechSpecs: React.FC<Props> = ({ product }) => {
   if (!product) {
@@ -51,12 +50,12 @@ const TechSpecs: React.FC<Props> = ({ product }) => {
 
   return (
     <>
-      <div className={s.tech}>
-        <h2 className={s.title}>Tech specs</h2>
-        <ul className={s.techList}>
+      <div className={styles.tech}>
+        <h2 className={styles.title}>Tech specs</h2>
+        <ul className={styles.techList}>
           {techItems.map(({ title, value }) => (
-            <li key={title} className={s.techItem}>
-              <span className={s.techTitle}>{title}</span>
+            <li key={title} className={styles.techItem}>
+              <span className={styles.techTitle}>{title}</span>
               <span>{value}</span>
             </li>
           ))}

@@ -1,8 +1,8 @@
-import { useCartSelector } from '../../hooks/reduxHooks';
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs';
 import Button from '../Button/Button';
 import CartItem from '../CartItem/CartItem';
 import styles from './CartPage.module.scss';
+import { useCartSelector } from '../../hooks/reduxHooks';
 
 const CartPage: React.FC = () => {
   const { itemCount, totalPrice } = useCartSelector(state => state);

@@ -1,9 +1,9 @@
 import Breadcrumbs from '../../Breadcrumbs/Breadcrumbs';
-import styles from './FavoritesPage.module.scss';
-import ProductCard from '../../ProductCard/ProductCard';
-import { useFavoritesSelector } from '../../../hooks/reduxHooks';
-import { ProductT } from '../../../types';
 import { FavoritesState } from '../../../slices/favoriteSlice';
+import ProductCard from '../../ProductCard/ProductCard';
+import { ProductT } from '../../../types';
+import styles from './FavoritesPage.module.scss';
+import { useFavoritesSelector } from '../../../hooks/reduxHooks';
 
 const FavoritesPage: React.FC = () => {
   const favorites = useFavoritesSelector(
