@@ -44,12 +44,10 @@ const favoritesSlice = createSlice({
     setFavorites: (
       state,
       action: PayloadAction<{ products: ProductT[]; userId: string }>,
-    ) => {
-      localStorage.setItem(
-        LOCAL_FAVORITES_KEY + action.payload.userId,
-        JSON.stringify(action.payload.products),
-      );
-    },
+    ) => ({
+      ...state,
+      favorites: action.payload.products,
+    }),
   },
 });
 
