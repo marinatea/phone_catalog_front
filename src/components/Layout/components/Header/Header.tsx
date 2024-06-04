@@ -44,7 +44,7 @@ const Header: React.FC = () => {
         <ul className={styles.navlinks}>
           <li>
             <NavLink
-              onClick={() => setIsNavbarOpen(!isNavbarOpen)}
+              onClick={() => setIsNavbarOpen(false)}
               to="/"
               className={({ isActive }) => (isActive ? styles.active : '')}
             >
@@ -53,7 +53,7 @@ const Header: React.FC = () => {
           </li>
           <li>
             <NavLink
-              onClick={() => setIsNavbarOpen(!isNavbarOpen)}
+              onClick={() => setIsNavbarOpen(false)}
               to="/phones"
               className={({ isActive }) => (isActive ? styles.active : '')}
             >
@@ -62,7 +62,7 @@ const Header: React.FC = () => {
           </li>
           <li>
             <NavLink
-              onClick={() => setIsNavbarOpen(!isNavbarOpen)}
+              onClick={() => setIsNavbarOpen(false)}
               to="/tablets"
               className={({ isActive }) => (isActive ? styles.active : '')}
             >
@@ -71,7 +71,7 @@ const Header: React.FC = () => {
           </li>
           <li>
             <NavLink
-              onClick={() => setIsNavbarOpen(!isNavbarOpen)}
+              onClick={() => setIsNavbarOpen(false)}
               to="/accessories"
               className={({ isActive }) => (isActive ? styles.active : '')}
             >
@@ -82,10 +82,18 @@ const Header: React.FC = () => {
         {isNavbarOpen && (
           <>
             <div className={styles.burgerIcons}>
-              <NavLink to="/favorites" className={styles.burgerIcon}>
+              <NavLink
+                to="/favorites"
+                className={styles.burgerIcon}
+                onClick={() => setIsNavbarOpen(false)}
+              >
                 <Icon iconId={Icons.HEART} className={styles.heart} />
               </NavLink>
-              <NavLink to="/cart" className={styles.burgerIcon}>
+              <NavLink
+                to="/cart"
+                className={styles.burgerIcon}
+                onClick={() => setIsNavbarOpen(!isNavbarOpen)}
+              >
                 <Icon iconId={Icons.CART} className={styles.cart} />
               </NavLink>
             </div>
