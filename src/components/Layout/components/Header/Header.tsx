@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { SignOutButton, SignedIn, SignedOut } from '@clerk/clerk-react';
+import {
+  SignOutButton,
+  SignedIn,
+  SignedOut,
+  useSession,
+} from '@clerk/clerk-react';
 
 import CartBadge from '../../../generic/Badge/Badge';
 import FavoriteBadge from '../../../generic/FavoriteBadge/FavoriteBadge';
@@ -7,15 +12,23 @@ import Icon from '../../../generic/Icon/Icon';
 import { Icons } from '../../../../types';
 import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
+import Loader from '../../../generic/Loader/Loader';
 
 const Header: React.FC = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-
   const [icon, setIcon] = useState(isNavbarOpen ? Icons.CLOSE : Icons.BURGER);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { session } = useSession();
 
   useEffect(() => {
     setIcon(isNavbarOpen ? Icons.CLOSE : Icons.BURGER);
   }, [isNavbarOpen]);
+
+  useEffect(() => {
+    if (session !== undefined) {
+      setIsLoaded(true);
+    }
+  }, [session]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,9 +44,15 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  if (!isLoaded) {
+    return <Loader />;
+  }
+
   return (
     <header className={styles.header}>
-      <img className={styles.divLogo} src={'/img/logo.png'} alt="logo" />
+      <NavLink to="/">
+        <img className={styles.divLogo} src={'/img/logo.png'} alt="logo" />
+      </NavLink>
       <nav
         className={`${styles.navbar} ${isNavbarOpen ? styles.navbar_active : ''}`}
       >
@@ -99,27 +118,28 @@ const Header: React.FC = () => {
               </SignOutButton>
             </li>
           </SignedIn>
+
+          {isNavbarOpen && (
+            <>
+              <div className={styles.burgerIcons}>
+                <NavLink
+                  to="/favorites"
+                  className={styles.burgerIcon}
+                  onClick={() => setIsNavbarOpen(false)}
+                >
+                  <Icon iconId={Icons.HEART} className={styles.heart} />
+                </NavLink>
+                <NavLink
+                  to="/cart"
+                  className={styles.burgerIcon}
+                  onClick={() => setIsNavbarOpen(!isNavbarOpen)}
+                >
+                  <Icon iconId={Icons.CART} className={styles.cart} />
+                </NavLink>
+              </div>
+            </>
+          )}
         </ul>
-        {isNavbarOpen && (
-          <>
-            <div className={styles.burgerIcons}>
-              <NavLink
-                to="/favorites"
-                className={styles.burgerIcon}
-                onClick={() => setIsNavbarOpen(false)}
-              >
-                <Icon iconId={Icons.HEART} className={styles.heart} />
-              </NavLink>
-              <NavLink
-                to="/cart"
-                className={styles.burgerIcon}
-                onClick={() => setIsNavbarOpen(!isNavbarOpen)}
-              >
-                <Icon iconId={Icons.CART} className={styles.cart} />
-              </NavLink>
-            </div>
-          </>
-        )}
       </nav>
       <div className={styles.icons}>
         <NavLink to="/favorites">
