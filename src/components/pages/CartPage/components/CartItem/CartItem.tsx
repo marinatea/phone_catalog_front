@@ -6,17 +6,24 @@ import {
 import {
   useAppDispatch,
   useCartSelector,
+  useProductsSelector,
 } from '../../../../../hooks/reduxHooks';
 
 import Button from '../../../../generic/Button/Button';
-import { Icons } from '../../../../../types';
+import { ICartProduct, Icons, ProductT } from '../../../../../types';
 import styles from './CartItem.module.scss';
 import { useUser } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
 
 const CartItem: React.FC = () => {
   const { cart } = useCartSelector(state => state);
   const dispatch = useAppDispatch();
   const { user } = useUser();
+  const { allProducts } = useProductsSelector(state => state);
+
+
+  const productForLink=(prod:ICartProduct) => allProducts.find((p:ProductT) => p.name === prod.name);
+
 
   return (
     <div className={styles.cartItemContainer}>
@@ -45,9 +52,9 @@ const CartItem: React.FC = () => {
                   alt={product.name}
                 />
               </div>
-              <a href={`/*`} className={styles.name}>
+              <Link to={`/${productForLink(product)?.category}/${productForLink(product)?.itemId}`} className={styles.name}>
                 {product.name}
-              </a>
+              </Link>
             </div>
             <div className={styles.secondRow}>
               <div className={styles.counter}>

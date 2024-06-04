@@ -42,7 +42,6 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
   } = product;
 
   const isProductInCard = Object.hasOwn(cart, id);
-
   const cartProduct = {
     id,
     name,
