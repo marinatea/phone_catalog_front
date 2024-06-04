@@ -6,6 +6,7 @@
 .main {
 display: grid;
   justify-content: center;
+  min-height: 100vh;
 
   @include mQ.phone {
     grid-template-columns: repeat(4, 1fr);
