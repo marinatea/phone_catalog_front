@@ -86,7 +86,7 @@ const CartItem: React.FC = () => {
                   icon={Icons.PLUS}
                 />
               </div>
-              <div className={styles.price}>${product.price}</div>
+              <div className={styles.price}>${product.price * product.count}</div>
             </div>
           </div>
         );
