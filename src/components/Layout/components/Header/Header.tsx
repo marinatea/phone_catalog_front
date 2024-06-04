@@ -9,6 +9,18 @@ import styles from './Header.module.scss';
 const Header: React.FC = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
+  const [icon, setIcon] = useState(
+    isNavbarOpen ? Icons.CLOSE : Icons.BURGER,
+  );
+
+  useEffect(() => {
+    setIcon(
+      isNavbarOpen
+        ? Icons.CLOSE
+        : Icons.BURGER,
+    );
+  }, [isNavbarOpen]);
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 640) {
@@ -93,7 +105,7 @@ const Header: React.FC = () => {
           className={styles.union}
           onClick={() => setIsNavbarOpen(!isNavbarOpen)}
         >
-          <Icon iconId={Icons.BURGER} className={styles.burger} />
+          <Icon iconId={icon} className={styles.burger} />
         </div>
       </div>
     </header>
