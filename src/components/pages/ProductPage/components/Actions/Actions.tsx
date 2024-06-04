@@ -18,7 +18,10 @@ import classnames from 'classnames';
 import getProductLink from '../../../../../utils/getProductLink';
 import style from './Actions.module.scss';
 import { useUser } from '@clerk/clerk-react';
-import { addToFavorites, removeFromFavorites } from '../../../../../slices/favoriteSlice';
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../../../../slices/favoriteSlice';
 import { useEffect, useState } from 'react';
 
 const AVAILABLE_COLORS: { [key: string]: string } = {
@@ -44,7 +47,9 @@ const Actions: React.FC<Props> = ({ product }) => {
   const { user, isSignedIn } = useUser();
   const navigate = useNavigate();
 
-  const isProductInFavorites = favorites.some(item => item.itemId === product?.id);
+  const isProductInFavorites = favorites.some(
+    item => item.itemId === product?.id,
+  );
 
   const [icon, setIcon] = useState(
     isProductInFavorites ? Icons.HEART_FILL : Icons.HEART,
@@ -58,7 +63,8 @@ const Actions: React.FC<Props> = ({ product }) => {
     );
   }, [favorites, product]);
 
-  const favoriteCard = allProducts.find(p => p.name === product?.name)
+  const favoriteCard = allProducts.find(p => p.name === product?.name);
+
   if (!product || !favoriteCard) {
     return null;
   }
@@ -68,7 +74,7 @@ const Actions: React.FC<Props> = ({ product }) => {
       if (isProductInFavorites) {
         dispatch(
           removeFromFavorites({
-            productId: favoriteCard?.name || '', 
+            productId: favoriteCard?.name || '',
             userId: user?.id as string,
           }),
         );
@@ -83,6 +89,7 @@ const Actions: React.FC<Props> = ({ product }) => {
       navigate('/signin/');
     }
   };
+
   const {
     name,
     capacityAvailable,

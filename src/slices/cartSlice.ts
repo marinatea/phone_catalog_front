@@ -99,6 +99,12 @@ const cartSlice = createSlice({
         JSON.stringify(state.cart),
       );
     },
+    clearCart: (state, action: PayloadAction<string>) => {
+      state.itemCount = 0;
+      state.totalPrice = 0;
+      state.cart = {};
+      localStorage.setItem(LOCAL_CART_KEY + action.payload, JSON.stringify({}));
+    },
   },
 });
 
@@ -107,5 +113,6 @@ export const {
   addCartItem,
   removeCartItem,
   removeCartItemsType,
+  clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

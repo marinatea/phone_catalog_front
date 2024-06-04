@@ -2,7 +2,7 @@
 @import '/src/utils/mobileHeaderFonts';
 @import '/src/utils/mediaQueries.module';
 @import '/src/constants/colors.module';
-@import '../Button/Button.module';
+@import '/src/components/generic/Button/Button.module';
 
 .modal {
   display: flex;

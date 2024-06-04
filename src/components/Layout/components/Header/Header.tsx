@@ -9,16 +9,10 @@ import styles from './Header.module.scss';
 const Header: React.FC = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
-  const [icon, setIcon] = useState(
-    isNavbarOpen ? Icons.CLOSE : Icons.BURGER,
-  );
+  const [icon, setIcon] = useState(isNavbarOpen ? Icons.CLOSE : Icons.BURGER);
 
   useEffect(() => {
-    setIcon(
-      isNavbarOpen
-        ? Icons.CLOSE
-        : Icons.BURGER,
-    );
+    setIcon(isNavbarOpen ? Icons.CLOSE : Icons.BURGER);
   }, [isNavbarOpen]);
 
   useEffect(() => {
