@@ -1,9 +1,11 @@
+import React, { useEffect, useState } from 'react';
+import { SignOutButton, SignedIn, SignedOut } from '@clerk/clerk-react';
+
 import CartBadge from '../../../generic/Badge/Badge';
 import FavoriteBadge from '../../../generic/FavoriteBadge/FavoriteBadge';
 import Icon from '../../../generic/Icon/Icon';
 import { Icons } from '../../../../types';
 import { NavLink } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
 import styles from './Header.module.scss';
 
 const Header: React.FC = () => {
@@ -72,6 +74,31 @@ const Header: React.FC = () => {
               Accessories
             </NavLink>
           </li>
+          <SignedOut>
+            <li>
+              <NavLink
+                to="/signin"
+                className={({ isActive }) => (isActive ? styles.active : '')}
+              >
+                SignIn
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/signup"
+                className={({ isActive }) => (isActive ? styles.active : '')}
+              >
+                SigneUp
+              </NavLink>
+            </li>
+          </SignedOut>
+          <SignedIn>
+            <li>
+              <SignOutButton>
+                <span>Sign Out</span>
+              </SignOutButton>
+            </li>
+          </SignedIn>
         </ul>
         {isNavbarOpen && (
           <>

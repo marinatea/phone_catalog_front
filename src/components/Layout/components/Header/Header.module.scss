@@ -5,15 +5,15 @@
 
 .header {
   display: flex;
+  position: sticky;
+  top: 0;
   justify-content: space-between;
   align-items: center;
+  z-index: 999;
   border: 1px solid c.$elements;
   background-color: c.$white;
   height: 64px;
   color: c.$primary;
-  position: sticky;
-  top: 0;
-  z-index: 999;
 
   .divLogo {
     padding: 18px 24px;
@@ -22,18 +22,18 @@
   }
 
   .navbar {
-    position: absolute;
-    z-index: 10;
-    background-color: c.$white;
-    top: 64.5px;
-    width: 100%;
-    height: calc(100vh - 65px);
     display: flex;
+    position: absolute;
+    top: 64.5px;
     flex-direction: column;
     justify-content: space-between;
-    text-align: center;
     transform: translateX(-100%);
+    z-index: 10;
     transition: transform 0.3s ease-in-out;
+    background-color: c.$white;
+    width: 100%;
+    height: calc(100vh - 65px);
+    text-align: center;
 
     &.navbar_active {
       transform: translateX(0);
@@ -48,15 +48,15 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      border: 1px solid c.$icons;
       width: 50%;
       height: 64px;
-      border: 1px solid c.$icons;
     }
 
     .navlinks {
       display: flex;
-      flex-direction: column;
       flex-grow: 1;
+      flex-direction: column;
       justify-content: flex-start;
       margin: 0;
       padding: 0;
@@ -70,7 +70,7 @@
       }
 
       li {
-        a {
+        a, span {
           position: relative;
           color: #89939a;
           font-size: 12px;
@@ -109,15 +109,15 @@
 
     @include mQ.tablet {
       position: static;
-      width: 100%;
-      height: auto;
       flex-direction: row;
       transform: none;
+      width: 100%;
+      height: auto;
 
       .navlinks {
         flex-direction: row;
-        width: 100%;
         justify-content: space-between;
+        width: 100%;
       }
     }
   }
