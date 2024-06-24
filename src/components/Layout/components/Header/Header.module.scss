@@ -12,11 +12,11 @@
   z-index: 999;
   border: 1px solid c.$elements;
   background-color: c.$white;
-  height: 64px;
   color: c.$primary;
+  margin-bottom: 56px;
 
   .divLogo {
-    padding: 18px 24px;
+    padding: 18px 48px 18px 24px;
     width: 80px;
     height: 28px;
   }
@@ -24,16 +24,13 @@
   .navbar {
     display: flex;
     position: absolute;
-    top: 64.5px;
-    flex-direction: column;
     justify-content: space-between;
     transform: translateX(-100%);
-    z-index: 10;
     transition: transform 0.3s ease-in-out;
     background-color: c.$white;
     width: 100%;
-    height: calc(100vh - 65px);
     text-align: center;
+
 
     &.navbar_active {
       transform: translateX(0);
@@ -44,13 +41,13 @@
       flex-direction: row;
       width: 100%;
     }
+
     .burgerIcon {
       display: flex;
       justify-content: center;
       align-items: center;
       border: 1px solid c.$icons;
       width: 50%;
-      height: 64px;
     }
 
     .navlinks {
@@ -58,21 +55,23 @@
       flex-grow: 1;
       flex-direction: column;
       justify-content: flex-start;
+      align-items: center;
       margin: 0;
       padding: 0;
-      max-width: 100vh;
       text-transform: uppercase;
-
+      cursor: pointer;
+      
       @include dF.h1-font;
 
       @include mQ.tablet {
-        max-width: 329px;
+        max-width: 450px;
       }
 
       li {
-        a, span {
+        a,
+        span {
           position: relative;
-          color: #89939a;
+          color: c.$secondary;
           font-size: 12px;
           text-decoration: none;
 
@@ -124,6 +123,7 @@
 
   .icons {
     display: flex;
+    padding-left: 48px;
 
     .heart,
     .cart {
