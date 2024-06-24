@@ -1,3 +1,4 @@
+import { ICartProduct, Icons, ProductT } from '../../../../../types';
 import {
   addCartItem,
   removeCartItem,
@@ -10,10 +11,9 @@ import {
 } from '../../../../../hooks/reduxHooks';
 
 import Button from '../../../../generic/Button/Button';
-import { ICartProduct, Icons, ProductT } from '../../../../../types';
+import { Link } from 'react-router-dom';
 import styles from './CartItem.module.scss';
 import { useUser } from '@clerk/clerk-react';
-import { Link } from 'react-router-dom';
 
 const CartItem: React.FC = () => {
   const { cart } = useCartSelector(state => state);
@@ -21,9 +21,8 @@ const CartItem: React.FC = () => {
   const { user } = useUser();
   const { allProducts } = useProductsSelector(state => state);
 
-
-  const productForLink=(prod:ICartProduct) => allProducts.find((p:ProductT) => p.name === prod.name);
-
+  const productForLink = (prod: ICartProduct) =>
+    allProducts.find((p: ProductT) => p.name === prod.name);
 
   return (
     <div className={styles.cartItemContainer}>
@@ -52,7 +51,10 @@ const CartItem: React.FC = () => {
                   alt={product.name}
                 />
               </div>
-              <Link to={`/${productForLink(product)?.category}/${productForLink(product)?.itemId}`} className={styles.name}>
+              <Link
+                to={`/${productForLink(product)?.category}/${productForLink(product)?.itemId}`}
+                className={styles.name}
+              >
                 {product.name}
               </Link>
             </div>
@@ -86,7 +88,9 @@ const CartItem: React.FC = () => {
                   icon={Icons.PLUS}
                 />
               </div>
-              <div className={styles.price}>${product.price * product.count}</div>
+              <div className={styles.price}>
+                ${product.price * product.count}
+              </div>
             </div>
           </div>
         );
