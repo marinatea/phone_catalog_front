@@ -1,8 +1,7 @@
 import { ICartProduct, Icons, ProductT } from '../../../../../types';
 import {
-  addCartItem,
-  removeCartItem,
-  removeCartItemsType,
+  patchCartItemCount,
+  removeFromCart,
 } from '../../../../../slices/cartSlice';
 import {
   useAppDispatch,
@@ -33,8 +32,8 @@ const CartItem: React.FC = () => {
               <Button
                 onClick={() => {
                   dispatch(
-                    removeCartItemsType({
-                      productId: product.id,
+                    removeFromCart({
+                      itemId: product.id,
                       userId: user?.id as string,
                     }),
                   );
@@ -63,9 +62,10 @@ const CartItem: React.FC = () => {
                 <Button
                   onClick={() => {
                     dispatch(
-                      removeCartItem({
-                        productId: product.id,
+                      patchCartItemCount({
+                        itemId: product.id,
                         userId: user?.id as string,
+                        newCount: product.count - 1,
                       }),
                     );
                   }}
@@ -77,9 +77,10 @@ const CartItem: React.FC = () => {
                 <Button
                   onClick={() => {
                     dispatch(
-                      addCartItem({
-                        product: product,
+                      patchCartItemCount({
+                        itemId: product.id,
                         userId: user?.id as string,
+                        newCount: product.count + 1,
                       }),
                     );
                   }}

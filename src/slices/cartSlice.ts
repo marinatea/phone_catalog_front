@@ -1,118 +1,154 @@
 /* eslint-disable no-param-reassign */
 
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { ICartProduct } from '../types';
-import { LOCAL_CART_KEY } from '../constants/localStorageKeys';
 
 export interface CartState {
   cart: {
     [productId: string]: ICartProduct & { count: number };
   };
-  itemCount: number;
-  totalPrice: number;
+  isLoading: boolean;
+  error: undefined | string;
 }
 
 const initialState: CartState = {
   cart: {},
-  itemCount: 0,
-  totalPrice: 0,
+  isLoading: true,
+  error: undefined,
 };
+
+export const setCart = createAsyncThunk(
+  'cart/setCart',
+  async (userId: string) => {
+    const res = await fetch(
+      `https://phone-catalog-back.onrender.com/users/${userId}`,
+    );
+
+    return await res.json();
+  },
+);
+
+export const addToCart = createAsyncThunk(
+  'cart/addToCart',
+  async ({
+    userId,
+    newItem,
+  }: {
+    userId: string;
+    newItem: ICartProduct & { count: number };
+  }) => {
+    const res = await fetch(
+      `https://phone-catalog-back.onrender.com/users/${userId}/cart`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newItem),
+      },
+    );
+
+    return await res.json();
+  },
+);
+
+export const removeFromCart = createAsyncThunk(
+  'cart/removeFromCart',
+  async ({ userId, itemId }: { userId: string; itemId: string }) => {
+    const res = await fetch(
+      `https://phone-catalog-back.onrender.com/users/${userId}/cart/${itemId}`,
+      {
+        method: 'DELETE',
+      },
+    );
+
+    return await res.json();
+  },
+);
+
+export const patchCartItemCount = createAsyncThunk(
+  'cart/patchCartItemCount',
+  async ({
+    userId,
+    itemId,
+    newCount,
+  }: {
+    userId: string;
+    itemId: string;
+    newCount: number;
+  }) => {
+    const res = await fetch(
+      `https://phone-catalog-back.onrender.com/users/${userId}/cart/${itemId}/${newCount}`,
+      {
+        method: 'PATCH',
+      },
+    );
+
+    return await res.json();
+  },
+);
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
-  reducers: {
-    setCartItems: (
-      state,
-      action: PayloadAction<{
-        products: { [productId: string]: ICartProduct & { count: number } };
-        userId: string;
-      }>,
-    ) => {
-      state.cart = action.payload.products;
-
-      state.totalPrice = Object.keys(state.cart).reduce(
-        (count, cartItemId) =>
-          count + state.cart[cartItemId].count * state.cart[cartItemId].price,
-        0,
-      );
-
-      state.itemCount = Object.keys(state.cart).reduce(
-        (count, cartItemId) => count + state.cart[cartItemId].count,
-        0,
-      );
-    },
-    addCartItem: (
-      state,
-      action: PayloadAction<{ product: ICartProduct; userId: string }>,
-    ) => {
-      state.itemCount++;
-      state.totalPrice += action.payload.product.price;
-
-      if (Object.hasOwn(state.cart, action.payload.product.id)) {
-        state.cart[action.payload.product.id].count++;
-      } else {
-        state.cart[action.payload.product.id] = {
-          ...action.payload.product,
-          count: 1,
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(setCart.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(setCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.cart = action.payload.cart as unknown as {
+        [productId: string]: ICartProduct & {
+          count: number;
         };
-      }
-
-      localStorage.setItem(
-        LOCAL_CART_KEY + action.payload.userId,
-        JSON.stringify(state.cart),
-      );
-    },
-    removeCartItem: (
-      state,
-      action: PayloadAction<{ productId: string; userId: string }>,
-    ) => {
-      state.itemCount--;
-      state.totalPrice -= state.cart[action.payload.productId].price;
-
-      if (Object.hasOwn(state.cart, action.payload.productId)) {
-        if (state.cart[action.payload.productId].count > 1) {
-          state.cart[action.payload.productId].count--;
-        } else {
-          delete state.cart[action.payload.productId];
-        }
-      }
-
-      localStorage.setItem(
-        LOCAL_CART_KEY + action.payload.userId,
-        JSON.stringify(state.cart),
-      );
-    },
-    removeCartItemsType: (
-      state,
-      action: PayloadAction<{ productId: string; userId: string }>,
-    ) => {
-      const thisItemCount = state.cart[action.payload.productId].count;
-
-      state.itemCount -= thisItemCount;
-      state.totalPrice -=
-        state.cart[action.payload.productId].price * thisItemCount;
-      delete state.cart[action.payload.productId];
-      localStorage.setItem(
-        LOCAL_CART_KEY + action.payload.userId,
-        JSON.stringify(state.cart),
-      );
-    },
-    clearCart: (state, action: PayloadAction<string>) => {
-      state.itemCount = 0;
-      state.totalPrice = 0;
-      state.cart = {};
-      localStorage.setItem(LOCAL_CART_KEY + action.payload, JSON.stringify({}));
-    },
+      };
+    });
+    builder.addCase(setCart.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(addToCart.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(addToCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.cart = action.payload as unknown as {
+        [productId: string]: ICartProduct & { count: number };
+      };
+    });
+    builder.addCase(addToCart.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(removeFromCart.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(removeFromCart.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.cart = action.payload as unknown as {
+        [productId: string]: ICartProduct & { count: number };
+      };
+    });
+    builder.addCase(removeFromCart.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+    builder.addCase(patchCartItemCount.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(patchCartItemCount.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.cart = action.payload as unknown as {
+        [productId: string]: ICartProduct & { count: number };
+      };
+    });
+    builder.addCase(patchCartItemCount.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
   },
 });
 
-export const {
-  setCartItems,
-  addCartItem,
-  removeCartItem,
-  removeCartItemsType,
-  clearCart,
-} = cartSlice.actions;
 export default cartSlice.reducer;
