@@ -4,11 +4,17 @@ import ProductCard from '../ProductTypePage/components/ProductCard/ProductCard';
 import { ProductT } from '../../../types';
 import styles from './FavoritesPage.module.scss';
 import { useFavoritesSelector } from '../../../hooks/reduxHooks';
+import Loader from '../../generic/Loader/Loader';
 
 const FavoritesPage: React.FC = () => {
   const favorites = useFavoritesSelector(
     (state: FavoritesState) => state.favorites,
   );
+  const isLoading = useFavoritesSelector(state => state.isLoading);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <main className={styles.favoritesPage}>

@@ -120,7 +120,7 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
             [styles.sliderCardImage]: isSlider,
             [styles.image]: !isSlider,
           })}
-          src={`/${image}`}
+          src={`${image}`}
           alt={name}
         />
       </a>

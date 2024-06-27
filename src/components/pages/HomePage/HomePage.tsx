@@ -3,37 +3,26 @@ import { Link } from 'react-router-dom';
 import ProductsSlider from '../../generic/ProductsSlider/ProductsSlider';
 import SearchBar from './components/SearchBar/SearchBar';
 import styles from './HomePage.module.scss';
-import { useMemo } from 'react';
 import { useProductsSelector } from '../../../hooks/reduxHooks';
 import { useUser } from '@clerk/clerk-react';
+import Loader from '../../generic/Loader/Loader';
 
 const HomePage: React.FC = () => {
-  const { phones, tablets, accessories, allProducts } = useProductsSelector(
-    state => state,
-  );
+  const { phones, tablets, accessories, newModels, hotPrices } =
+    useProductsSelector(state => state);
   const { user } = useUser();
+
+  const isLoading = useProductsSelector(state => state.isLoading);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const categories = [
     { title: 'Mobile phones', type: 'phones', count: phones.length },
     { title: 'Tablets', type: 'tablets', count: tablets.length },
     { title: 'Accessories', type: 'accessories', count: accessories.length },
   ];
-
-  const newModelProducts = useMemo(() => {
-    return [...allProducts]
-      .sort((a, b) => {
-        return b.year - a.year;
-      })
-      .slice(0, 20);
-  }, [allProducts]);
-
-  const hotPriceProducts = useMemo(() => {
-    return [...allProducts]
-      .sort((a, b) => {
-        return b.fullPrice - b.price - (a.fullPrice - a.price);
-      })
-      .slice(0, 16);
-  }, [allProducts]);
 
   return (
     <main className={styles.homePage}>
@@ -46,7 +35,7 @@ const HomePage: React.FC = () => {
         <Banner />
       </div>
       <div className={styles.newModels}>
-        <ProductsSlider title="Brand new models" products={newModelProducts} />
+        <ProductsSlider title="Brand new models" products={newModels} />
       </div>
       <div className={styles.categories}>
         <h2 className={styles.categoriesTitle}>Shop by category</h2>
@@ -73,7 +62,7 @@ const HomePage: React.FC = () => {
           ))}
       </div>
       <div className={styles.hotPrices}>
-        <ProductsSlider products={hotPriceProducts} title="Hot prices" />
+        <ProductsSlider products={hotPrices} title="Hot prices" />
       </div>
     </main>
   );

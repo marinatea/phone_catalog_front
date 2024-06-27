@@ -21,7 +21,7 @@ const ImagesSelector: React.FC<Props> = ({ images }) => {
     <>
       <div className={styles.selectedImgContainer}>
         <img
-          src={'/' + images[selectedImageIndex]}
+          src={images[selectedImageIndex]}
           className={styles.selectedImg}
           alt="main image"
         />
@@ -41,7 +41,7 @@ const ImagesSelector: React.FC<Props> = ({ images }) => {
               }}
             >
               <img
-                src={'/' + image}
+                src={image}
                 className={styles.secondaryImg}
                 alt="secondary image"
               />

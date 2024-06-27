@@ -1,8 +1,4 @@
-interface Props {
-  product: IProductDetails | null;
-}
-
-import { IProductDetails, Icons } from '../../../../../types';
+import { IProductDetails, Icons, ProductT } from '../../../../../types';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   addToFavorites,
@@ -12,7 +8,6 @@ import {
   useAppDispatch,
   useCartSelector,
   useFavoritesSelector,
-  useProductsSelector,
 } from '../../../../../hooks/reduxHooks';
 import { useEffect, useState } from 'react';
 
@@ -39,9 +34,18 @@ const AVAILABLE_COLORS: { [key: string]: string } = {
   coral: '#ff6451',
 };
 
-const Actions: React.FC<Props> = ({ product }) => {
+interface Props {
+  product: IProductDetails | null;
+  productWithoutDetails: ProductT | null;
+  productType: 'phones' | 'tablets' | 'accessories';
+}
+
+const Actions: React.FC<Props> = ({
+  product,
+  productWithoutDetails,
+  productType,
+}) => {
   const { cart } = useCartSelector(state => state);
-  const { allProducts } = useProductsSelector(state => state);
   const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();
   const { user, isSignedIn } = useUser();
@@ -63,9 +67,7 @@ const Actions: React.FC<Props> = ({ product }) => {
     );
   }, [favorites, product]);
 
-  const favoriteCard = allProducts.find(p => p.name === product?.name);
-
-  if (!product || !favoriteCard) {
+  if (!product || !productWithoutDetails) {
     return null;
   }
 
@@ -74,14 +76,17 @@ const Actions: React.FC<Props> = ({ product }) => {
       if (isProductInFavorites) {
         dispatch(
           removeFromFavorites({
-            itemId: favoriteCard?.itemId || '',
+            itemId: productWithoutDetails?.itemId || '',
             userId: user?.id as string,
           }),
         );
         setIcon(Icons.HEART);
       } else {
         dispatch(
-          addToFavorites({ newItem: favoriteCard, userId: user?.id as string }),
+          addToFavorites({
+            newItem: productWithoutDetails,
+            userId: user?.id as string,
+          }),
         );
         setIcon(Icons.HEART_FILL);
       }
@@ -144,7 +149,7 @@ const Actions: React.FC<Props> = ({ product }) => {
             {colorsAvailable.map(color => (
               <li key={color} className={style.item}>
                 <Link
-                  to={`/phones/${getProductLink({
+                  to={`/${productType}/${getProductLink({
                     id,
                     newPart: color,
                   })}`}
@@ -163,7 +168,7 @@ const Actions: React.FC<Props> = ({ product }) => {
             {capacityAvailable.map(capacityItem => (
               <li key={capacityItem} className={style.item}>
                 <Link
-                  to={`/phones/${getProductLink({
+                  to={`/${productType}/${getProductLink({
                     id,
                     newPart: capacityItem.toLowerCase(),
                     index: -2,
