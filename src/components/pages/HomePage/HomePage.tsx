@@ -5,11 +5,18 @@ import SearchBar from './components/SearchBar/SearchBar';
 import styles from './HomePage.module.scss';
 import { useProductsSelector } from '../../../hooks/reduxHooks';
 import { useUser } from '@clerk/clerk-react';
+import Loader from '../../generic/Loader/Loader';
 
 const HomePage: React.FC = () => {
   const { phones, tablets, accessories, newModels, hotPrices } =
     useProductsSelector(state => state);
   const { user } = useUser();
+
+  const isLoading = useProductsSelector(state => state.isLoading);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   const categories = [
     { title: 'Mobile phones', type: 'phones', count: phones.length },
