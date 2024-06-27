@@ -25,7 +25,7 @@ export const setCart = createAsyncThunk(
       `https://phone-catalog-back.onrender.com/users/${userId}`,
     );
 
-    return await res.json();
+    return res.json();
   },
 );
 
@@ -49,7 +49,7 @@ export const addToCart = createAsyncThunk(
       },
     );
 
-    return await res.json();
+    return res.json();
   },
 );
 
@@ -63,7 +63,7 @@ export const removeFromCart = createAsyncThunk(
       },
     );
 
-    return await res.json();
+    return res.json();
   },
 );
 
@@ -85,7 +85,7 @@ export const patchCartItemCount = createAsyncThunk(
       },
     );
 
-    return await res.json();
+    return res.json();
   },
 );
 

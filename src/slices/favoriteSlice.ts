@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { ProductT } from '../types';
@@ -21,7 +22,7 @@ export const setFavorites = createAsyncThunk(
       `https://phone-catalog-back.onrender.com/users/${userId}`,
     );
 
-    return await res.json();
+    return res.json();
   },
 );
 
@@ -39,7 +40,7 @@ export const addToFavorites = createAsyncThunk(
       },
     );
 
-    return await res.json();
+    return res.json();
   },
 );
 
@@ -53,7 +54,7 @@ export const removeFromFavorites = createAsyncThunk(
       },
     );
 
-    return await res.json();
+    return res.json();
   },
 );
 

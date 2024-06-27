@@ -17,12 +17,12 @@ const CartPage: React.FC = () => {
   const { user } = useUser();
 
   const totalPrice = Object.values(cart).reduce(
-    (totalPrice, item) => totalPrice + item.count * item.price,
+    (reducerPrice, item) => reducerPrice + item.count * item.price,
     0,
   );
 
   const itemCount = Object.values(cart).reduce(
-    (totalCount, item) => totalCount + item.count,
+    (reducerCount, item) => reducerCount + item.count,
     0,
   );
 
