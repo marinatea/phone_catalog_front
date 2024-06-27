@@ -11,6 +11,7 @@ import ProductCard from './components/ProductCard/ProductCard';
 import Select from './components/Select/Select';
 import styles from './ProductTypePage.module.scss';
 import { useAppDispatch, useProductsSelector } from '../../../hooks/reduxHooks';
+import Loader from '../../generic/Loader/Loader';
 
 const sortOptions = [
   { value: SortType.WITHOUT_SORT, label: 'Without Sort' },
@@ -138,9 +139,8 @@ const ProductTypePage: React.FC<Props> = ({ productsType }) => {
 
     return pageNumbers;
   };
-
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader/>
   }
 
   return (
