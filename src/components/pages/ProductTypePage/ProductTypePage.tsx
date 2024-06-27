@@ -2,19 +2,15 @@ type Props = {
   productsType: 'phones' | 'tablets' | 'accessories';
 };
 
-import { IProductDetails, Icons, SortType } from '../../../types';
-import {
-  convertToProductDetails,
-  convertToProductT,
-} from '../../../utils/helpers';
 import { useEffect, useMemo, useState } from 'react';
-
+import { fetchSortedProducts } from '../../../slices/productsSlice';
+import { Icons, SortType } from '../../../types';
 import Breadcrumbs from '../../generic/Breadcrumbs/Breadcrumbs';
 import Icon from '../../generic/Icon/Icon';
 import ProductCard from './components/ProductCard/ProductCard';
 import Select from './components/Select/Select';
 import styles from './ProductTypePage.module.scss';
-import { useProductsSelector } from '../../../hooks/reduxHooks';
+import { useAppDispatch, useProductsSelector } from '../../../hooks/reduxHooks';
 
 const sortOptions = [
   { value: SortType.WITHOUT_SORT, label: 'Without Sort' },
@@ -35,10 +31,28 @@ const itemsPerPageOptions = [
 ];
 
 const ProductTypePage: React.FC<Props> = ({ productsType }) => {
-  const { allProducts } = useProductsSelector(state => state);
-  const filteredProducts = allProducts.filter(
-    product => product.category === productsType,
+  const dispatch = useAppDispatch();
+  const { phones, tablets, accessories, sortedProducts, isLoading } =
+    useProductsSelector(state => state);
+  const params = useMemo(() => new URLSearchParams(window.location.search), []);
+  const [currentPage, setCurrentPage] = useState(
+    () => Number(params.get('page')) || 1,
   );
+  const [itemsPerPage, setItemsPerPage] = useState(
+    () => Number(params.get('itemsPerPage')) || 16,
+  );
+  const [sortType, setSortType] = useState<SortType>(
+    () => (params.get('sort') as SortType) || SortType.WITHOUT_SORT,
+  );
+
+  const products =
+    productsType === 'phones'
+      ? phones
+      : productsType === 'tablets'
+        ? tablets
+        : accessories;
+  const productCount = products.length;
+  const totalPages = Math.ceil(productCount / itemsPerPage);
 
   let pageTitle = '';
 
@@ -54,62 +68,41 @@ const ProductTypePage: React.FC<Props> = ({ productsType }) => {
       break;
   }
 
-  const params = useMemo(() => new URLSearchParams(window.location.search), []);
+  useEffect(() => {
+    dispatch(
+      fetchSortedProducts({
+        category: productsType,
+        sort: sortType,
+        start: currentPage,
+        limit: itemsPerPage,
+      }),
+    );
+  }, [productsType, sortType, currentPage, itemsPerPage, dispatch]);
 
-  const [currentPage, setCurrentPage] = useState(() => {
-    return Number(params.get('page')) || 1;
-  });
+  useEffect(() => {
+    params.set('sort', sortType);
+    params.set('itemsPerPage', itemsPerPage.toString());
+    params.set('page', currentPage.toString());
+    window.history.replaceState(
+      {},
+      '',
+      `${window.location.pathname}?${params}`,
+    );
+  }, [sortType, itemsPerPage, currentPage, params]);
 
-  const [itemsPerPage, setItemsPerPage] = useState(() => {
-    return Number(params.get('itemsPerPage')) || 16;
-  });
-
-  const [sortType, setSortType] = useState<SortType>(() => {
-    return (params.get('sort') as SortType) || SortType.WITHOUT_SORT;
-  });
-
-  const sortProducts = (
-    products: IProductDetails[],
-    sortTypeParam: SortType,
-  ) => {
-    const sortedProducts = [...products];
-
-    switch (sortTypeParam) {
-      case SortType.AZ:
-        sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      case SortType.ZA:
-        sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-        break;
-      case SortType.LOW_TO_HIGH:
-        sortedProducts.sort((a, b) => a.priceDiscount - b.priceDiscount);
-        break;
-      case SortType.HIGH_TO_LOW:
-        sortedProducts.sort((a, b) => b.priceDiscount - a.priceDiscount);
-        break;
-      case SortType.NEWEST_TO_OLDEST:
-        sortedProducts.sort((a, b) => Number(b.year) - Number(a.year));
-        break;
-      case SortType.OLDEST_TO_NEWEST:
-        sortedProducts.sort((a, b) => Number(a.year) - Number(b.year));
-        break;
-      case SortType.WITHOUT_SORT:
-        return products;
-      default:
-        break;
+  const handleSortChange = (value: number | SortType | undefined) => {
+    if (typeof value === 'number' || typeof value === 'string') {
+      setSortType(value as SortType);
+      setCurrentPage(1);
     }
-
-    return sortedProducts;
   };
 
-  const convertedProducts = filteredProducts.map(convertToProductDetails);
-  const sortedProducts = sortProducts(convertedProducts, sortType);
-
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem);
-
-  const totalPages = Math.ceil(sortedProducts.length / itemsPerPage);
+  const handleItemsPerPageChange = (value: number | SortType | undefined) => {
+    if (typeof value === 'number') {
+      setItemsPerPage(value);
+      setCurrentPage(1);
+    }
+  };
 
   const pagination = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -146,36 +139,15 @@ const ProductTypePage: React.FC<Props> = ({ productsType }) => {
     return pageNumbers;
   };
 
-  const handleSortChange = (value: number | SortType | undefined) => {
-    if (typeof value === 'number' || typeof value === 'string') {
-      setSortType(value as SortType);
-      setCurrentPage(1);
-    }
-  };
-
-  const handleItemsPerPageChange = (value: number | SortType | undefined) => {
-    if (typeof value === 'number') {
-      setItemsPerPage(value);
-      setCurrentPage(1);
-    }
-  };
-
-  useEffect(() => {
-    params.set('sort', sortType);
-    params.set('itemsPerPage', itemsPerPage.toString());
-    params.set('page', currentPage.toString());
-    window.history.replaceState(
-      {},
-      '',
-      `${window.location.pathname}?${params}`,
-    );
-  }, [sortType, itemsPerPage, currentPage, params]);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <main className={styles.phonesPage}>
       <Breadcrumbs />
       <h1 className={styles.title}>{pageTitle}</h1>
-      <span className={styles.subText}>{filteredProducts.length} models</span>
+      <span className={styles.subText}>{sortedProducts.length} models</span>
       <div className={styles.filterWrapper}>
         <div className={styles.filter}>
           <label className={styles.label} htmlFor="sort">
@@ -201,8 +173,8 @@ const ProductTypePage: React.FC<Props> = ({ productsType }) => {
         </div>
       </div>
       <div className={styles.cardsContainer}>
-        {currentItems.map(product => (
-          <ProductCard key={product.id} product={convertToProductT(product)} />
+        {sortedProducts.map(product => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
       <div className={styles.pageSelector}>
@@ -215,13 +187,9 @@ const ProductTypePage: React.FC<Props> = ({ productsType }) => {
         {renderPageNumbers()}
         <Icon
           iconId={Icons.ARROW_RIGHT}
-          className={`${styles.arrowRight} ${
-            currentPage === totalPages || currentItems.length === 0
-              ? styles.disabled
-              : ''
-          }`}
+          className={`${styles.arrowRight} ${currentPage === totalPages ? styles.disabled : ''}`}
           onClick={() => pagination(currentPage + 1)}
-          disabled={currentPage === totalPages || currentItems.length === 0}
+          disabled={currentPage === totalPages}
         />
       </div>
     </main>
