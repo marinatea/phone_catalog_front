@@ -83,7 +83,10 @@ const Actions: React.FC<Props> = ({
         setIcon(Icons.HEART);
       } else {
         dispatch(
-          addToFavorites({ newItem: productWithoutDetails, userId: user?.id as string }),
+          addToFavorites({
+            newItem: productWithoutDetails,
+            userId: user?.id as string,
+          }),
         );
         setIcon(Icons.HEART_FILL);
       }
