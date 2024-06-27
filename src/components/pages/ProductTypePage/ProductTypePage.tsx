@@ -139,8 +139,9 @@ const ProductTypePage: React.FC<Props> = ({ productsType }) => {
 
     return pageNumbers;
   };
+
   if (isLoading) {
-    return <Loader/>
+    return <Loader />;
   }
 
   return (
