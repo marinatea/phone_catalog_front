@@ -48,7 +48,7 @@ const ProductPage: React.FC<Props> = ({ productType }) => {
       </div>
 
       <div className={styles.actions}>
-        <Actions product={product as IProductDetails} />
+        <Actions product={product as IProductDetails} productType={productType} />
       </div>
       <div className={styles.about}>
         <About product={product as IProductDetails} />

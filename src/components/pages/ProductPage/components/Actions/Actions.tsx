@@ -1,5 +1,6 @@
 interface Props {
   product: IProductDetails | null;
+  productType: "phones" | "tablets" | "accessories";
 }
 
 import { IProductDetails, Icons, ProductT } from '../../../../../types';
@@ -8,12 +9,10 @@ import {
   useAppDispatch,
   useCartSelector,
   useFavoritesSelector,
-  // useProductsSelector,
 } from '../../../../../hooks/reduxHooks';
 
 import Button from '../../../../generic/Button/Button';
 import { addCartItem } from '../../../../../slices/cartSlice';
-// import { addToFavorites } from '../../../../../slices/favoriteSlice';
 import classnames from 'classnames';
 import getProductLink from '../../../../../utils/getProductLink';
 import style from './Actions.module.scss';
@@ -40,9 +39,8 @@ const AVAILABLE_COLORS: { [key: string]: string } = {
   coral: '#ff6451',
 };
 
-const Actions: React.FC<Props> = ({ product }) => {
+const Actions: React.FC<Props> = ({ product, productType }) => {
   const { cart } = useCartSelector(state => state);
-  // const { allProducts } = useProductsSelector(state => state);
   const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();
   const { user, isSignedIn } = useUser();
@@ -158,7 +156,7 @@ const Actions: React.FC<Props> = ({ product }) => {
             {colorsAvailable.map(color => (
               <li key={color} className={style.item}>
                 <Link
-                  to={`/${favoriteCard.category}/${getProductLink({
+                  to={`/${productType}/${getProductLink({
                     id,
                     newPart: color,
                   })}`}
@@ -177,7 +175,7 @@ const Actions: React.FC<Props> = ({ product }) => {
             {capacityAvailable.map(capacityItem => (
               <li key={capacityItem} className={style.item}>
                 <Link
-                  to={`/${favoriteCard.category}/${getProductLink({
+                  to={`/${productType}/${getProductLink({
                     id,
                     newPart: capacityItem.toLowerCase(),
                     index: -2,
