@@ -34,13 +34,13 @@ const ProductPage: React.FC<Props> = ({ productType }) => {
     if (productId) {
       dispatch(fetchProductByItemId(productId))
         .unwrap()
-        .then((result) => {
+        .then(result => {
           dispatch(fetchProductById({ id: productId, category: productType }));
           dispatch(fetchRecommendedProducts(result.id));
         })
         .catch(error => {
           navigate('/product-not-found');
-          throw new Error(error)
+          throw new Error(error);
         });
     }
   }, [dispatch, navigate, productId, productType]);
