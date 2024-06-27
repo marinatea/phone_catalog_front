@@ -5,24 +5,24 @@ interface Props {
 import { IProductDetails, Icons } from '../../../../../types';
 import { Link, useNavigate } from 'react-router-dom';
 import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../../../../slices/favoriteSlice';
+import {
   useAppDispatch,
   useCartSelector,
   useFavoritesSelector,
   useProductsSelector,
 } from '../../../../../hooks/reduxHooks';
+import { useEffect, useState } from 'react';
 
 import Button from '../../../../generic/Button/Button';
-import { addCartItem } from '../../../../../slices/cartSlice';
+import { addToCart } from '../../../../../slices/cartSlice';
 // import { addToFavorites } from '../../../../../slices/favoriteSlice';
 import classnames from 'classnames';
 import getProductLink from '../../../../../utils/getProductLink';
 import style from './Actions.module.scss';
 import { useUser } from '@clerk/clerk-react';
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from '../../../../../slices/favoriteSlice';
-import { useEffect, useState } from 'react';
 
 const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
@@ -74,14 +74,14 @@ const Actions: React.FC<Props> = ({ product }) => {
       if (isProductInFavorites) {
         dispatch(
           removeFromFavorites({
-            productId: favoriteCard?.name || '',
+            itemId: favoriteCard?.itemId || '',
             userId: user?.id as string,
           }),
         );
         setIcon(Icons.HEART);
       } else {
         dispatch(
-          addToFavorites({ product: favoriteCard, userId: user?.id as string }),
+          addToFavorites({ newItem: favoriteCard, userId: user?.id as string }),
         );
         setIcon(Icons.HEART_FILL);
       }
@@ -190,8 +190,8 @@ const Actions: React.FC<Props> = ({ product }) => {
             onClick={() => {
               if (isSignedIn) {
                 dispatch(
-                  addCartItem({
-                    product: cartProduct,
+                  addToCart({
+                    newItem: { ...cartProduct, count: 1 },
                     userId: user?.id as string,
                   }),
                 );
