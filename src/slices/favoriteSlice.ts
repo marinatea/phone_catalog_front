@@ -17,7 +17,7 @@ const favoritesSlice = createSlice({
   reducers: {
     addToFavorites: (
       state,
-      action: PayloadAction<{ product: ProductT | any; userId: string }>,
+      action: PayloadAction<{ product: ProductT; userId: string }>,
     ) => {
       state.favorites.push(action.payload.product);
       localStorage.setItem(

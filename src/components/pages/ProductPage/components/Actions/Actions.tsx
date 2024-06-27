@@ -2,13 +2,13 @@ interface Props {
   product: IProductDetails | null;
 }
 
-import { IProductDetails, Icons } from '../../../../../types';
+import { IProductDetails, Icons, ProductT } from '../../../../../types';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   useAppDispatch,
   useCartSelector,
   useFavoritesSelector,
-  useProductsSelector,
+  // useProductsSelector,
 } from '../../../../../hooks/reduxHooks';
 
 import Button from '../../../../generic/Button/Button';
@@ -23,6 +23,7 @@ import {
   removeFromFavorites,
 } from '../../../../../slices/favoriteSlice';
 import { useEffect, useState } from 'react';
+import { fetchProductByItemId } from '../../../../../slices/productsSlice';
 
 const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
@@ -41,7 +42,7 @@ const AVAILABLE_COLORS: { [key: string]: string } = {
 
 const Actions: React.FC<Props> = ({ product }) => {
   const { cart } = useCartSelector(state => state);
-  const { allProducts } = useProductsSelector(state => state);
+  // const { allProducts } = useProductsSelector(state => state);
   const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();
   const { user, isSignedIn } = useUser();
@@ -63,9 +64,22 @@ const Actions: React.FC<Props> = ({ product }) => {
     );
   }, [favorites, product]);
 
-  const favoriteCard = allProducts.find(p => p.name === product?.name);
+  const [favoriteCard, setFavoriteCard] = useState<ProductT | null>(null);
 
-  if (!product) {
+  useEffect(() => {
+    if (product && product.id) {
+      dispatch(fetchProductByItemId(product.id))
+        .then((resultAction) => {
+          setFavoriteCard(resultAction.payload);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error('Failed to fetch product:', error);
+        });
+    }
+  }, [dispatch, product]);
+
+  if (!product || !favoriteCard) {
     return null;
   }
 
@@ -144,7 +158,7 @@ const Actions: React.FC<Props> = ({ product }) => {
             {colorsAvailable.map(color => (
               <li key={color} className={style.item}>
                 <Link
-                  to={`/phones/${getProductLink({
+                  to={`/${favoriteCard.category}/${getProductLink({
                     id,
                     newPart: color,
                   })}`}
@@ -163,7 +177,7 @@ const Actions: React.FC<Props> = ({ product }) => {
             {capacityAvailable.map(capacityItem => (
               <li key={capacityItem} className={style.item}>
                 <Link
-                  to={`/phones/${getProductLink({
+                  to={`/${favoriteCard.category}/${getProductLink({
                     id,
                     newPart: capacityItem.toLowerCase(),
                     index: -2,

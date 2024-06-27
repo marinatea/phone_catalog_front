@@ -11,6 +11,7 @@ export interface ProductsState {
   sortedProducts: ProductT[];
   newModels: ProductT[];
   hotPrices: ProductT[];
+  selectedProduct: ProductT | null;
   isLoading: boolean;
   error: undefined | string;
 }
@@ -23,6 +24,7 @@ const initialState: ProductsState = {
   sortedProducts: [],
   newModels: [],
   hotPrices: [],
+  selectedProduct: null,
   isLoading: true,
   error: undefined,
 };
@@ -76,6 +78,30 @@ export const fetchSortedProducts = createAsyncThunk(
   },
 );
 
+export const fetchProductByItemId = createAsyncThunk(
+  'products/fetchProductByItemId',
+  async (itemId: string, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `https://phone-catalog-back.onrender.com/products/item?itemId=${itemId}`,
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch product');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to fetch product:', error);
+
+      return rejectWithValue('Failed to fetch product');
+    }
+  },
+);
+
 const productsSlice = createSlice({
   name: 'products',
   initialState,
@@ -126,6 +152,17 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message;
+    });
+    builder.addCase(fetchProductByItemId.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProductByItemId.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.selectedProduct = action.payload;
+    });
+    builder.addCase(fetchProductByItemId.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message || 'Failed to fetch product';
     });
   },
 });
