@@ -1,6 +1,6 @@
 type Props = { productType: 'phones' | 'tablets' | 'accessories' };
 
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import About from './components/Description/About';
@@ -11,33 +11,39 @@ import ImagesSelector from './components/ImagesSelector/ImagesSelector';
 import ProductsSlider from '../../generic/ProductsSlider/ProductsSlider';
 import TechSpecs from './components/Description/TechSpecs';
 import styles from './ProductPage.module.scss';
-import { useProductsSelector } from '../../../hooks/reduxHooks';
+import { useAppDispatch, useProductsSelector } from '../../../hooks/reduxHooks';
+import {
+  fetchProductById,
+  fetchProductByItemId,
+  fetchRecommendedProducts,
+} from '../../../slices/productsSlice';
 
 const ProductPage: React.FC<Props> = ({ productType }) => {
   const navigate = useNavigate();
   const { productId } = useParams<{ productId: string }>();
-  const allProducts = useProductsSelector(state => state);
-  const { allProducts: products } = useProductsSelector(state => state);
-
-  const product = allProducts[productType].find(prod => prod.id === productId);
+  const dispatch = useAppDispatch();
+  const productWithoutDetails = useProductsSelector(
+    state => state.selectedProduct,
+  );
+  const product = useProductsSelector(state => state.selectedProductDetails);
+  const recommendedProducts = useProductsSelector(
+    state => state.recommendedProducts,
+  );
 
   useEffect(() => {
-    if (product === undefined && allProducts[productType].length !== 0) {
-      navigate('/product-not-found');
+    if (productId) {
+      dispatch(fetchProductByItemId(productId))
+        .unwrap()
+        .then((result) => {
+          dispatch(fetchProductById({ id: productId, category: productType }));
+          dispatch(fetchRecommendedProducts(result.id));
+        })
+        .catch(error => {
+          navigate('/product-not-found');
+          throw new Error(error)
+        });
     }
-  }, [allProducts, navigate, product, productType]);
-
-  const recomendedProducts = useMemo(() => {
-    const filteredProducts = [...products].filter(
-      p =>
-        p.category === product?.category &&
-        (p.color === product.color ||
-          p.capacity === product.capacity ||
-          p.ram === product.ram),
-    );
-
-    return filteredProducts.slice(0, 12);
-  }, [products, product]);
+  }, [dispatch, navigate, productId, productType]);
 
   return (
     <main className={styles.productPage}>
@@ -51,6 +57,7 @@ const ProductPage: React.FC<Props> = ({ productType }) => {
         <Actions
           product={product as IProductDetails}
           productType={productType}
+          productWithoutDetails={productWithoutDetails}
         />
       </div>
       <div className={styles.about}>
@@ -61,7 +68,7 @@ const ProductPage: React.FC<Props> = ({ productType }) => {
       </div>
       <div className={styles.suggested}>
         <ProductsSlider
-          products={recomendedProducts}
+          products={recommendedProducts}
           title="You may also like"
         />
       </div>

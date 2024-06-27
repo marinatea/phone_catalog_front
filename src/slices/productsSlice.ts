@@ -9,9 +9,11 @@ export interface ProductsState {
   accessories: IProductDetails[];
   allProducts: ProductT[];
   sortedProducts: ProductT[];
+  recommendedProducts: ProductT[];
   newModels: ProductT[];
   hotPrices: ProductT[];
   selectedProduct: ProductT | null;
+  selectedProductDetails: IProductDetails | null;
   isLoading: boolean;
   error: undefined | string;
 }
@@ -22,9 +24,11 @@ const initialState: ProductsState = {
   accessories: [],
   allProducts: [],
   sortedProducts: [],
+  recommendedProducts: [],
   newModels: [],
   hotPrices: [],
   selectedProduct: null,
+  selectedProductDetails: null,
   isLoading: true,
   error: undefined,
 };
@@ -94,9 +98,51 @@ export const fetchProductByItemId = createAsyncThunk(
 
       return data;
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to fetch product:', error);
+      return rejectWithValue('Failed to fetch product');
+    }
+  },
+);
 
+export const fetchRecommendedProducts = createAsyncThunk(
+  'products/fetchRecommendedProducts',
+  async (productId: string, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `https://phone-catalog-back.onrender.com/products/${productId}/recommended`,
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch recommended products');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      return rejectWithValue('Failed to fetch recommended products');
+    }
+  },
+);
+
+export const fetchProductById = createAsyncThunk(
+  'products/fetchProductById',
+  async (
+    { id, category }: { id: string; category: string },
+    { rejectWithValue },
+  ) => {
+    try {
+      const response = await fetch(
+        `https://phone-catalog-back.onrender.com/${category}/${id}`,
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch product');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
       return rejectWithValue('Failed to fetch product');
     }
   },
@@ -161,6 +207,29 @@ const productsSlice = createSlice({
       state.selectedProduct = action.payload;
     });
     builder.addCase(fetchProductByItemId.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message || 'Failed to fetch product';
+    });
+    builder.addCase(fetchRecommendedProducts.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchRecommendedProducts.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.recommendedProducts = action.payload;
+    });
+    builder.addCase(fetchRecommendedProducts.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error =
+        action.error.message || 'Failed to fetch recommended products';
+    });
+    builder.addCase(fetchProductById.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProductById.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.selectedProductDetails = action.payload;
+    });
+    builder.addCase(fetchProductById.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error.message || 'Failed to fetch product';
     });

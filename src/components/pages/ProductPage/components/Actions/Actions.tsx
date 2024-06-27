@@ -1,8 +1,3 @@
-interface Props {
-  product: IProductDetails | null;
-  productType: 'phones' | 'tablets' | 'accessories';
-}
-
 import { IProductDetails, Icons, ProductT } from '../../../../../types';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -22,7 +17,6 @@ import {
   removeFromFavorites,
 } from '../../../../../slices/favoriteSlice';
 import { useEffect, useState } from 'react';
-import { fetchProductByItemId } from '../../../../../slices/productsSlice';
 
 const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
@@ -39,7 +33,17 @@ const AVAILABLE_COLORS: { [key: string]: string } = {
   coral: '#ff6451',
 };
 
-const Actions: React.FC<Props> = ({ product, productType }) => {
+interface Props {
+  product: IProductDetails | null;
+  productWithoutDetails: ProductT | null;
+  productType: 'phones' | 'tablets' | 'accessories';
+}
+
+const Actions: React.FC<Props> = ({
+  product,
+  productWithoutDetails,
+  productType,
+}) => {
   const { cart } = useCartSelector(state => state);
   const { favorites } = useFavoritesSelector(state => state);
   const dispatch = useAppDispatch();
@@ -62,22 +66,7 @@ const Actions: React.FC<Props> = ({ product, productType }) => {
     );
   }, [favorites, product]);
 
-  const [favoriteCard, setFavoriteCard] = useState<ProductT | null>(null);
-
-  useEffect(() => {
-    if (product && product.id) {
-      dispatch(fetchProductByItemId(product.id))
-        .then(resultAction => {
-          setFavoriteCard(resultAction.payload);
-        })
-        .catch(error => {
-          // eslint-disable-next-line no-console
-          console.error('Failed to fetch product:', error);
-        });
-    }
-  }, [dispatch, product]);
-
-  if (!product || !favoriteCard) {
+  if (!product || !productWithoutDetails) {
     return null;
   }
 
@@ -86,14 +75,17 @@ const Actions: React.FC<Props> = ({ product, productType }) => {
       if (isProductInFavorites) {
         dispatch(
           removeFromFavorites({
-            productId: favoriteCard?.name || '',
+            productId: productWithoutDetails?.name || '',
             userId: user?.id as string,
           }),
         );
         setIcon(Icons.HEART);
       } else {
         dispatch(
-          addToFavorites({ product: favoriteCard, userId: user?.id as string }),
+          addToFavorites({
+            product: productWithoutDetails,
+            userId: user?.id as string,
+          }),
         );
         setIcon(Icons.HEART_FILL);
       }
