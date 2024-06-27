@@ -8,6 +8,8 @@ import { removeFromCart } from '../../../slices/cartSlice';
 import styles from './CartPage.module.scss';
 import { useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
+import { OrderT } from '../../../types';
+import { addOrder } from '../../../slices/orderSlice';
 
 const CartPage: React.FC = () => {
   const [isCheckedOut, setIsCheckedOut] = useState(false);
@@ -25,6 +27,24 @@ const CartPage: React.FC = () => {
     (reducerCount, item) => reducerCount + item.count,
     0,
   );
+
+  const handleCheckout = async () => {
+    setIsCheckedOut(true);
+
+    for (const itemId of Object.keys(cart)) {
+      const item = cart[itemId];
+      const newOrder: OrderT = {
+        productId: itemId,
+        userId: user?.id as string,
+        quantity: item.count,
+        price: item.price,
+        status: 'pending',
+      };
+
+      await dispatch(addOrder(newOrder)); // Dispatch the addOrder action for each item
+      dispatch(removeFromCart({ userId: user?.id as string, itemId })); // Remove the item from the cart
+    }
+  };
 
   return (
     <main className={styles.cartPage}>
@@ -45,12 +65,7 @@ const CartPage: React.FC = () => {
           title={'Checkout'}
           type="primary"
           className={styles.checkoutButton}
-          onClick={() => {
-            setIsCheckedOut(true);
-            Object.keys(cart).forEach(itemId => {
-              dispatch(removeFromCart({ userId: user?.id as string, itemId }));
-            });
-          }}
+          onClick={handleCheckout}
           isDisabled={itemCount === 0}
         />
       </div>

@@ -64,6 +64,15 @@ export interface ProductT {
   image: string;
 }
 
+export interface OrderT {
+  id?: number;
+  productId: string;
+  userId: string;
+  quantity: number;
+  price: number;
+  status: string;
+}
+
 export enum SortType {
   AZ = 'az',
   ZA = 'za',
