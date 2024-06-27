@@ -65,7 +65,7 @@ const Actions: React.FC<Props> = ({ product }) => {
 
   const favoriteCard = allProducts.find(p => p.name === product?.name);
 
-  if (!product || !favoriteCard) {
+  if (!product) {
     return null;
   }
 
