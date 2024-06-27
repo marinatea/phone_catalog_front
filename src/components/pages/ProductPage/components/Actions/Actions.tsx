@@ -1,6 +1,6 @@
 interface Props {
   product: IProductDetails | null;
-  productType: "phones" | "tablets" | "accessories";
+  productType: 'phones' | 'tablets' | 'accessories';
 }
 
 import { IProductDetails, Icons, ProductT } from '../../../../../types';
@@ -67,10 +67,10 @@ const Actions: React.FC<Props> = ({ product, productType }) => {
   useEffect(() => {
     if (product && product.id) {
       dispatch(fetchProductByItemId(product.id))
-        .then((resultAction) => {
+        .then(resultAction => {
           setFavoriteCard(resultAction.payload);
         })
-        .catch((error) => {
+        .catch(error => {
           // eslint-disable-next-line no-console
           console.error('Failed to fetch product:', error);
         });
