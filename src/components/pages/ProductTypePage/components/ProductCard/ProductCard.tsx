@@ -17,7 +17,7 @@ import { useEffect, useState } from 'react';
 
 import Button from '../../../../generic/Button/Button';
 import Icon from '../../../../generic/Icon/Icon';
-import { addCartItem } from '../../../../../slices/cartSlice';
+import { addToCart } from '../../../../../slices/cartSlice';
 import classnames from 'classnames';
 import styles from './ProductCard.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -83,7 +83,7 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
       if (isProductInFavorites) {
         dispatch(
           removeFromFavorites({
-            productId: favoriteCard.name,
+            itemId: favoriteCard.itemId,
             userId: user?.id as string,
           }),
         );
@@ -91,7 +91,7 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
         setIcon(Icons.HEART);
       } else {
         dispatch(
-          addToFavorites({ product: favoriteCard, userId: user?.id as string }),
+          addToFavorites({ newItem: favoriteCard, userId: user?.id as string }),
         );
 
         setIcon(Icons.HEART_FILL);
@@ -150,8 +150,8 @@ const ProductCard: React.FC<Props> = ({ product, isSlider }) => {
           onClick={() => {
             if (isSignedIn) {
               dispatch(
-                addCartItem({
-                  product: cartProduct,
+                addToCart({
+                  newItem: { ...cartProduct, count: 1 },
                   userId: user?.id as string,
                 }),
               );

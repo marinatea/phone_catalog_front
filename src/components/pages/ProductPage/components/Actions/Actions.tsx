@@ -1,22 +1,23 @@
 import { IProductDetails, Icons, ProductT } from '../../../../../types';
 import { Link, useNavigate } from 'react-router-dom';
 import {
+  addToFavorites,
+  removeFromFavorites,
+} from '../../../../../slices/favoriteSlice';
+import {
   useAppDispatch,
   useCartSelector,
   useFavoritesSelector,
 } from '../../../../../hooks/reduxHooks';
+import { useEffect, useState } from 'react';
 
 import Button from '../../../../generic/Button/Button';
-import { addCartItem } from '../../../../../slices/cartSlice';
+import { addToCart } from '../../../../../slices/cartSlice';
+// import { addToFavorites } from '../../../../../slices/favoriteSlice';
 import classnames from 'classnames';
 import getProductLink from '../../../../../utils/getProductLink';
 import style from './Actions.module.scss';
 import { useUser } from '@clerk/clerk-react';
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from '../../../../../slices/favoriteSlice';
-import { useEffect, useState } from 'react';
 
 const AVAILABLE_COLORS: { [key: string]: string } = {
   gold: '#fad8bd',
@@ -75,17 +76,14 @@ const Actions: React.FC<Props> = ({
       if (isProductInFavorites) {
         dispatch(
           removeFromFavorites({
-            productId: productWithoutDetails?.name || '',
+            itemId: productWithoutDetails?.itemId || '',
             userId: user?.id as string,
           }),
         );
         setIcon(Icons.HEART);
       } else {
         dispatch(
-          addToFavorites({
-            product: productWithoutDetails,
-            userId: user?.id as string,
-          }),
+          addToFavorites({ newItem: productWithoutDetails, userId: user?.id as string }),
         );
         setIcon(Icons.HEART_FILL);
       }
@@ -194,8 +192,8 @@ const Actions: React.FC<Props> = ({
             onClick={() => {
               if (isSignedIn) {
                 dispatch(
-                  addCartItem({
-                    product: cartProduct,
+                  addToCart({
+                    newItem: { ...cartProduct, count: 1 },
                     userId: user?.id as string,
                   }),
                 );

@@ -1,10 +1,6 @@
 /* eslint-disable max-len */
 import './App.scss';
 
-import {
-  LOCAL_CART_KEY,
-  LOCAL_FAVORITES_KEY,
-} from './constants/localStorageKeys';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import CartPage from './components/pages/CartPage/CartPage';
@@ -19,7 +15,7 @@ import RegistrationPage from './components/pages/RegistrationPage/RegistrationPa
 import SignInPage from './components/pages/SignInPage/SignInPage';
 import SignUpPage from './components/pages/SignUpPage/SignUpPage';
 import { fetchProducts } from './slices/productsSlice';
-import { setCartItems } from './slices/cartSlice';
+import { setCart } from './slices/cartSlice';
 import { setFavorites } from './slices/favoriteSlice';
 import { useAppDispatch } from './hooks/reduxHooks';
 import { useEffect } from 'react';
@@ -31,16 +27,8 @@ export const App = () => {
   const { user } = useUser();
 
   useEffect(() => {
-    const localCart = localStorage.getItem(LOCAL_CART_KEY + user?.id);
-    const cart = localCart ? JSON.parse(localCart) : {};
-
-    dispatch(setCartItems({ products: cart, userId: user?.id as string }));
-
-    const localFaves = localStorage.getItem(LOCAL_FAVORITES_KEY + user?.id);
-    const faves = localFaves ? JSON.parse(localFaves) : [];
-
-    dispatch(setFavorites({ products: faves, userId: user?.id as string }));
-
+    dispatch(setCart(user?.id as string));
+    dispatch(setFavorites(user?.id as string));
     dispatch(fetchProducts());
   }, [dispatch, user]);
 
