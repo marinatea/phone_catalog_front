@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         <Link to="/" className={styles.footer__logo}>
           <img
             // eslint-disable-next-line max-len
-            src="https://storage.googleapis.com/group_project_images/img/logo.png"
+            src="https://storage.googleapis.com/group_project_images/img/Logo.png"
             alt="logo"
           />
         </Link>
