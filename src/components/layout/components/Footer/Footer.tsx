@@ -8,11 +8,18 @@ const Footer: React.FC = () => {
     <div className={styles.footerWrapper}>
       <footer className={styles.footer}>
         <Link to="/" className={styles.footer__logo}>
-          <img src="/img/logo.png" alt="logo" />
+          <img
+            // eslint-disable-next-line max-len
+            src="https://storage.googleapis.com/group_project_images/img/logo.png"
+            alt="logo"
+          />
         </Link>
 
         <nav className={`${styles['footer-nav']} ${styles.footer__nav}`}>
-          <a href="https://github.com/" className={styles['footer-nav__item']}>
+          <a
+            href="https://github.com/MaPaJBY"
+            className={styles['footer-nav__item']}
+          >
             Github
           </a>
           <a href="/" className={styles['footer-nav__item']}>
