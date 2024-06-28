@@ -14,7 +14,7 @@ const ImagesSelector: React.FC<Props> = ({ images }) => {
   }, [location.pathname]);
 
   if (images === undefined) {
-    return;
+    return null;
   }
 
   return (
