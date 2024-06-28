@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
                 <div className={styles.categoryImgContainer}>
                   <img
                     className={styles.categoryImg}
-                    src={`/img/category-${type}.png`}
+                    src={`https://storage.googleapis.com/group_project_images/img/category-${type}.png`}
                     alt="category"
                   />
                 </div>

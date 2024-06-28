@@ -52,6 +52,14 @@ const CartPage: React.FC = () => {
       <Breadcrumbs />
       <h1 className={styles.title}>Cart</h1>
       <div className={styles.cardsContainer}>
+        {!totalPrice && (
+          <img
+            className={styles.cartIsEmpty}
+            // eslint-disable-next-line max-len
+            src="https://storage.googleapis.com/group_project_images/img/cart-is-empty.png"
+            alt="cart is empty"
+          />
+        )}
         <div className={styles.cardContainer}>
           <CartItem />
         </div>

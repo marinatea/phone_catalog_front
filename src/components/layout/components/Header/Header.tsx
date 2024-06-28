@@ -51,7 +51,13 @@ const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <NavLink to="/">
-        <img className={styles.divLogo} src={'/img/logo.png'} alt="logo" />
+        <img
+          className={styles.divLogo}
+          src={
+            'https://storage.googleapis.com/group_project_images/img/Logo.png'
+          }
+          alt="logo"
+        />
       </NavLink>
       <nav
         className={`${styles.navbar} ${isNavbarOpen ? styles.navbar_active : ''}`}

@@ -41,6 +41,11 @@
     grid-column: span 4;
     margin-top: 32px;
   }
+  .cartIsEmpty {
+    grid-column: span 4;
+    margin-top: 32px;
+    height: 50vh;
+  }
 
   .cardContainer {
     &:not(:first-child) {
