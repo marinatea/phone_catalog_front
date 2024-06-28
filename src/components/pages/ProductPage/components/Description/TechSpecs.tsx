@@ -7,7 +7,7 @@ import styles from './Description.module.scss';
 
 const TechSpecs: React.FC<Props> = ({ product }) => {
   if (!product) {
-    return;
+    return null;
   }
 
   const { screen, resolution, processor, ram, camera, capacity, zoom, cell } =
