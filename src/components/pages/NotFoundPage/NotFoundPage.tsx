@@ -6,7 +6,10 @@ const NotFoundPage = () => {
       <h1 className={styles.title}>Page not found</h1>
       <img
         className={styles.photo}
-        src={'/img/product-not-found.png'}
+        src={
+          // eslint-disable-next-line max-len
+          'https://storage.googleapis.com/group_project_images/img/product-not-found.png'
+        }
         alt="not found page"
       />
     </div>
