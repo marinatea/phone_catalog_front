@@ -1,9 +1,0 @@
-{
-  "extends": "@mate-academy/students-ts-config",
-  "include": ["src"],
-  "compilerOptions": {
-    "sourceMap": false,
-    "types": ["node", "cypress"],
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
-  }
-}
