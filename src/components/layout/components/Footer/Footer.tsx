@@ -8,10 +8,11 @@ const Footer: React.FC = () => {
     <div className={styles.footerWrapper}>
       <footer className={styles.footer}>
         <Link to="/" className={styles.footer__logo}>
-          
           <img
             //eslint-disable-next-line max-len
-            src="https://storage.googleapis.com/group_project_images/img/Logo.png" alt="logo" />
+            src="https://storage.googleapis.com/group_project_images/img/Logo.png"
+            alt="logo"
+          />
         </Link>
 
         <nav className={`${styles['footer-nav']} ${styles.footer__nav}`}>
